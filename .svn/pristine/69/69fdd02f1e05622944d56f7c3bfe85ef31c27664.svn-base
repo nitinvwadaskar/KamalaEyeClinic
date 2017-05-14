@@ -1,0 +1,19 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Web;
+
+namespace Kamala_Eye_Clinic.Models
+{
+    public class TreatmentVision
+    {
+        public int treatmentid { get; set;}
+        public int visionid { get; set; }
+        public int eye { get; set; }
+        public int vn { get; set; }
+        public int area { get; set; }
+        public int sph { get; set; }
+        public int cyl { get; set; }
+        public int axis { get; set; }
+    }
+}

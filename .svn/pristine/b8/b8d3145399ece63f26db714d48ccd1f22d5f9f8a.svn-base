@@ -1,0 +1,64 @@
+﻿@model Kamala_Eye_Clinic.Models.ItemMaster
+
+@{
+    ViewBag.Title = "Item";
+    Layout = "~/Views/_Layout.cshtml";
+}
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        <div class="row">
+            <div class="col-md-12 form-group">
+                <div class="col-md-4">
+                    <div class="col-md-5">
+                        @Html.LabelFor(model => model.itemname, htmlAttributes: new { @class = "control-label" })
+                    </div>
+                    <div class="col-md-7">
+                        @Html.EditorFor(model => model.itemname, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.itemname, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="col-md-5">
+                        @Html.LabelFor(model => model.unit, htmlAttributes: new { @class = "control-label" })
+                    </div>
+                    <div class="col-md-7">
+                        @Html.DropDownListFor(model => model.unit,Model.units ,new { @class = "form-control" })
+                        @Html.ValidationMessageFor(model => model.unit, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="col-md-5">
+                        @Html.LabelFor(model => model.rate, htmlAttributes: new { @class = "control-label" })
+                    </div>
+                    <div class="col-md-7">
+                        @Html.EditorFor(model => model.rate, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.rate, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-12 col-sm-12 form-group" align="center">
+                <hr />
+                @Html.HiddenFor(model => model.CMD)
+                @if (Model.CMD == null)
+                {
+                    <input type="submit" class="btn btn-default btn-info " value="Save" name="SubmitBtn" />
+                }
+                else
+                {
+                    <input type="submit" class="btn btn-default btn-primary " value="Update" name="SubmitBtn" />
+                    @* <input type="submit" class="btn btn-default btn-danger" value="Delete" name="SubmitBtn" />*@
+                }
+                <input type="reset" class="btn btn-warning " value="Reset" />
+            </div>
+        </div>
+    </div>
+}
+
+<div>
+    @Html.ActionLink("  Back to List", "ViewItem", "StockManagement", new { @class = "fa fa-arrow-circle-o-left btn btn-info btn-sm" })
+</div>

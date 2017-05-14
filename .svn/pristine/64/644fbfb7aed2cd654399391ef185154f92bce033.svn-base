@@ -1,0 +1,69 @@
+﻿@model Kamala_Eye_Clinic.Models.PresentingComplentsMaster
+@{
+    ViewBag.Title = "Presenting Complents Master";
+    Layout = "~/Views/_Layout.cshtml";
+}
+
+<div class="row">
+
+    @if (ViewBag != null)
+    {
+        <label>@ViewBag.msg </label>
+    }
+
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+
+        <div class="form-horizontal">
+
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+            <div class="col-lg-12 form-group">
+                <div class="col-lg-6">
+                    <div class="col-lg-5">
+                        @Html.LabelFor(model => model.complentname, htmlAttributes: new { @class = "control-label" })
+                    </div>
+                    <div class="col-lg-7">
+                        @Html.EditorFor(model => model.complentname, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.complentname, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-12 form-group">
+                <div class="col-lg-6">
+                    <div class="col-lg-5">
+                        @Html.LabelFor(model => model.complentdescription, htmlAttributes: new { @class = "control-label" })
+                    </div>
+                    <div class="col-lg-7">
+                        @Html.EditorFor(model => model.complentdescription, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.complentdescription, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-lg-12 form-group">
+                <br />
+                <div class="col-lg-6 form-group" align="center">
+                    @Html.HiddenFor(model => model.CMD)
+                    @if (Model.CMD == null)
+
+                    {
+                        <input type="submit" class="btn btn-default btn-info" value="Save" name="SubmitBtn" />
+                    }
+                    else
+                    {
+                        <input type="submit" class="btn btn-default btn-primary" value="Update" name="SubmitBtn" />
+                        @* <input type="submit" class="btn btn-default btn-danger" value="Delete" name="SubmitBtn" />*@
+                    }
+                    <input type="reset" class="btn btn-warning" value="Reset" />
+                </div>
+            </div>
+        </div>
+    }
+</div>
+<div>
+    @Html.ActionLink("  Back to List", "PresentingComplentsDetails", "Treatment", new { @class = "fa fa-arrow-circle-o-left btn btn-info btn-sm" })
+</div>
+<script src="~/Scripts/jquery.validate.min.js"></script>
+<script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>

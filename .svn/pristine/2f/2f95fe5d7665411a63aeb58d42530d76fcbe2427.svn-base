@@ -1,0 +1,210 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+    <meta charset="utf-8" />
+    <link href="~/Content/css/bootstrap.min.css" rel='stylesheet' type='text/css' />
+    <link href="~/Content/Dashboard.css" rel="stylesheet" />
+    <link href="~/Content/css/font-awesome.css" rel="stylesheet">
+    <script src="~/Content/js/jquery.min.js"> </script>
+    <script src="~/Content/js/bootstrap.min.js"> </script>
+    <script type="text/javascript" src="https://formden.com/static/cdn/formden.js"></script>
+</head>
+<body>
+    <nav class="navbar navbar-default navbar-static-top">
+        <div class="container-fluid">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle navbar-toggle-sidebar collapsed">
+                    MENU
+                </button>
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="#">
+                    Kamla Eye Clinic
+                </a>
+            </div>
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">                
+                <ul class="nav navbar-nav navbar-right">                    
+                    <li class="dropdown ">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+                            @Session["UserName"]
+                            <span class="caret"></span>
+                        </a>
+                        <ul class="dropdown-menu" role="menu">
+                            <li class="dropdown-header">SETTINGS</li>
+                            <li class=""><a href="~/User/ChangePassword">Change Password</a></li>                           
+                            <li class="divider"></li>
+                            <li>@Html.ActionLink("Logout", "Logout", "User")</li>
+                        </ul>
+                    </li>
+                </ul>
+            </div><!-- /.navbar-collapse -->
+        </div><!-- /.container-fluid -->
+    </nav>
+    <div class="container-fluid main-container">
+        <div class="col-md-2 sidebar">
+            <div class="row">
+                <!-- uncomment code for absolute positioning tweek see top comment in css -->
+                <div class="absolute-wrapper"> </div>
+                <!-- Menu -->
+                <div class="side-menu">
+                    <nav class="navbar navbar-default" role="navigation">
+                        <!-- Main Menu -->
+                        <div class="side-menu-container">
+                            <ul class="nav navbar-nav">
+                                <li class="active"><a href="~/Home/Dashboard"><span class="glyphicon glyphicon-dashboard"></span> Dashboard</a></li>
+                                <!-- Dropdown-->
+                                <li class="panel panel-default" id="dropdown">
+                                    <a data-toggle="collapse" href="#PatientManagement">
+                                        <span class="glyphicon glyphicon-tint"></span> Patient Management<span class="caret"></span>
+                                    </a>
+                                    <!-- Dropdown level 1 -->
+                                    <div id="PatientManagement" class="panel-collapse collapse">
+                                        <div class="panel-body">
+                                            <ul class="nav navbar-nav">
+                                                <li><a href="~/Patient/TreatmentHistory">Treatment</a></li>
+                                                <li><a href="~/Patient/ConsentDetails">Consent From</a></li>
+                                                <li><a href="~/Patient/DischargeDetails">Discharge</a></li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </li>
+                                <li class="panel panel-default" id="dropdown">
+                                    <a data-toggle="collapse" href="#MedicineManagement">
+                                        <span class="glyphicon glyphicon-plus-sign"></span>Medicine Management<span class="caret"></span>
+                                    </a>
+                                    <!-- Dropdown level 1 -->
+                                    <div id="MedicineManagement" class="panel-collapse collapse">
+                                        <div class="panel-body">
+                                            <ul class="nav navbar-nav">
+                                                <li><a href="~/Medicines/DrugCategoryDetails">Drug Category Master</a></li>
+                                                <li><a href="~/Medicines/DrugDetails">Drug Master</a></li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </li>
+                                <li class="panel panel-default" id="dropdown">
+                                    <a data-toggle="collapse" href="#Billing">
+                                        <span class="glyphicon glyphicon-credit-card"></span>Billing<span class="caret"></span>
+                                    </a>
+                                    <!-- Dropdown level 1 -->
+                                    <div id="Billing" class="panel-collapse collapse">
+                                        <div class="panel-body">
+                                            <ul class="nav navbar-nav">
+                                                <li><a href="~/Patient/BillDetails">Patient Bill</a></li>
+                                                <li><a href="~/Billing/BillParticularDetails">Bill Particular Master</a></li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </li>
+                                <li class="panel panel-default" id="dropdown">
+                                    <a data-toggle="collapse" href="#Administrator">
+                                        <span class="glyphicon glyphicon-user"></span>Administrator<span class="caret"></span>
+                                    </a>
+                                    <!-- Dropdown level 1 -->
+                                    <div id="Administrator" class="panel-collapse collapse">
+                                        <div class="panel-body">
+                                            <ul class="nav navbar-nav">
+                                                <li><a href="~/Treatment/PresentingComplentsDetails">Presenting Complents</a></li>
+                                                <li><a href="~/Treatment/PresentingDiagnosisDetails">Presenting Diagnosis</a></li>
+                                                <li><a href="~/Treatment/OccupationDetails">Occupation</a></li>
+                                                <li><a href="~/Treatment/HistoryDetails">History</a></li>
+                                                <li><a href="~/Treatment/CheckupDetails">Check-up</a></li>
+                                                <li><a href="~/Treatment/FundusDetails">Fundus</a></li>
+                                                <li><a href="~/Treatment/AdviceDetails">Advice</a></li>
+                                                <li><a href="~/Doctor/DoctorDetails">Doctor Registration</a></li>
+                                                <li><a href="~/Sister/SisterDetails">Sister Registration</a></li>
+                                                <li><a href="~/Home/Admin_Control_Panel">Admin Control Panel</a></li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </li>
+                                <li><a href="~/Report/Report"><span class="glyphicon glyphicon-file"></span>Reports</a></li>
+                                <li><a href="~/Patient/PatientSelection"><span class="glyphicon glyphicon-circle-arrow-left"></span>Back to Selection</a></li>
+                            </ul>
+                        </div><!-- /.navbar-collapse -->
+                    </nav>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-10 content">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    @ViewBag.Title
+                </div>
+                <div class="panel-body">
+                    @RenderBody()
+                </div>
+            </div>
+        </div>
+        <footer class="pull-left footer">
+            <p class="col-md-12">
+                <hr class="divider">
+                &copy; 2014 RUBRAIN. All Rights Reserved | Design by <a href="http://rubrains.com" target="_blank">RUBRAIN</a>
+            </p>
+        </footer>
+    </div>
+
+    <script>
+        $(document).ready(function () {
+            var date_input = $('.date');
+            // var container = $('.bootstrap-iso form').length > 0 ? $('.bootstrap-iso form').parent() : "body";
+            date_input.datepicker({
+                format: 'mm/dd/yyyy',
+                // container: container ,
+                todayHighlight: true,
+                autoclose: true,
+            });
+            var no_past_date_input = $('.nopastdate');
+            // var container = $('.bootstrap-iso form').length > 0 ? $('.bootstrap-iso form').parent() : "body";
+            no_past_date_input.datepicker({
+                format: 'mm/dd/yyyy',
+                minDate:0,
+                // container: container ,
+                todayHighlight: true,
+                autoclose: true,
+            });
+            var no_future_date_input = $('.nofuturedate');
+            // var container = $('.bootstrap-iso form').length > 0 ? $('.bootstrap-iso form').parent() : "body";
+            no_future_date_input.datepicker({
+                format: 'mm/dd/yyyy',
+                maxDate: 0,
+                // container: container ,
+                todayHighlight: true,
+                autoclose: true,
+            });
+        })
+    </script>
+    <script>
+    $(document).ready(function () {
+        var date_input = $('.date');
+       // var container = $('.bootstrap-iso form').length > 0 ? $('.bootstrap-iso form').parent() : "body";
+        date_input.datepicker({
+            format: 'mm/dd/yyyy',
+           // container: container ,
+            todayHighlight: true,
+            autoclose: true,
+        })
+    })
+    </script>
+
+    <script src="~/Scripts/Dashboard.js"></script>
+
+  @*  <script type="text/javascript" src="https://code.jquery.com/jquery-1.11.3.min.js"></script>*@
+
+    <!-- Include Date Range Picker -->
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.1/js/bootstrap-datepicker.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.1/css/bootstrap-datepicker3.css" />
+    @*<script src="~/Scripts/jquery-1.10.2.min.js"></script>*@
+    <script src="~/Scripts/jquery.validate.min.js"></script>
+    <script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
+    <script src="~/Content/js/jquery.nicescroll.js"></script>
+    <script src="~/Content/js/scripts.js"></script>
+</body>
+</html>

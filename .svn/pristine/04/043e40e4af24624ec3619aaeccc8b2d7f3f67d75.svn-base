@@ -1,0 +1,51 @@
+﻿@model System.Data.DataSet
+@{
+    ViewBag.Title = "Discharge Details";
+    Layout = "~/Views/_Layout.cshtml";
+}
+
+<div class="row">
+    <div class="form-horizontal">
+        <div class="col-lg-12">
+            <div class="col-lg-4">
+                <a class="btn btn-primary" href="~/Patient/Discharge"><i class="fa fa-plus"></i> &nbsp; Add Discharge</a>
+            </div>
+        </div>
+        <div class="col-lg-12">
+            <div class="table-responsive">
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>Patient Id</th>
+                            <th>Discharge Id</th>
+                            <th>Discharge Date</th>
+                            <th>Reason</th>
+                            <th>Eye Operated</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @try
+                        {
+                            for (int i = 0; i <= Model.Tables[0].Rows.Count - 1; i++)
+                            {
+                                <tr>
+                                    <td>@(i + 1)</td>
+                                    <td>@Model.Tables[0].Rows[i][2]</td>
+                                    <td>@Model.Tables[0].Rows[i][1]</td>
+                                    <td>@Model.Tables[0].Rows[i][13]</td>
+                                    <td>@Model.Tables[0].Rows[i][3]</td>
+                                    <td>@Model.Tables[0].Rows[i][5]</td>
+                                    <td>@Html.ActionLink("Edit", "DischargeUpdate", new { hid = Model.Tables[0].Rows[i][0], dischargeid = Model.Tables[0].Rows[i][1], patientid = Model.Tables[0].Rows[i][2] })</td>
+                                </tr>
+                            }
+                        }
+                        catch (Exception) { }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+    </div>
+</div>

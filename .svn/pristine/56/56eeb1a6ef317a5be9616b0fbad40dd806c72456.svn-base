@@ -1,0 +1,108 @@
+﻿
+using System;
+using System.Data;
+using System.IO;
+using System.Text;
+using System.Web;
+using iTextSharp.text;
+using iTextSharp.text.pdf;
+using iTextSharp.text.html.simpleparser;
+using System.Web.UI;
+
+namespace Kamala_Eye_Clinic.Models
+{
+    public class PrintGenerator
+    {
+        public static void GenerateBillPDF(int billid,int patientid,int hid,DateTime billdate)
+        {
+            //Dummy data for Invoice (Bill).
+            string HospitalName = "Kamala Eye Clinic";
+            int billNo = billid;
+            PatientBill obj = new PatientBill();
+            DBConnection cn = new DBConnection();
+            obj.CMD = "View1";
+            obj.hid =hid;
+            obj.billid = billid;
+            obj.patientid = patientid;
+            string xml = Common.ToXML(obj);
+            DataSet dataset = cn.ExecuteProcedure("Sp_PatientFinalBill", xml);            
+
+            using (StringWriter sw = new StringWriter())
+            {
+                using (HtmlTextWriter hw = new HtmlTextWriter(sw))
+                {
+                    StringBuilder sb = new StringBuilder();
+
+                    //Generate Invoice (Bill) Header.
+                    sb.Append("<table width='100%' cellspacing='0' cellpadding='2'>");
+                    sb.Append("<tr><td align='center' style='background-color: #18B5F0' colspan = '2'><b>");
+                    sb.Append(HospitalName);
+                    sb.Append("</b></td></tr>");
+                    sb.Append("<tr><td colspan = '2'></td></tr>");
+                    sb.Append("<tr><td><b>Bill No: </b>");
+                    sb.Append(billNo);
+                    sb.Append("</td><td align = 'right'><b>Date: </b>");
+                    sb.Append(billdate);
+                    sb.Append(" </td></tr>");
+                    sb.Append("<tr><td colspan = '2'><b>Hospital Name: </b>");
+                    sb.Append(HospitalName);
+                    sb.Append("</td></tr>");
+                    sb.Append("</table>");
+                    sb.Append("<br />");
+
+                    //Generate Invoice (Bill) Items Grid.
+                    sb.Append("<table border = '1'>");
+                    sb.Append("<tr>");
+                    sb.Append("<th>Srno</th> <th>Particular</th><th>Qty</th><th>Charges</th><th>Total</th>");                    
+                    sb.Append("</tr>");
+                    decimal totalamt = 0;                   
+                    for (int i = 0; i <= dataset.Tables[0].Rows.Count - 1; i++)
+                    {
+                        sb.Append("<tr>");
+                        sb.Append("<td>");
+                        sb.Append(dataset.Tables[0].Rows[i]["srno"]);
+                        sb.Append("</td>");
+
+                        sb.Append("<td>");
+                        sb.Append(dataset.Tables[0].Rows[i]["particularname"]);
+                        sb.Append("</td>");
+
+                        sb.Append("<td>");
+                        sb.Append(dataset.Tables[0].Rows[i]["qty"]);
+                        sb.Append("</td>");
+
+                        sb.Append("<td>");
+                        sb.Append(dataset.Tables[0].Rows[i]["charges"]);
+                        sb.Append("</td>");
+
+                        sb.Append("<td>");
+                        sb.Append(dataset.Tables[0].Rows[i]["subtotal"]);
+                        sb.Append("</td>");
+                        sb.Append("</tr>");
+                        totalamt = totalamt + Convert.ToDecimal(dataset.Tables[0].Rows[i]["subtotal"]);                     
+                    } 
+                    sb.Append("<tr><td align = 'right' colspan = '5'>Total: ");                                       
+                    sb.Append(totalamt);
+                    sb.Append("</td>");
+                    sb.Append("</tr></table>");
+
+                    //Export HTML String as PDF.
+                   
+                    
+                    StringReader sr = new StringReader(sb.ToString());
+                    Document pdfDoc = new Document(PageSize.A4, 10f, 10f, 10f, 0f);
+                    HTMLWorker htmlparser = new HTMLWorker(pdfDoc);
+                    PdfWriter writer = PdfWriter.GetInstance(pdfDoc, HttpContext.Current.Response.OutputStream);
+                    pdfDoc.Open();
+                    htmlparser.Parse(sr);
+                    pdfDoc.Close();
+                    HttpContext.Current.Response.ContentType = "application/pdf";
+                    HttpContext.Current.Response.AddHeader("content-disposition", "attachment;filename=Invoice_" + billNo + ".pdf");
+                    HttpContext.Current.Response.Cache.SetCacheability(HttpCacheability.NoCache);
+                    HttpContext.Current.Response.Write(pdfDoc);
+                    HttpContext.Current.Response.End();
+                }
+            }
+        }
+    }
+}

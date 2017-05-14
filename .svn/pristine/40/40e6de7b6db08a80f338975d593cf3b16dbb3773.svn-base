@@ -1,0 +1,19 @@
+﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using System.Linq;
+using System.Web;
+
+namespace Kamala_Eye_Clinic.Models
+{
+    public class TreatementFundus
+    {
+        public int treatmentid { get; set; }
+        public int patientid { get; set; }
+        public int fundusid { get; set; }
+        public int srno { get; set; }
+
+        [Display(Name = "Fundus:")]
+        public string fundusname { get; set; }
+    }
+}

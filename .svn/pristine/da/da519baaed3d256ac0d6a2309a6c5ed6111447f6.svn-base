@@ -1,0 +1,247 @@
+﻿@using Kamala_Eye_Clinic.Models
+@model Kamala_Eye_Clinic.Models.Treatment
+@{
+    ViewBag.Title = "Treatment";
+    Layout = "~/Views/_Layout.cshtml";
+    List<Kamala_Eye_Clinic.Models.DrugMaster> druglist = new Kamala_Eye_Clinic.Models.DrugMaster().GetAllDrug();
+
+    List<Kamala_Eye_Clinic.Models.TreatmentInvestigation> investigationlist = (List<Kamala_Eye_Clinic.Models.TreatmentInvestigation>)Session["Investigation"];
+    //List<Kamala_Eye_Clinic.Models.TreatmentMedicine> medicinelist = ViewBag.TreatmentMedicines;
+
+    List<Kamala_Eye_Clinic.Models.TreatmentMedicine> TreatMedicineList = (List<Kamala_Eye_Clinic.Models.TreatmentMedicine>)Session["TreatmentMedicine"];
+    
+    //  Kamala_Eye_Clinic.Models.TreatmentVision treatVision = ViewBag.TreatmentVision;
+}
+
+<form method="post" action="/Patient/Treatment" style="font-family:'Times New Roman';color:#999">
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <h2 class="panel-title text-center">Treatment</h2>
+        </div>
+        <div class="panel-body">
+           
+
+            <div class="panel panel-default">
+                <div class="panel-heading">Investigation</div>
+                <div class="panel-body">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <h4>Investigation</h4>
+                            <hr />
+                        </div>
+
+                        <div class="col-md-12">
+                            @for (int i = 0; i < Model.TreatInvestigationList.Count; i++)
+            {
+                                <label class="checkbox-inline">
+                                    @Html.HiddenFor(model => model.TreatInvestigationList[i].invId)
+                                    @Html.HiddenFor(model => model.TreatInvestigationList[i].invName)
+                                    @Html.CheckBoxFor(model => model.TreatInvestigationList[i].isChecked) @Model.TreatInvestigationList[i].invName
+                                </label>
+                    }
+                        </div>
+                    </div>
+                    <hr />
+                    <div class="row">
+                        <div class="col-md-8">
+                            <label>Advice:</label>
+                            @Html.TextAreaFor(model => model.advice, new { @class = "form-control" })
+                        </div>
+                        <div class="col-md-4">
+                            <label>Follow Up Date:</label>
+                            <div class="input-group">
+                                <div class="input-group-addon">
+                                    <i class="fa fa-calendar">
+                                    </i>
+                                </div>
+                                @Html.TextBoxFor(model => model.followup_dt, new { @class = "form-control date", placeholder = "DD/MM/YYYY" })
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="panel panel-default">
+                <!-- Default panel contents -->
+                <div class="panel-heading">Medicine</div>
+                <div class="panel-body">
+                    <div class="row">
+                        <div class="col-md-12 form-group">
+                            @Html.HiddenFor(model => model.TreatMedicine.medicineid, new SelectList(druglist, "drugid", "drugname"))
+                            <div class="col-md-2">
+                                <select class="form-control" id="particular" name="particular">
+                                    @for (int i = 0; i < druglist.Count; i++)
+                            {
+                                        <option value="@druglist[i].drugid:@druglist[i].drugname">@druglist[i].drugname</option>
+                            }
+                                </select>
+                                @if (ViewBag.msg != null)
+                        { <h4 style="color:orangered">@ViewBag.msg</h4> }
+                            </div>
+                            <div class="col-md-2">
+                                @Html.TextBoxFor(model => model.TreatMedicine.qty, new { type = "number", @class = "form-control", placeholder = "qty" })
+                            </div>
+                            <div class="col-md-3">
+                                <label class="checkbox-inline">
+                                    @Html.CheckBoxFor(model => (model.TreatMedicine.mischecked)) M
+                                </label>
+                                <label class="checkbox-inline">
+                                    @Html.CheckBoxFor(model => model.TreatMedicine.aischecked) A
+                                </label>
+                                <label class="checkbox-inline">
+                                    @Html.CheckBoxFor(model => model.TreatMedicine.eischecked) E
+                                </label>
+                                <label class="checkbox-inline">
+                                    @Html.CheckBoxFor(model => model.TreatMedicine.nischecked) N
+                                </label>
+                            </div>
+                            <div class="col-md-3">
+                                <input type="submit" class="btn btn-default" value="Add" name="SubmitBtn" />
+                                <input type="reset" class="btn btn-default" value="Clear" name="SubmitBtn" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Table -->
+                <table class="table table-stripped" id="particulars">
+                    <thead>
+                        <tr class="input-lg">
+                            <th xmltag="srno">#</th>
+                            <th xmltag="particular">Particulars</th>
+                            <th xmltag="qty">Qty.</th>
+                            <th xmltag="timing">Timing</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @if (TreatMedicineList != null)
+                {
+                    for (int i = 0; i < TreatMedicineList.Count; i++)
+                    {
+                                <tr>
+                                    <td>@(i + 1)</td>
+                                    <td>@TreatMedicineList[i].particular</td>
+                                    <td>@TreatMedicineList[i].qty</td>
+                                    <td>
+                                        <lable>@TreatMedicineList[i].m</lable>
+                                        <lable>@TreatMedicineList[i].a</lable>
+                                        <lable>@TreatMedicineList[i].e</lable>
+                                        <lable>@TreatMedicineList[i].n</lable>
+                                    </td>
+                                    <td>
+                                        <form method="post" action="/Patient/Treatment">
+                                            <input type="hidden" name="srno" value="@i" />
+                                            <input type="submit" class="btn btn-default" value="Delete" name="SubmitBtn" />
+                                        </form>
+                                    </td>
+                                </tr>
+                    }
+                }
+                    </tbody>
+                </table>
+
+            </div>
+
+            <div class="panel panel-default">
+                <div class="panel-heading">Eye Sight</div>
+                <div class="panel-body">
+                    <div class="row">
+                        <div class="col-md-12 ">
+                            <div class="col-md-12">
+                                <div class="table-responsive">
+                                    <table class="table table-stripped">
+                                        <thead>
+                                            
+                                            <tr>
+                                                <th>Eye</th>
+                                                <th colspan="1">Right</th>
+                                                <th></th>
+                                                <th></th>
+                                                <th></th>
+                                                <th></th>
+                                                <th>Eye</th>
+                                                <th colspan="1">Left</th>
+                                            </tr>
+                                            <tr>
+                                                <th colspan="2">
+                                                    <div class="input-group">
+                                                        <span class="input-group-addon">Vn</span>@Html.TextBoxFor(model => model.TreatVision.right_vn, new { @class = "form-control" })<span class="input-group-addon">/6</span>
+                                                    </div>
+                                                </th>
+                                                <th></th>
+                                                <th></th>
+                                                <th></th>
+                                                <th></th>
+                                                <th colspan="2">
+                                                    <div class="input-group">
+                                                        <span class="input-group-addon">Vn</span>@Html.TextBoxFor(model => model.TreatVision.left_vn, new { @class = "form-control" })<span class="input-group-addon">/6</span>
+                                                    </div>
+                                                </th>
+                                            </tr>
+                                            <tr>
+                                                <th></th>
+                                                <th>Sph.</th>
+                                                <th>Cyl.</th>
+                                                <th>Axis.</th>
+                                                <th></th>
+                                                <th>Sph.</th>
+                                                <th>Cyl.</th>
+                                                <th>Axis.</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td>Dist.</td>
+                                                <td>@Html.TextBoxFor(model => model.TreatVision.right_dist_sph, new { @class = "form-control", placeholder = "sph" })</td>
+                                                <td>@Html.TextBoxFor(model => model.TreatVision.right_dist_cyl, new { @class = "form-control", placeholder = "cyl" })</td>
+                                                <td>@Html.TextBoxFor(model => model.TreatVision.right_dist_axis, new { @class = "form-control", placeholder = "axis" })</td>
+                                                <td>Dist.</td>
+                                                <td>@Html.TextBoxFor(model => model.TreatVision.left_dist_sph, new { @class = "form-control", placeholder = "sph" })</td>
+                                                <td>@Html.TextBoxFor(model => model.TreatVision.left_dist_cyl, new { @class = "form-control", placeholder = "cyl" })</td>
+                                                <td>@Html.TextBoxFor(model => model.TreatVision.left_dist_axis, new { @class = "form-control", placeholder = "axis" })</td>
+
+                                            </tr>
+                                            <tr>
+                                                <td>Near</td>
+                                                <td>@Html.TextBoxFor(model => model.TreatVision.right_near_sph, new { @class = "form-control", placeholder = "sph" })</td>
+                                                <td>@Html.TextBoxFor(model => model.TreatVision.right_near_cyl, new { @class = "form-control", placeholder = "cyl" })</td>
+                                                <td>@Html.TextBoxFor(model => model.TreatVision.right_near_axis, new { @class = "form-control", placeholder = "axis" })</td>
+                                                <td>Near</td>
+                                                <td>@Html.TextBoxFor(model => model.TreatVision.left_near_sph, new { @class = "form-control", placeholder = "sph" })</td>
+                                                <td>@Html.TextBoxFor(model => model.TreatVision.left_near_cyl, new { @class = "form-control", placeholder = "cyl" })</td>
+                                                <td>@Html.TextBoxFor(model => model.TreatVision.left_near_axis, new { @class = "form-control", placeholder = "axis" })</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            
+        </div>
+        <div class="panel-footer"><div class="row">
+    <div class="col-md-4 pull-right">
+        <div class="col-lg-12">
+            <div class="col-lg-12 col-sm-12" align="center">
+                @Html.HiddenFor(model => model.treatmentid)
+                @if (Model.treatmentid == 0)
+                {
+                    <input type="submit" class="btn btn-default btn-info" value="Save" name="SubmitBtn" />
+                }
+                else
+                {
+                    <input type="submit" class="btn btn-default btn-primary" value="Update" name="SubmitBtn" />
+                                @* <input type="submit" class="btn btn-default btn-danger" value="Delete" name="SubmitBtn" />*@
+                }
+
+            </div>
+        </div>
+
+    </div>
+</div></div>
+    </div>
+</form>

@@ -1,0 +1,63 @@
+﻿
+@model System.Data.DataSet
+@{
+    ViewBag.Title = "TreatmentHistory";
+    Layout = "~/Views/_Layout.cshtml";
+}
+<div class="row">   
+    <div class="form-horizontal">
+        <div class="col-lg-12">
+            <div class="col-lg-4">
+                @Html.ActionLink("Add New Treatment","Treatment", new {treatmentid = 0}, new { @class = "btn btn-primary" })
+            </div>
+        </div>
+        <div class="col-lg-12">
+            <hr />
+            <div class="table-responsive">
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>Treatment No</th>
+                            <th>Treatment Date</th>
+                            <th>Patient Id</th>
+                            <th>Advice</th>
+                            <th>Followup Date</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @try
+                        {
+                            if (Model != null && Model.Tables.Count > 0)
+                            {
+                                if (Model.Tables[0].Rows.Count > 0)
+                                {
+                                    for (int i = 0; i <= Model.Tables[0].Rows.Count - 1; i++)
+                                    {
+
+                                        <tr>
+                                            <td>@(i + 1)</td>
+                                            <td>@Model.Tables[0].Rows[i]["treatmentid"]</td>
+                                            <td>@Model.Tables[0].Rows[i]["create_dt"]</td>
+                                            <td>@Model.Tables[0].Rows[i]["patientid"]</td>                                            
+                                            <td>@Model.Tables[0].Rows[i]["followup_dt"]</td>
+                                            <td>@Html.ActionLink("View", "Treatment", new { treatmentid = Model.Tables[0].Rows[i]["treatmentid"] })</td>
+                                        </tr>
+                                    }
+                                }
+                            }
+                            else
+                            {
+                                <tr>
+                                    <td style="color:red" colspan="7">History Not Found</td>
+                                </tr>
+                            }
+                        }
+                        catch (Exception) { }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>

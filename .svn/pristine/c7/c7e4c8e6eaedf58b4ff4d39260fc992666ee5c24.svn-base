@@ -1,0 +1,87 @@
+﻿
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <title>@ViewBag.Title</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } </script>
+    <link href="~/Content/css/bootstrap.min.css" rel='stylesheet' type='text/css' />
+    <!-- Custom Theme files -->
+    <link href="~/Content/css/font-awesome.css" rel="stylesheet">
+    <script src="~/Content/js/jquery.min.js"> </script>
+    <script src="~/Content/js/bootstrap.min.js"> </script>
+
+    <script type="text/javascript" src="https://formden.com/static/cdn/formden.js"></script>
+    
+
+</head>
+<body>
+    <nav role="navigation" class="navbar navbar-default navbar-fixed-top">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header">
+            <button type="button" data-target="#navbarCollapse" data-toggle="collapse" class="navbar-toggle">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <img src="~/Content/images/logo1.png" height="50" width="50">
+        </div>
+        <!-- Collection of nav links and other content for toggling -->
+        <div id="navbarCollapse" class="collapse navbar-collapse" style="margin-left:100px">
+            <ul class="nav navbar-nav">
+                <li class="active"><a href="~/Patient/PatientSelection">Home</a></li>
+                <li><a href="#">Profile</a></li>
+                <li><a href="#">Messages</a></li>
+            </ul>
+            <ul class="nav navbar-nav navbar-right" style="margin-right:2%">
+                <li class="dropdown">
+                    <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                        @Session["UserName"].ToString()
+                        <span class="caret"></span>
+                    </a>
+                    <ul class="dropdown-menu">
+                        <li><a href="#">Profile</a></li>
+                        <li>@Html.ActionLink("Change Password", "ChangePassword", "User")</li>
+                        <li>@Html.ActionLink("Logout", "Logout", "User")</li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+    </nav>
+    <div class="container" style="margin-top:5%;">
+        @RenderBody()
+    </div>
+    <footer class="panel-footer ">
+        <p align="center">&copy; 2014 RUBRAIN. All Rights Reserved | Design by <a href="http://rubrains.com" target="_blank">RUBRAIN</a> </p>
+    </footer>
+    <script>
+    $(document).ready(function () {
+        var date_input = $('.date');
+       // var container = $('.bootstrap-iso form').length > 0 ? $('.bootstrap-iso form').parent() : "body";
+        date_input.datepicker({
+            format: 'dd/mm/yyyy',
+           // container: container ,
+            todayHighlight: true,
+            autoclose: true,
+        })
+    })
+    </script>
+
+    <script type="text/javascript" src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
+
+    <!-- Include Date Range Picker -->
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.1/js/bootstrap-datepicker.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.1/css/bootstrap-datepicker3.css" />
+    @*<script src="~/Scripts/jquery-1.10.2.min.js"></script>*@
+    <script src="~/Scripts/jquery.validate.min.js"></script>
+    <script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
+    <script src="~/Content/js/jquery.nicescroll.js"></script>
+    <script src="~/Content/js/scripts.js"></script>
+</body>
+</html>

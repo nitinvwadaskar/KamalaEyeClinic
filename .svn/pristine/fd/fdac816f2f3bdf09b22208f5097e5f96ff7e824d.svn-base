@@ -1,0 +1,27 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Web;
+
+namespace Kamala_Eye_Clinic.Models
+{
+    public class TreatmenyVision
+    {
+        public int right_vn { get; set; }
+        public int right_dist_sph { get; set; }
+        public int right_dist_cyl { get; set; }
+        public int right_dist_axis { get; set; }
+        public int right_near_sph { get; set; }
+        public int right_near_cyl { get; set; }
+        public int right_near_axis { get; set; }
+
+        public int left_vn { get; set; }
+        public int left_dist_sph { get; set; }
+        public int left_dist_cyl { get; set; }
+        public int left_dist_axis { get; set; }
+        public int left_near_sph { get; set; }
+        public int left_near_cyl { get; set; }
+        public int left_near_axis { get; set; }
+
+    }
+}

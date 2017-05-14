@@ -1,0 +1,859 @@
+﻿@model Kamala_Eye_Clinic.Models.PatientMaster
+@{
+    ViewBag.Title = "Registration";
+    Layout = "~/Views/_Layout.cshtml";
+}
+
+<div class="row">
+    <div class="col-lg-12">
+        <div class="page-header">
+            <h4>Registration</h4>
+        </div>
+        <div class="form-group-sm">
+            <div class="row form-group">
+                <div class="col-lg-12 thumbnail input-sm">
+                    <div class="col-lg-6">
+                        <div class="col-lg-5">
+                            <label class="control-label">Select Registration Type: </label>
+                        </div>
+                        <div class="col-lg-6">
+                            <div class="radio-inline">
+                                <label><input type="radio" id="newpatient" name="patient" checked>New Patient</label>
+                            </div>
+                            <div class="radio-inline">
+                                <label><input type="radio" id="follow" name="patient">Follow-Up</label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row form-group">
+                <div class="col-lg-6 input-sm">
+                    <label class="control-label"><font color="red">* fields are mandatory </font></label>
+                </div>
+            </div>
+            @using (Html.BeginForm())
+            {
+                @Html.AntiForgeryToken()
+
+                <div class="panel-group" id="newregistration">
+                    <div class="panel panel-info">
+                        <div class="panel-heading">
+                            <h5>New Patient Registration</h5>
+                        </div>
+                        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                        <div class="panel-body ">
+                            <div id="tabs">
+                                <ul class="nav nav-tabs input-group-lg">
+                                    <li id="p_d" class="active"><a data-toggle="tab" href="#Personal_Details">Personal Details</a></li>
+                                    <li id="a_d"><a data-toggle="tab" href="#Address_Details">Address Details</a></li>
+                                    <li id="c_d"><a data-toggle="tab" href="#Contact_Details">Contact Details</a></li>
+                                    <li id="i_d"><a data-toggle="tab" href="#Identity_Detils">Identity & Address Proof Details</a></li>
+                                    <li id="o_d"><a data-toggle="tab" href="#Other_Details">Other Details</a></li>
+                                </ul>
+                                <br />
+                                <div class="tab-content input-sm">
+                                    <!-- Tab 1-->
+                                    <div class="tab-pane active" id="Personal_Details">
+                                        <!-- Row 1-->
+                                        <div class="row form-group">
+                                            <!-- col1 -->
+                                            <div class="col-lg-4">
+                                                <div class="col-lg-5">
+                                                    <label class="control-label">Title*:</label>
+                                                </div>
+                                                <div class="col-lg-4">
+                                                    @Html.DropDownListFor(model => model.title, new SelectList(new[] { "Mr.", "Ms.", "Mrs." }), new { @class = "form-control" })
+                                                    @Html.ValidationMessageFor(model => model.title, "", new { @class = "text-danger" })
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <!-- Row 2-->
+                                        <div class="row form-group">
+                                            <!-- col1 -->
+                                            <div class="col-lg-4">
+                                                <div class="col-lg-5">
+                                                    <label class="control-label">First Name*:</label>
+                                                </div>
+                                                <div class="col-lg-7">
+                                                    @Html.EditorFor(model => model.fname, new { htmlAttributes = new { @class = "form-control" } })
+                                                    @Html.ValidationMessageFor(model => model.fname, "", new { @class = "text-danger" })
+                                                </div>
+                                            </div>
+                                            <!-- col2 -->
+                                            <div class="col-lg-4">
+                                                <div class="col-lg-5">
+                                                    <label class="control-label">Middle Name*:</label>
+                                                </div>
+                                                <div class="col-lg-7">
+                                                    @Html.EditorFor(model => model.mname, new { htmlAttributes = new { @class = "form-control" } })
+                                                    @Html.ValidationMessageFor(model => model.mname, "", new { @class = "text-danger" })
+                                                </div>
+                                            </div>
+                                            <!-- col3 -->
+                                            <div class="col-lg-4">
+                                                <div class="col-lg-4">
+                                                    <label class="control-label">Last Name*:</label>
+                                                </div>
+                                                <div class="col-lg-7">
+                                                    @Html.EditorFor(model => model.lname, new { htmlAttributes = new { @class = "form-control" } })
+                                                    @Html.ValidationMessageFor(model => model.lname, "", new { @class = "text-danger" })
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <!-- Row 3 -->
+                                        <div class="row form-group">
+                                            <!-- col1 -->
+                                            <div class="col-lg-4">
+                                                <div class="col-lg-5">
+                                                    <label class="control-label">Birth Date:</label>
+                                                </div>
+                                                <div class="col-lg-7">
+                                                    @Html.EditorFor(model => model.dob, new { htmlAttributes = new { @class = "form-control", @type = "date" } })
+                                                    @Html.ValidationMessageFor(model => model.dob, "", new { @class = "text-danger" })
+                                                </div>
+                                            </div>
+                                            <!-- col2 -->
+                                            <div class="col-lg-4">
+                                                <div class="col-lg-5">
+                                                    <label class="control-label">Birth Place:</label>
+                                                </div>
+                                                <div class="col-lg-7">
+                                                    @Html.DropDownListFor(model => model.birthplace, new SelectList(new[] { "Select", "Pune", "Mumbai" }), new { @class = "form-control" })
+                                                    @Html.ValidationMessageFor(model => model.birthplace, "", new { @class = "text-danger" })
+                                                </div>
+                                            </div>
+                                            <!-- col3-->
+                                            <div class="col-lg-4">
+                                                <div class="col-lg-4">
+                                                    <label class="control-label">Age:</label>
+                                                </div>
+                                                <div class="col-lg-7">
+                                                    @Html.EditorFor(model => model.age, new { htmlAttributes = new { @class = "form-control" } })
+                                                    @Html.ValidationMessageFor(model => model.age, "", new { @class = "text-danger" })
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <!-- Row 4-->
+                                        <div class="row form-group">
+                                            <!-- col1 -->
+                                            <div class="col-lg-4">
+                                                <div class="col-lg-5">
+                                                    <label class="control-label">Gender*:</label>
+                                                </div>
+                                                <div class="col-lg-7">
+                                                    <div class="radio-inline">
+                                                        <label>@Html.RadioButton("Gender", "Male", true)  Male</label>
+                                                    </div>
+                                                    <div class="radio-inline">
+                                                        <label>@Html.RadioButton("Gender", "Female")  Female</label>
+                                                    </div>
+                                                    @Html.ValidationMessageFor(model => model.gender, "", new { @class = "text-danger" })
+                                                </div>
+                                            </div>
+                                            <!-- col2 -->
+                                            <div class="col-lg-4">
+                                                <div class="col-lg-5">
+                                                    <label class="control-label">Marital Status*:</label>
+                                                </div>
+
+                                                <div class="col-lg-7">
+                                                    @Html.DropDownListFor(model => model.maritalstatus, new SelectList(new[] { "Married ", "Unmarried" }), new { @class = "form-control" })
+                                                    @Html.ValidationMessageFor(model => model.maritalstatus, "", new { @class = "text-danger" })
+                                                </div>
+                                            </div>
+                                            <!-- col3 -->
+                                            <div class="col-lg-4">
+                                                <div class="col-lg-4">
+                                                    <label class="control-label">Blood Group:</label>
+                                                </div>
+                                                <div class="col-lg-7">
+                                                    @Html.DropDownListFor(model => model.bloodgroup, new SelectList(new[] { "A+ ", "B+", "AB+", "O+", "A-", "B-", "AB-", "O-" }), new { @class = "form-control" })
+                                                    @Html.ValidationMessageFor(model => model.bloodgroup, "", new { @class = "text-danger" })
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <!-- Row 5-->
+                                        <div class="row form-group">
+                                            <!-- col 1 -->
+                                            <div class="col-lg-4">
+                                                <div class="col-lg-5">
+                                                    <label class="control-label">Height:</label>
+                                                </div>
+                                                <div class="col-lg-7">
+                                                    @Html.EditorFor(model => model.pheight, new { htmlAttributes = new { @class = "form-control" } })
+                                                    @Html.ValidationMessageFor(model => model.pheight, "", new { @class = "text-danger" })
+                                                </div>
+                                            </div>
+                                            <!-- col 2 -->
+                                            <div class="col-lg-4">
+                                                <div class="col-lg-5">
+                                                    <label class="control-label">Weight:</label>
+                                                </div>
+                                                <div class="col-lg-7">
+                                                    @Html.EditorFor(model => model.pweight, new { htmlAttributes = new { @class = "form-control" } })
+                                                    @Html.ValidationMessageFor(model => model.pweight, "", new { @class = "text-danger" })
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row form-group">
+                                            <!-- col 1 -->
+                                            <div class="col-lg-12" align="center">
+                                                <input type="submit" id="next_tab2" class="btn btn-primary btn-sm">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!--Row 6-->
+                                    <!--Tab 1 close-->
+                                    <!-- Tab No 2-->
+                                    <div class="tab-pane" id="Address_Details">
+                                        <!--Row 1-->
+                                        <div class="col-lg-12 label-success input-lg">
+                                            <!-- col1 -->
+                                            <div class="col-lg-6" align="center">
+                                                <h5 class="label">Temporary Address</h5>
+                                            </div>
+                                            <!-- col2 -->
+                                            <div class="col-lg-6" align="center">
+                                                <h5 class="label">Permanent Address</h5>
+                                            </div>
+                                        </div>
+                                        <div class="row form-group"></div>
+                                        <div class="row">
+                                            <div class="col-lg-12">
+                                                <div class="form-group col-lg-12">
+                                                    <div class="col-lg-6">
+                                                        <div class="col-lg-12 thumbnail">
+                                                            <div class="row form-group">
+                                                                <div class="col-lg-12">
+                                                                </div>
+                                                            </div>
+                                                            <div class="row form-group">
+                                                                <br />
+                                                            </div>
+                                                            <div class="row form-group">
+                                                            </div>
+                                                            <div class="row form-group">
+                                                                <div class="col-lg-12">
+                                                                    <div class="col-lg-5">
+                                                                        <label class="control-label">Address:</label>
+                                                                    </div>
+                                                                    <div class="col-lg-6">
+                                                                        @Html.TextAreaFor(model => model.taddress, new { @class = "form-control" })
+                                                                        @Html.ValidationMessageFor(model => addressinfo.taddress, "", new { @class = "text-danger" })
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="row form-group">
+                                                                <div class="col-lg-12">
+                                                                    <div class="col-lg-5">
+                                                                        <label class="control-label">City*:</label>
+                                                                    </div>
+                                                                    <div class="col-lg-6">
+                                                                        @Html.EditorFor(model => model.tcity, new { @class = "form-control" })
+                                                                        @Html.ValidationMessageFor(model => addressinfo.tcity, "", new { @class = "text-danger" })
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="row form-group ">
+                                                                <div class="col-lg-12">
+                                                                    <div class="col-lg-5">
+                                                                        <label class="control-label">Country*:</label>
+                                                                    </div>
+                                                                    <div class="col-lg-6">
+                                                                        @Html.DropDownListFor(model => model.tcountry, new SelectList(new[] { "India", "US", "UK" }), new { @class = "form-control" })
+                                                                        @Html.ValidationMessageFor(model => model.tcountry, "", new { @class = "text-danger" })
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="row form-group ">
+                                                                <div class="col-lg-12">
+                                                                    <div class="col-lg-5">
+                                                                        <label class="control-label">State*:</label>
+                                                                    </div>
+                                                                    <div class="col-lg-6">
+                                                                        @Html.DropDownListFor(model => model.tcountry, new SelectList(new[] { "Maharashtra", "Gujrat", "Punjab" }), new { @class = "form-control" })
+                                                                        @Html.ValidationMessageFor(model => model.tcountry, "", new { @class = "text-danger" })
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="row form-group ">
+                                                                <div class="col-lg-12">
+                                                                    <div class="col-lg-5">
+                                                                        <label class="control-label">District*:</label>
+                                                                    </div>
+                                                                    <div class="col-lg-6">
+                                                                        @Html.DropDownListFor(model => model.tcountry, new SelectList(new[] { "Pune", "Mumbai", "Nashik" }), new { @class = "form-control" })
+                                                                        @Html.ValidationMessageFor(model => model.tcountry, "", new { @class = "text-danger" })
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="row form-group ">
+                                                                <div class="col-lg-12">
+                                                                    <div class="col-lg-5">
+                                                                        <label class="control-label">Pin Code:</label>
+                                                                    </div>
+                                                                    <div class="col-lg-6">
+                                                                        @Html.EditorFor(model => model.tpin, new { htmlAttributes = new { @class = "form-control" } })
+                                                                        @Html.ValidationMessageFor(model => model.tpin, "", new { @class = "text-danger" })
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-lg-6">
+                                                        <div class="col-lg-12 thumbnail">
+                                                            <div class="row form-group">
+                                                                <div class="col-lg-12">
+                                                                    <div class="checkbox">
+                                                                        <label>
+                                                                            <input id="sameAddress" type="checkbox" value="Same as Temporary Address">Same as Temporary Address
+                                                                        </label>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="row form-group"></div>
+                                                            <div class="row">
+                                                                <div class="col-lg-12">
+                                                                    <!-- col2 -->
+                                                                    <div class="form-group col-lg-12">
+                                                                        <div class="col-lg-5">
+                                                                            <label class="control-label">Address:</label>
+                                                                        </div>
+                                                                        <div class="col-lg-6">
+                                                                            @Html.TextAreaFor(model => model.paddress, new { @class = "form-control" })
+                                                                            @Html.ValidationMessageFor(model => model.paddress, "", new { @class = "text-danger" })
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <!--Row 3-->
+                                                            <div class="row">
+                                                                <div class="col-lg-12">
+                                                                    <!-- col2 -->
+                                                                    <div class="form-group col-lg-12">
+                                                                        <div class="col-lg-5">
+                                                                            <label class="control-label">City*:</label>
+                                                                        </div>
+                                                                        <div class="col-lg-6">
+                                                                            @Html.EditorFor(model => model.pcity, new { @class = "form-control" })
+                                                                            @Html.ValidationMessageFor(model => model.pcity, "", new { @class = "text-danger" })
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <!--Row 3-->
+                                                            <div class="row">
+                                                                <div class="col-lg-12">
+                                                                    <div class="form-group col-lg-12">
+                                                                        <div class="col-lg-5">
+                                                                            <label class="control-label">Country*:</label>
+                                                                        </div>
+                                                                        <div class="col-lg-6">
+                                                                            @Html.DropDownListFor(model => model.tcountry, new SelectList(new[] { "India", "US", "UK" }), new { @class = "form-control" })
+                                                                            @Html.ValidationMessageFor(model => model.tcountry, "", new { @class = "text-danger" })
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <!--Row 4-->
+                                                            <div class="row">
+                                                                <div class="col-lg-12">
+                                                                    <div class="form-group col-lg-12">
+                                                                        <div class="col-lg-5">
+                                                                            <label class="control-label">State*:</label>
+                                                                        </div>
+                                                                        <div class="col-lg-6">
+                                                                            @Html.DropDownListFor(model => model.pstate, new SelectList(new[] { "Maharashtra", "Gujrat", "Punjab" }), new { @class = "form-control" })
+                                                                            @Html.ValidationMessageFor(model => model.pstate, "", new { @class = "text-danger" })
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <!--Row 5-->
+                                                            <div class="row">
+                                                                <div class="col-lg-12">
+                                                                    <div class="form-group col-lg-12">
+                                                                        <div class="col-lg-5">
+                                                                            <label class="control-label">District*:</label>
+                                                                        </div>
+                                                                        <div class="col-lg-6">
+                                                                            @Html.DropDownListFor(model => model.pdistrict, new SelectList(new[] { "Pune", "Mumbai", "Nashik" }), new { @class = "form-control" })
+                                                                            @Html.ValidationMessageFor(model => model.pdistrict, "", new { @class = "text-danger" })
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <!--Row 6-->
+                                                            <div class="row">
+                                                                <div class="col-lg-12">
+                                                                    <div class="form-group col-lg-12">
+                                                                        <div class="col-lg-5">
+                                                                            <label class="control-label">Pin Code:</label>
+                                                                        </div>
+                                                                        <div class="col-lg-6">
+                                                                            @Html.EditorFor(model => model.ppin, new { htmlAttributes = new { @class = "form-control" } })
+                                                                            @Html.ValidationMessageFor(model => model.ppin, "", new { @class = "text-danger" })
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row form-group">
+                                            <!-- col 1 -->
+                                            <div class="col-lg-12" align="center">
+                                                <label id="previous_tab1" class="btn btn-primary btn-sm"><i class="fa fa-arrow-circle-left"></i>&nbsp; Back  </label>
+                                                <label id="next_tab3" class="btn btn-primary btn-sm"> Continue &nbsp; <i class="fa fa-arrow-circle-right"></i></label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!--Tab 2 close-->
+                                    <!-- Tab 3-->
+                                    <div class="tab-pane" id="Contact_Details">
+                                        <!--Row 1-->
+                                        <div class="row form-group">
+                                            <!-- col1 -->
+                                            <div class="col-lg-6">
+                                                <div class="col-lg-5">
+                                                    <label class="control-label">Mobile No*:</label>
+                                                </div>
+                                                <div class="col-lg-6">
+                                                    @Html.EditorFor(model => model.pmobile, new { htmlAttributes = new { @class = "form-control" } })
+                                                    @Html.ValidationMessageFor(model => model.pmobile, "", new { @class = "text-danger" })
+                                                </div>
+                                            </div>
+                                            <!-- col2 -->
+                                            <div class="col-lg-6">
+                                                <div class="col-lg-5">
+                                                    <label class="control-label">Alternate Mobile No:</label>
+                                                </div>
+                                                <div class="col-lg-6">
+                                                    @Html.EditorFor(model => model.amobile, new { htmlAttributes = new { @class = "form-control" } })
+                                                    @Html.ValidationMessageFor(model => model.amobile, "", new { @class = "text-danger" })
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <!--Row 2-->
+                                        <div class="row form-group">
+                                            <!-- col1 -->
+                                            <div class="col-lg-6">
+                                                <div class="col-lg-5">
+                                                    <label class="control-label">Telephone No:</label>
+                                                </div>
+                                                <div class="col-lg-6">
+                                                    @Html.EditorFor(model => model.phone, new { htmlAttributes = new { @class = "form-control" } })
+                                                    @Html.ValidationMessageFor(model => model.phone, "", new { @class = "text-danger" })
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <!--Row 3-->
+                                        <div class="row form-group">
+                                            <!-- col1 -->
+                                            <div class="col-lg-6">
+                                                <div class="col-lg-5">
+                                                    <label class="control-label">Email Id:</label>
+                                                </div>
+                                                <div class="col-lg-6">
+                                                    @Html.EditorFor(model => model.pmobile, new { htmlAttributes = new { @class = "form-control" } })
+                                                    @Html.ValidationMessageFor(model => model.pmobile, "", new { @class = "text-danger" })
+                                                </div>
+                                            </div>
+                                            <!-- col2 -->
+                                            <div class="col-lg-6">
+                                                <div class="col-lg-5">
+                                                    <label class="control-label">Alternate Email Id:</label>
+                                                </div>
+                                                <div class="col-lg-6">
+                                                    <input type="text" class="form-control" id="AltEmailId" placeholder="xyz@abc.com">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row form-group">
+                                            <!-- col 1 -->
+                                            <div class="col-lg-12" align="center">
+                                                <label id="previous_tab2" class="btn btn-primary btn-sm"><i class="fa fa-arrow-circle-left"></i>&nbsp; Back  </label>
+                                                <label id="next_tab4" class="btn btn-primary btn-sm"> Continue &nbsp; <i class="fa fa-arrow-circle-right"></i></label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!--tab 3 Close-->
+                                    <!-- Tab 4-->
+                                    <div class="tab-pane" id="Identity_Detils">
+                                        <!--Row 1-->
+                                        <div class="row form-group">
+                                            <!-- col1 -->
+                                            <div class="col-lg-6">
+                                                <div class="col-lg-5">
+                                                    <label class="control-label">Aadhar Card:</label>
+                                                </div>
+                                                <div class="col-lg-7 ">
+                                                    <div class="radio-inline">
+                                                        <label><input type="radio" id="Male" name="aadhar">Yes</label>
+                                                    </div>
+                                                    <div class="radio-inline">
+                                                        <label><input type="radio" id="Female" name="aadhar">No</label>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <!-- col2 -->
+                                            <div class="col-lg-6">
+                                                <div class="col-lg-5">
+                                                    <label class="control-label">Aadhar No:</label>
+                                                </div>
+                                                <div class="col-lg-6">
+                                                    <input type="text" class="form-control" id="AadharNo">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <!--Row 1 close-->
+                                        <!--Row 2-->
+                                        <div class="row form-group">
+                                            <!-- col1 -->
+                                            <div class="col-lg-6">
+                                                <div class="col-lg-5">
+                                                    <label class="control-label">Passport:</label>
+                                                </div>
+                                                <div class="col-lg-7 ">
+                                                    <div class="radio-inline">
+                                                        <label><input type="radio" id="Passport_Yes" name="passport">Yes</label>
+                                                    </div>
+                                                    <div class="radio-inline">
+                                                        <label><input type="radio" id="Passport_No" name="passport">No</label>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <!-- col2 -->
+                                            <div class="col-lg-6">
+                                                <div class="col-lg-5">
+                                                    <label class="control-label">Passport No:</label>
+                                                </div>
+                                                <div class="col-lg-6">
+                                                    <input type="text" class="form-control" id="PassportNo">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <!--Row 2 close-->
+                                        <!--Row 3-->
+                                        <div class="row form-group">
+                                            <!-- col1 -->
+                                            <div class="col-lg-6">
+                                                <div class="col-lg-5">
+                                                    <label class="control-label">PAN Card:</label>
+                                                </div>
+                                                <div class="col-lg-7 ">
+                                                    <div class="radio-inline">
+                                                        <label><input type="radio" id="Pan_Yes" name="pancard">Yes</label>
+                                                    </div>
+                                                    <div class="radio-inline">
+                                                        <label><input type="radio" id="Pan_No" name="pancard">No</label>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <!-- col2 -->
+                                            <div class="col-lg-6">
+                                                <div class="col-lg-5">
+                                                    <label class="control-label">PAN No:</label>
+                                                </div>
+                                                <div class="col-lg-6">
+                                                    <input type="text" class="form-control" id="PANNo">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <!--Row 3 close-->
+                                        <!--Row 4-->
+                                        <div class="row form-group">
+                                            <!-- col1 -->
+                                            <div class="col-lg-6">
+                                                <div class="col-lg-5">
+                                                    <label class="control-label">Voter Id:</label>
+                                                </div>
+                                                <div class="col-lg-7 ">
+                                                    <div class="radio-inline">
+                                                        <label><input type="radio" id="Voter_Id_Yes" name="voterid">Yes</label>
+                                                    </div>
+                                                    <div class="radio-inline">
+                                                        <label><input type="radio" id="Voter_Id_No" name="voterid">No</label>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <!-- col2 -->
+                                            <div class="col-lg-6">
+                                                <div class="col-lg-5">
+                                                    <label class="control-label">Voter Id No:</label>
+                                                </div>
+                                                <div class="col-lg-6">
+                                                    <input type="text" class="form-control" id="VoterIdNo">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <!--Row 4 close-->
+                                        <!--Row 4-->
+                                        <div class="row form-group">
+                                            <!-- col1 -->
+                                            <div class="col-lg-6">
+                                                <div class="col-lg-5">
+                                                    <label class="control-label">Employee Id:</label>
+                                                </div>
+                                                <div class="col-lg-7 ">
+                                                    <div class="radio-inline">
+                                                        <label><input type="radio" id="empid_yes" name="employee">Yes</label>
+                                                    </div>
+                                                    <div class="radio-inline">
+                                                        <label><input type="radio" id="empid_no" name="employee">No</label>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <!-- col2 -->
+                                            <div class="col-lg-6">
+                                                <div class="col-lg-5">
+                                                    <label class="control-label">Employee Id No:</label>
+                                                </div>
+                                                <div class="col-lg-6">
+                                                    <input type="text" class="form-control" id="EmpIdNo">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <!--Row 4 close-->
+                                        <div class="row form-group">
+                                            <!-- col 1 -->
+                                            <div class="col-lg-12" align="center">
+                                                <label id="previous_tab3" class="btn btn-primary btn-sm"><i class="fa fa-arrow-circle-left"></i>&nbsp; Back  </label>
+                                                <label id="next_tab5" class="btn btn-primary btn-sm"> Continue &nbsp; <i class="fa fa-arrow-circle-right"></i></label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!--tab 4 Close-->
+                                    <!-- Tab 4-->
+                                    <div class="tab-pane" id="Other_Details">
+                                        <!--Row 1-->
+                                        <div class="row form-group">
+                                            <!-- col1 -->
+                                            <div class="col-lg-6">
+                                                <div class="col-lg-5">
+                                                    <label class="control-label">Company id:</label>
+                                                </div>
+                                                <div class="col-lg-6">
+                                                    <input type="text" class="form-control" id="Compid">
+                                                </div>
+                                            </div>
+                                            <!-- col2 -->
+                                            <div class="col-lg-6">
+                                                <div class="col-lg-5">
+                                                    <label class="control-label">Address:</label>
+                                                </div>
+                                                <div class="col-lg-6">
+                                                    <input type="text" class="form-control" id="Address">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <!--Row 2-->
+                                        <div class="row form-group">
+                                            <!-- col1 -->
+                                            <div class="col-lg-6">
+                                                <div class="col-lg-5">
+                                                    <label class="control-label">Employee Id:</label>
+                                                </div>
+                                                <div class="col-lg-6">
+                                                    <input type="text" class="form-control" id="EmpId">
+                                                </div>
+                                            </div>
+                                            <!-- col2 -->
+                                        </div>
+                                        <!--Row 3-->
+                                        <div class="row form-group">
+                                            <!-- col1 -->
+                                            <div class="col-lg-6">
+                                                <div class="col-lg-5">
+                                                    <label class="control-label">Insurance Company id:</label>
+                                                </div>
+                                                <div class="col-lg-6">
+                                                    <input type="text" class="form-control" id="InsuranceCompid">
+                                                </div>
+                                            </div>
+                                            <!-- col2 -->
+                                            <div class="col-lg-6">
+                                                <div class="col-lg-5">
+                                                    <label class="control-label">Insurance No:</label>
+                                                </div>
+                                                <div class="col-lg-6">
+                                                    <input type="text" class="form-control" id="InsuranceNo">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <!--Row 4-->
+                                        <div class="row">
+                                            <div class="col-lg-12" align="center">
+                                                <label id="previous_tab4" class="btn btn-primary btn-md"><i class="fa fa-arrow-circle-left">&nbsp; Back </i> </label>
+                                                <button class="btn btn-info btn-md" value="Print"><i class="fa fa-print">&nbsp Print</i></button>
+                                                <button id="Submit" class="btn btn-success btn-md"><i class="fa fa-save"> &nbsp; Save </i></button>
+                                                <button class="btn btn-danger btn-md" value="cancel"><i class="fa fa-ban">&nbsp Cancel</i></button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!--Tab 4 Close-->
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            }
+            @using (Html.BeginForm())
+            {
+                @Html.AntiForgeryToken()
+
+                <div class="panel-group" id="follow_up" hidden>
+                    <div class="panel panel-info">
+                        <div class="panel-heading">
+                            <h5>Follow-Up Patient</h5><br />
+                            <div class="input-sm">
+                                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                                <div class="row form-group">
+                                    <div class="col-lg-12" align="center">
+                                        <div class="col-lg-3">
+                                            <input type="text" class="form-control" id="patient_id" placeholder="Patient Id" />
+                                        </div>
+                                        <div class="col-lg-1">
+                                            <label class="control-label">OR</label>
+                                        </div>
+                                        <div class="col-lg-5">
+                                            <input type="text" class="form-control" id="patient_name" placeholder="Patient Name" />
+                                        </div>
+                                        <div class="col-lg-2">
+                                            <button class="btn btn-primary btn-sm" id="search"><i class="fa fa-search"></i>&nbsp; Search</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="panel-body">
+                            <div class="input-sm">
+                                <div class="row form-group">
+                                    <div class="col-lg-4">
+                                        <div class="col-lg-5">
+                                            <label class="control-label">Patient Id:</label>
+                                        </div>
+                                        <div class="col-lg-7">
+                                            <label id="P_Id" class="control-label">-</label>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-8">
+                                        <div class="col-lg-5">
+                                            <label class="control-label">Patient Name:</label>
+                                        </div>
+                                        <div class="col-lg-7">
+                                            <label id="P_Id" class="control-label">-</label>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row form-group">
+                                    <div class="col-lg-4">
+                                        <div class="col-lg-5">
+                                            <label class="control-label">Last Visit Date:</label>
+                                        </div>
+                                        <div class="col-lg-7">
+                                            <label id="last_visit" class="control-label">-</label>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-4">
+                                        <div class="col-lg-5">
+                                            <label class="control-label">Follow-Up Date:</label>
+                                        </div>
+                                        <div class="col-lg-7">
+                                            <label id="P_Id" class="control-label">-</label>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row form-group">
+                                    <div class="col-lg-12" align="center">
+                                        <button class="btn btn-primary btn-sm" id="registerVisit"><i class="fa fa-edit"></i>&nbsp; Register Visit</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+</div>
+<script>
+    $(document).ready(function () {
+        $("#newpatient").click(function () {
+            $("#newregistration").show();
+            $("#follow_up").hide();
+            $("#Personal_Details").addClass("active");
+            $("#p_d").addClass("active");
+            $("#Address_Details").removeClass("active");
+            $("#a_d").removeClass("active");
+        });
+
+        $("#follow").click(function () {
+            $("#follow_up").show();
+            $("#newregistration").hide();
+        });
+    });
+
+    $(document).ready(function () {
+
+        $("#next_tab2").click(function () {
+            $("#Personal_Details").removeClass("active");
+            $("#p_d").removeClass("active");
+            $("#Address_Details").addClass("active");
+            $("#a_d").addClass("active");
+        });
+
+        $("#next_tab3").click(function () {
+            $("#Address_Details").removeClass("active");
+            $("#a_d").removeClass("active");
+            $("#Contact_Details").addClass("active");
+            $("#c_d").addClass("active");
+        });
+
+        $("#next_tab4").click(function () {
+            $("#Contact_Details").removeClass("active");
+            $("#c_d").removeClass("active");
+            $("#Identity_Detils").addClass("active");
+            $("#i_d").addClass("active");
+        });
+
+        $("#next_tab5").click(function () {
+            $("#Identity_Detils").removeClass("active");
+            $("#i_d").removeClass("active");
+            $("#Other_Details").addClass("active");
+            $("#o_d").addClass("active");
+        });
+
+        $("#previous_tab1").click(function () {
+            $("#Address_Details").removeClass("active");
+            $("#a_d").removeClass("active");
+            $("#Personal_Details").addClass("active");
+            $("#p_d").addClass("active");
+        });
+
+        $("#previous_tab2").click(function () {
+            $("#Contact_Details").removeClass("active");
+            $("#c_d").removeClass("active");
+            $("#Address_Details").addClass("active");
+            $("#a_d").addClass("active");
+        });
+
+        $("#previous_tab3").click(function () {
+            $("#Identity_Detils").removeClass("active");
+            $("#i_d").removeClass("active");
+            $("#Contact_Details").addClass("active");
+            $("#c_d").addClass("active");
+        });
+
+        $("#previous_tab4").click(function () {
+            $("#Other_Details").removeClass("active");
+            $("#o_d").removeClass("active");
+            $("#Identity_Detils").addClass("active");
+            $("#i_d").addClass("active");
+        });
+    });
+</script>

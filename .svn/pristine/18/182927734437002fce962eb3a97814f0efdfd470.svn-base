@@ -1,0 +1,243 @@
+﻿@model Kamala_Eye_Clinic.Models.OTBilling
+
+@{
+    ViewBag.Title = "Bill";
+    Layout = "~/Views/_Layout.cshtml";
+    List<Kamala_Eye_Clinic.Models.BillParticularMaster> billpartcularlist = new Kamala_Eye_Clinic.Models.BillParticularMaster().GetAllBillParticular();
+    List<Kamala_Eye_Clinic.Models.BillParticulars> billpartcular = ViewBag.BillParticulars;
+    Kamala_Eye_Clinic.Models.BillParticulars billpar = ViewBag.BillPar;
+}
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        <div class="row">
+            <div class="col-md-12 form-group">
+                <div class="col-md-4">
+                    <div class="col-md-5">
+                        <lable class="control-lable">Address</lable>
+                    </div>
+                    <div class="col-md-7">
+                        @Html.EditorFor(model => model.address, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.address, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="col-md-5">
+                        <lable class="control-lable">PAN No:</lable>
+                    </div>
+                    <div class="col-md-7">
+                        @Html.EditorFor(model => model.PAN_No, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.PAN_No, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="col-md-5">
+                       <lable class="control-lable">Consultant</lable>
+                    </div>
+                    <div class="col-md-7">
+                        @Html.DropDownListFor(model => model.consultant,Model. ,new { @class = "form-control" })
+                        @Html.ValidationMessageFor(model => model.consultant, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-12 form-group">
+                <div class="col-md-4">
+                    <div class="col-md-5">
+                        <lable class="control-lable">TPA:</lable>
+                    </div>
+                    <div class="col-md-7">
+                        @Html.EditorFor(model => model.TPA, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.TPA, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="col-md-5">
+                        <lable class="control-lable">CCN</lable>
+                    </div>
+                    <div class="col-md-7">
+                        @Html.EditorFor(model => model.CCN, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.CCN, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="col-md-5">
+                        <lable class="control-lable">Adm. Date & Time :</lable>
+                    </div>
+                    <div class="col-md-7">
+                        @Html.EditorFor(model => model.admitdatetime, new { htmlAttributes = new { @class = "form-control date" } })
+                        @Html.ValidationMessageFor(model => model.admitdatetime, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-12 form-group">
+                <div class="col-md-4">
+                    <div class="col-md-5">
+                        <lable class="control-lable">Dis. Date & Time:</lable>
+                    </div>
+                    <div class="col-md-7">
+                        @Html.EditorFor(model => model.disdatetime, new { htmlAttributes = new { @class = "form-control date" } })
+                        @Html.ValidationMessageFor(model => model.disdatetime, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="col-md-5">
+                        <lable class="control-lable">Final Diagnosis :</lable>
+                    </div>
+                    <div class="col-md-7">
+                        @Html.EditorFor(model => model.finaldiaagnosis, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.finaldiaagnosis, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="col-md-5">
+                        <lable class="control-lable">No. of Days:</lable>
+                    </div>
+                    <div class="col-md-7">
+                        @Html.EditorFor(model => model.no_of_days, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.no_of_days, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="col-md-12 form-group">
+                <div class="col-md-4">
+                    <div class="col-md-5">
+                        <lable class="control-lable">Day Care:</lable>
+                    </div>
+                    <div class="col-md-7">
+                        @Html.EditorFor(model => model.day_care, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.day_care, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="col-md-5">
+                        <lable class="control-lable">Total Amount:</lable>
+                    </div>
+                    <div class="col-md-7">
+                        @Html.EditorFor(model => model.totalamount, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.totalamount, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="col-md-5">
+                        <lable class="control-lable">Payment Mode:</lable>
+                    </div>
+                    <div class="col-md-7">
+                        @Html.DropDownListFor(model => model.paymentmode,new SelectList(new[] {"Cash","Debit Card","Credit Card","Net Banking","Cheque"}) ,new { @class = "form-control"})
+                        @Html.ValidationMessageFor(model => model.paymentmode, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+<form method="post" action="/Patient/Bill">
+    <div class="row">
+        <div class="col-md-12 form-group">
+            <div class="col-md-3">
+                <div class="col-md-4">
+                    <label class="control-label">Particular:</label>
+                </div>
+                <div class="col-md-8">
+                    <select class="form-control" id="particular" name="particular">
+                        @for (int i = 0; i < billpartcularlist.Count; i++)
+                        {
+                            <option>@billpartcularlist[i].name</option>
+                        }
+                    </select>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="col-md-4">
+                    <label class="control-label">Quantity:</label>
+                </div>
+                <div class="col-md-8">
+                    <input type="number" name="qty" id="qty" class="form-control" placeholder="QTY" value="0" />
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="col-md-4">
+                    <label class="control-label">Charges:</label>
+                </div>
+                <div class="col-md-8">
+                    <input type="number" name="charges" id="charges" class="form-control" placeholder="Charges" value="0" />
+                </div>
+            </div>
+            <div class="col-md-3">
+                <input type="submit" class="btn btn-default btn-sm" value="Add" name="SubmitBtn" />
+                <input type="reset" class="btn btn-default btn-sm" value="Clear" name="SubmitBtn" />
+            </div>
+        </div>
+    </div>
+</form>
+<div class="row">
+    <div class="col-md-12">
+        <div class="table-responsive">
+            <table class="table table-stripped" id="particulars">
+                <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>Particulars</th>
+                        <th>Qty.</th>
+                        <th>Charges</th>
+                        <th>Amount</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @if (billpartcular != null)
+                    {
+                        for (int i = 0; i < billpartcular.Count; i++)
+                        {
+                            <tr>
+                                <td>@(i + 1)</td>
+                                <td>@billpartcular[i].particular</td>
+                                <td>@billpartcular[i].qty</td>
+                                <td>@billpartcular[i].charges</td>
+                                <td>@billpartcular[i].total</td>
+                                <td>
+                                    <form method="post" action="/Patient/Bill"><input type="hidden" name="srno" value="@i" /> <input type="submit" class="btn btn-default" value="Delete" name="SubmitBtn" /></form>
+
+                                </td>
+                            </tr>
+                        }
+                    }
+                </tbody>
+                <tfoot>
+                    <tr>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td>Total Amount:</td>
+                        <td><label>@ViewBag.Total Rs</label></td>
+                        <td></td>
+                    </tr>
+                </tfoot>
+            </table>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-8"></div>
+    <div class="col-md-2">
+        <form method="post" action="/Patient/Checkout">
+            <input type="submit" name="SubmitBtn" value="Checkout" class="btn btn-success" />
+        </form>
+    </div>
+    <div class="col-md-2">
+        <form method="post" action="/Patient/Bill">
+            <input type="submit" name="SubmitBtn" value="Clear" class="btn btn-success" />
+        </form>
+    </div>
+</div>
+
+<div>
+    @Html.ActionLink("Back to List", "BillDetails")
+</div>

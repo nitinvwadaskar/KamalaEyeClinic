@@ -1,0 +1,103 @@
+﻿@{
+    ViewBag.Title = "Bill_Particulers_Master";
+    Layout = "~/Views/_Layout.cshtml";
+}
+<div class="row">
+    <div class="page-header">
+        <h4>Bill Particulars Master</h4>
+    </div>
+    <form class="form-horizontal">
+        <div class="form-group-sm">
+            <div class="row form-group">
+                <div class="col-lg-6">
+                    <div class="col-lg-4">
+                        <button type="button" class="btn btn-primary btn-md" data-toggle="modal" data-target="#addParticular"><i class="fa fa-th-list"></i>&nbsp; Add Particular</button>
+                    </div>
+                </div>
+            </div>
+
+            <div id="addParticular" class="modal fade" role="dialog">
+                <div class="modal-dialog modal-sm">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h4>New Bill Particular</h4>
+                        </div>
+                        <div class="modal-body">
+                            <div class="row form-group">
+                                <div class="col-lg-6">
+                                    <label class="control-label">Particular:</label>
+                                </div>
+                                <div class="col-lg-6">
+                                    <input type="text" class="form-control" name="Particular" />
+                                </div>
+                            </div>
+                            <div class="row form-group">
+                                <div class="col-lg-6">
+                                    <label class="control-label">Description:</label>
+                                </div>
+                                <div class="col-lg-6">
+                                    <textarea  class="form-control" name="description"></textarea>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-primary " data-dismiss="modal">Save</button>
+                            <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+
+            <div class="row form-group">
+                <div class="col-lg-12">
+                    <hr />
+                    <div class="table-responsive">
+                        <table class="table table-striped" id="particulartable">
+                            <tr>
+                                <th>#</th>
+                                <th>Particular Name</th>
+                                <th>Description</th>
+                                <th>Action</th>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+            <div id="editParticular" class="modal fade" role="dialog">
+                <div class="modal-dialog modal-sm">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h4>Edit Bill Particular</h4>
+                        </div>
+                        <div class="modal-body">
+                            <div class="row form-group">
+                                <div class="col-lg-6">
+                                    <label class="control-label">Particular:</label>
+                                </div>
+                                <div class="col-lg-6">
+                                    <input type="text" class="form-control" name="Particular" />
+                                </div>
+                            </div>
+                            <div class="row form-group">
+                                <div class="col-lg-6">
+                                    <label class="control-label">Description:</label>
+                                </div>
+                                <div class="col-lg-6">
+                                    <textarea type="text" class="form-control" name="description"></textarea>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-primary " data-dismiss="modal">Save</button>
+                            <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </form>
+</div>

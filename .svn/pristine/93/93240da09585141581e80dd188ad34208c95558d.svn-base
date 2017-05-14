@@ -1,0 +1,44 @@
+﻿@model System.Data.DataSet
+@{
+    ViewBag.Title = "Bill Details";
+    Layout = "~/Views/_Layout.cshtml";
+}
+<div class="row">
+  
+    <div class="form-horizontal">
+        <div class="col-lg-12">
+            <div class="col-lg-6 pull-left">
+                @Html.ActionLink("  Add New Bill", "Bill", "Patient", new { @class = "fa fa-plus btn btn-info btn-sm" })
+            </div>            
+        </div>
+
+        <div class="col-lg-12">
+            <hr />
+            <div class="table-responsive">
+                <table class="table table-striped">
+                    <thead >
+                        <tr>
+                            <th align="center">#</th>
+                            <th align="center">Bill Id</th>
+                            <th align="center">Bill Date</th>
+                            <th align="center">Patient Id</th>
+                            <th align="center">Action</th>
+                        </tr>
+                    </thead>
+                    <tbody  align="center">
+                        @for (int i = 0; i <= Model.Tables[0].Rows.Count - 1; i++)
+                        {
+                            <tr>
+                                <td>@(i + 1)</td>
+                                <td>@Model.Tables[0].Rows[i]["billid"]</td>
+                                <td>@Model.Tables[0].Rows[i]["billdate"]</td>
+                                <td>@Model.Tables[0].Rows[i]["patientid"]</td>
+                                <td>@Html.ActionLink("View", "ViewBills", new { Billid = Model.Tables[0].Rows[i]["billid"], Billdate = Model.Tables[0].Rows[i]["billdate"] })</td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>

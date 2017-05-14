@@ -1,0 +1,157 @@
+﻿@model Kamala_Eye_Clinic.Models.OTRegistration
+
+@{
+    ViewBag.Title = "OTRegistration";
+    Layout = "~/Views/_Layout.cshtml";
+}
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+        <h4>OTRegistration</h4>
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+        <div class="row form-group">
+            <div class="col-md-12">
+                <div class="col-md-4">
+                    <div class="col-md-5">
+                        @Html.LabelFor(model => model.otdate, htmlAttributes: new { @class = "control-label  " })
+                    </div>
+                    <div class="col-md-7">
+                        @Html.EditorFor(model => model.otdate, new { htmlAttributes = new { @class = "form-control date" } })
+                        @Html.ValidationMessageFor(model => model.otdate, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="col-md-5">
+                        @Html.LabelFor(model => model.durationfrom, htmlAttributes: new { @class = "control-label" })
+                    </div>
+                    <div class="col-md-7">
+                        @Html.EditorFor(model => model.durationfrom, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.durationfrom, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="col-md-5">
+                        @Html.LabelFor(model => model.durationto, htmlAttributes: new { @class = "control-label  " })
+                    </div>
+                    <div class="col-md-7">
+                        @Html.EditorFor(model => model.durationto, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.durationto, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-12">
+                <div class="col-md-4">
+                    <div class="col-md-5">
+                        @Html.LabelFor(model => model.typeofanaesthesia, htmlAttributes: new { @class = "control-label  " })
+                    </div>
+                    <div class="col-md-7">
+                        @Html.EditorFor(model => model.typeofanaesthesia, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.typeofanaesthesia, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="col-md-5">
+                        @Html.LabelFor(model => model.provisionaldiagnosis, htmlAttributes: new { @class = "control-label  " })
+                    </div>
+                    <div class="col-md-7">
+                        @Html.EditorFor(model => model.provisionaldiagnosis, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.provisionaldiagnosis, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="col-md-5">
+                        @Html.LabelFor(model => model.surgerytitle, htmlAttributes: new { @class = "control-label  " })
+                    </div>
+                    <div class="col-md-7">
+                        @Html.EditorFor(model => model.surgerytitle, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.surgerytitle, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-12">
+                <div class="col-md-4">
+                    <div class="col-md-5">
+                        @Html.LabelFor(model => model.operatingsurgeon, htmlAttributes: new { @class = "control-label  " })
+                    </div>
+                    <div class="col-md-7">
+                        @Html.EditorFor(model => model.operatingsurgeon, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.operatingsurgeon, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="col-md-5">
+                        @Html.LabelFor(model => model.anaesthetist, htmlAttributes: new { @class = "control-label  " })
+                    </div>
+                    <div class="col-md-7">
+                        @Html.EditorFor(model => model.anaesthetist, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.anaesthetist, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="col-md-5">
+                        @Html.LabelFor(model => model.assistingdoctor, htmlAttributes: new { @class = "control-label  " })
+                    </div>
+                    <div class="col-md-7">
+                        @Html.EditorFor(model => model.assistingdoctor, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.assistingdoctor, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-12">
+                <div class="col-md-4">
+                    <div class="col-md-5">
+                        @Html.LabelFor(model => model.assistingnurse, htmlAttributes: new { @class = "control-label  " })
+                    </div>
+                    <div class="col-md-7">
+                        @Html.EditorFor(model => model.assistingnurse, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.assistingnurse, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="col-md-5">
+                        @Html.LabelFor(model => model.remarks, htmlAttributes: new { @class = "control-label  " })
+                    </div>
+                    <div class="col-md-7">
+                        @Html.EditorFor(model => model.remarks, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.remarks, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="col-md-5">
+                        @Html.LabelFor(model => model.material_HPE, htmlAttributes: new { @class = "control-label  " })
+                    </div>
+                    <div class="col-md-7">
+                        @Html.EditorFor(model => model.material_HPE, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.material_HPE, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-12 form-group">
+                <div class="col-lg-12" align="center">
+                    @Html.HiddenFor(model => model.CMD)
+                    @if (Model.CMD == null)
+                    {
+                        <input type="submit" class="btn btn-default btn-info " value="Save" name="SubmitBtn" />
+                    }
+                    else
+                    {
+                        <input type="submit" class="btn btn-default btn-primary " value="Update" name="SubmitBtn" />
+                        @* <input type="submit" class="btn btn-default btn-danger" value="Delete" name="SubmitBtn" />*@
+                    }
+                    <input type="reset" class="btn btn-warning " value="Reset" />
+                </div>
+            </div>
+        </div>
+    </div>
+}
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>

@@ -1,0 +1,25 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Web;
+
+namespace Kamala_Eye_Clinic.Models
+{
+    public class StockLedger
+    {
+        public int transactionid { get; set; }
+        public int itemid { get; set; }
+        public string itemname { get; set; }
+        public int unit { get; set; }
+        public int qty { get; set; }
+        public string type { get; set; }
+        public int openingqty { get; set; }
+        public int closingqty { get; set; }
+
+        public string createby { get; set; }
+        public string updateby { get; set; }
+        public string CMD { get; set; }
+
+
+    }
+}

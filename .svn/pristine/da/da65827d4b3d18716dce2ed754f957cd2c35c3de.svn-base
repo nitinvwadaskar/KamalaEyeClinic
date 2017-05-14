@@ -1,0 +1,407 @@
+﻿@{
+    ViewBag.Title = "Treatment_Sheet";
+    Layout = "~/Views/_Layout.cshtml";
+}
+
+
+<div class="row">
+    <div class="page-header">
+        <h4>Treatment Sheet</h4>
+    </div>
+    <form class="form-horizontal">
+        <div class="form-group-sm">
+            <!--Row 1-->
+            <div class="row ">
+                <div class="col-lg-12">
+                    <div class="col-lg-12 thumbnail">
+                        <div class="col-lg-4">
+                            <div class="col-lg-6">
+                                <label class="control-label">Patient Id:</label>
+                            </div>
+                            <div class="col-lg-6">
+                                <input type="text" class="form-control" name="Patient_Id" />
+                            </div>
+                        </div>
+                        <div class="col-lg-4">
+                            <div class="col-lg-5">
+                                <button class="btn btn-info btn-sm" name="search"><i class="fa fa-search">&nbsp; Search</i></button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!--Row 2-->
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="panel-group">
+                        <div class="panel panel-info">
+                            <div class="panel-heading ">
+                                <div class="row">
+                                    <h5>Patient Details</h5>
+                                    <!-- col1 -->
+                                    <div class="col-lg-4">
+                                        <div class="col-lg-6">
+                                            <label class="control-label input-sm">Patient Id:</label>
+                                        </div>
+                                        <div class="col-lg-6">
+                                            <label id="Reg_No" class="control-label input-sm">-</label>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-8">
+                                        <div class="col-lg-3">
+                                            <label class="control-label input-sm">Patient Name :</label>
+                                        </div>
+                                        <div class="col-lg-9">
+                                            <label id="Patient_Name" class="control-label input-sm">-</label>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <br />
+                                    <div class="col-lg-4">
+                                        <div class="col-lg-6">
+                                            <label class="control-label input-sm">Admit Date:</label>
+                                        </div>
+                                        <div class="col-lg-6">
+                                            <label id="Admit_Date" class="control-label input-sm">-</label>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-4">
+                                        <div class="col-lg-6">
+                                            <label class="control-label input-sm">Admit Time:</label>
+                                        </div>
+                                        <div class="col-lg-6">
+                                            <label id="Admit_Time" class="control-label input-sm">-</label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="panel-body">
+                                <div class="row thumbnail">
+                                    <div class="row form-group">
+                                        <div class="col-lg-12">
+                                            <label class="col-lg-12 label label-success">Investigation</label>
+                                        </div>
+                                    </div>
+                                    <!--Col 1 -->
+                                    <div class="col-lg-12">
+                                        <div class="row">
+                                            <div class="col-lg-12">
+                                                <div class="col-lg-2">
+                                                    <label class="checkbox-inline input-sm">
+                                                        <input id="chk1" type="checkbox" value="">CBC
+                                                    </label>
+                                                </div>
+                                                <div class="col-lg-2">
+                                                    <label class="checkbox-inline input-sm">
+                                                        <input id="chk2" type="checkbox" value="">HIV
+                                                    </label>
+                                                </div>
+                                                <div class="col-lg-2">
+                                                    <label class="checkbox-inline input-sm">
+                                                        <input id="chk3" type="checkbox" value="">Urine Comp
+                                                    </label>
+                                                </div>
+                                                <div class="col-lg-2">
+                                                    <label class="checkbox-inline input-sm">
+                                                        <input id="chk4" type="checkbox" value="">R.B. Sugar
+                                                    </label>
+                                                </div>
+                                                <div class="col-lg-2">
+                                                    <label class="checkbox-inline input-sm">
+                                                        <input id="chk5" type="checkbox" value="">HBsAg Disease
+                                                    </label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!--Col 2 -->
+                                    <div class="col-lg-12">
+                                        <div class="row">
+                                            <div class="col-lg-12">
+                                                <div class="col-lg-2">
+                                                    <label class="checkbox-inline input-sm">
+                                                        <input id="chk6" type="checkbox" value="">ESR
+                                                    </label>
+                                                </div>
+                                                <div class="col-lg-2">
+                                                    <label class="checkbox-inline input-sm">
+                                                        <input id="chk7" type="checkbox" value="">MT
+                                                    </label>
+                                                </div>
+                                                <div class="col-lg-2">
+                                                    <label class="checkbox-inline input-sm">
+                                                        <input id="chk8" type="checkbox" value="">R.A. Factor
+                                                    </label>
+                                                </div>
+                                                <div class="col-lg-2">
+                                                    <label class="checkbox-inline input-sm">
+                                                        <input id="chk9" type="checkbox" value="">Fitness Certificate
+                                                    </label>
+                                                </div>
+                                                <div class="col-lg-2">
+                                                    <label class="checkbox-inline input-sm">
+                                                        <input id="chk10" type="checkbox" value="">A/Scan
+                                                    </label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row thumbnail form-group">
+                                    <div class="row form-group">
+                                        <div class="col-lg-12">
+                                            <label class="col-lg-12 label label-primary">Checkups & Medication</label>
+                                        </div>
+                                    </div>
+                                    <div class="row form-group">
+                                        <div class="col-lg-12">
+                                            <div class="col-lg-4">
+                                                <div class="col-lg-6">
+                                                    <label class="label control-label">Eye Operated:</label>
+                                                </div>
+                                                <div class="col-lg-6">
+                                                    <select id="eyeCombo" class="form-control">
+                                                        <option>select</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-6">
+                                                <div class="col-lg-3">
+                                                    <label class="control-label">Check-Up:</label>
+                                                </div>
+                                                <div class="col-lg-6">
+                                                    <select id="checkupCombo" class="form-control">
+                                                        <option>select</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row form-group">
+                                        <div class="col-lg-12">
+                                            <div class="col-lg-3">
+                                                <div class="col-lg-5">
+                                                    <label class="control-label">Medicine:</label>
+                                                </div>
+                                                <div class="col-lg-7">
+                                                    <select id="medicineCombo" class="form-control">
+                                                        <option>select</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+
+                                            <div class="col-lg-3">
+                                                <div class="col-lg-5">
+                                                    <label class="control-label">Quantity:</label>
+                                                </div>
+                                                <div class="col-lg-7">
+                                                    <input type="text" class="form-control" />
+                                                </div>
+                                            </div>
+
+                                            <div class="col-lg-2">
+                                                <div class="col-lg-3">
+                                                    <label class="checkbox-inline input-sm">
+                                                        <input id="chk11" type="checkbox">M
+                                                    </label>
+                                                </div>
+                                                <div class="col-lg-3">
+                                                    <label class="checkbox-inline input-sm">
+                                                        <input id="chk12" type="checkbox">A
+                                                    </label>
+                                                </div>
+                                                <div class="col-lg-3">
+                                                    <label class="checkbox-inline input-sm">
+                                                        <input id="chk13" type="checkbox">E
+                                                    </label>
+                                                </div>
+                                                <div class="col-lg-3">
+                                                    <label class="checkbox-inline input-sm">
+                                                        <input id="chk14" type="checkbox">N
+                                                    </label>
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-1">
+                                                <button class="btn btn-primary btn-sm"><i class="fa fa-plus"></i>Add</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row form-group">
+                                        <br />
+                                        <div class="col-lg-12">
+                                            <div class="table-responsive">
+                                                <table class="table table-stripped">
+                                                    <thead>
+                                                        <tr>
+                                                            <th>#</th>
+                                                            <th>Medicine</th>
+                                                            <th>Quantity</th>
+                                                            <th>Time</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                        <tr>
+                                                            <td>1</td>
+                                                            <td>-</td>
+                                                            <td>-</td>
+                                                            <td>-</td>
+                                                        </tr>
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row thumbnail form-group">
+                                    <div class="row form-group">
+                                        <div class="col-lg-12">
+                                            <label class="col-lg-12 label label-primary">Vision Measurement</label>
+                                        </div>
+                                    </div>
+                                    <div class="row form-group">
+                                        <div class="col-lg-6">
+                                            <div class="col-lg-12 thumbnail">
+                                                <div class="col-lg-6">
+                                                    <div class="col-lg-4">
+                                                        <label class="control-label">Eye:</label>
+                                                    </div>
+                                                    <div class="col-lg-6">
+                                                        <select class="form-control">
+                                                            <option>Right</option>
+                                                            <option>Left</option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                                <div class="col-lg-6">
+                                                    <div class="col-lg-4">
+                                                        <label class="control-label">Vn:</label>
+                                                    </div>
+                                                    <div class="col-lg-6">
+                                                        <div class="input-group">
+                                                            <input type="text" class="form-control"><span class="input-group-addon">/6</span>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-12 thumbnail">
+                                                <div class="col-lg-12 form-group">
+                                                    <div class="col-lg-4">
+                                                        <label class="control-label">Eye Dist:</label>
+                                                    </div>
+                                                    <div class="col-lg-4">
+                                                        <select class="form-control">
+                                                            <option>Dist.</option>
+                                                            <option>Near</option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                                <div class="col-lg-12 form-group">
+                                                    <div class="col-lg-10">
+                                                        <div class="col-lg-3">
+                                                            <input type="text" class="form-control" placeholder="Sph.">
+                                                        </div>
+                                                        <div class="col-lg-3">
+                                                            <input type="text" class="form-control" placeholder="Cyl.">
+                                                        </div>
+                                                        <div class="col-lg-3">
+                                                            <input type="text" class="form-control" placeholder="Axis.">
+                                                        </div>
+                                                        <div class="col-lg-3">
+                                                            <button class="btn btn-primary btn-sm"><i class="fa fa-plus"></i>Add</button>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-6">
+                                            <div class="col-lg-12 thumbnail">
+                                                <div class="col-lg-12">
+                                                    <div class="table-responsive">
+                                                        <table class="table table-stripped">
+                                                            <thead>
+                                                                <tr>
+                                                                    <th>Eye</th>
+                                                                    <th colspan="3">Right</th>
+                                                                    <th colspan="3">Left</th>
+                                                                </tr>
+                                                                <tr>
+                                                                    <th>Vn</th>
+                                                                    <th colspan="3">/6</th>
+                                                                    <th colspan="3">/6</th>
+                                                                </tr>
+                                                                <tr>
+                                                                    <th></th>
+                                                                    <th>Sph.</th>
+                                                                    <th>Cyl.</th>
+                                                                    <th>Axis.</th>
+                                                                    <th>Sph.</th>
+                                                                    <th>Cyl.</th>
+                                                                    <th>Axis.</th>
+                                                                </tr>
+                                                            </thead>
+                                                            <tbody>
+                                                                <tr>
+                                                                    <td>Dist.</td>
+                                                                    <td>-</td>
+                                                                    <td>-</td>
+                                                                    <td>-</td>
+                                                                    <td>-</td>
+                                                                    <td>-</td>
+                                                                    <td>-</td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td>Near</td>
+                                                                    <td>-</td>
+                                                                    <td>-</td>
+                                                                    <td>-</td>
+                                                                    <td>-</td>
+                                                                    <td>-</td>
+                                                                    <td>-</td>
+                                                                </tr>
+                                                            </tbody>
+                                                        </table>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <hr />
+                                    <div class="col-lg-6">
+                                        <div class="col-lg-4">
+                                            <label class="control-label">Advice:</label>
+                                        </div>
+                                        <div class="col-lg-8">
+                                            <textarea class="form-control"></textarea>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6">
+                                        <div class="col-lg-4">
+                                            <label class="control-label">Follow-Up:</label>
+                                        </div>
+                                        <div class="col-lg-4">
+                                            <input type="date" class="form-control" id="followupdate"/>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!--Row 3-->
+            <div class="row form-group">
+                <div class="col-lg-12" align="center">
+                    <button class="btn btn-info btn-sm" value="New" onclick=""><i class="fa fa-print">&nbsp Print</i></button>
+                    <button class="btn btn-primary btn-sm" value="New"><i class="fa fa-plus">&nbsp New</i></button>
+                    <button class="btn btn-success btn-sm" value="Save"><i class="fa fa-save">&nbsp Save</i></button>
+                    <button class="btn btn-info btn-sm" value="edit"><i class="fa fa-edit">&nbsp Edit</i></button>
+                    <button class="btn btn-danger btn-sm" value="delete"><i class="fa fa-trash">&nbsp Delete</i></button>
+                    <button class="btn btn-default btn-sm" value="Clear"><i class="fa fa-repeat">&nbsp Clear</i></button>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>

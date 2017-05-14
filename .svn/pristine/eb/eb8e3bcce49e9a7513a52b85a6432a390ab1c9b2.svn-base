@@ -1,0 +1,43 @@
+﻿@{
+    ViewBag.Title = "Admin_Control_Panel";
+    Layout = "~/Views/_Layout.cshtml";
+}
+
+<div class="row">
+    <form class="form-group" action="#">
+        <div class="form-group-sm">
+
+            <div class="col-lg-offset-2  col-lg-8 jumbotron col-lg-offset-2" style="padding-top: 1%; padding-bottom: 1%">
+                <center><h3> Admin Control Panel</h3></center>
+                <br />
+                <div class="col-lg-offset-1 col-lg-5 thumbnail col-lg-offset-2" style="height: 150px; width: 250px">
+                    <a href="~/User/Registration">
+                        <img src="~/content/img/new.ico" style="height: 75%">
+                        <h6 align="center">New User </h6>
+                    </a>
+                </div>
+
+                <div class="col-lg-offset-1 col-lg-5 thumbnail" style="height: 150px; width: 250px">
+                    <a href="~/User/ChangePassword">
+                        <img src="~/content/img/user.bmp" style="height: 75%">
+                        <h6 align="center">User Password Change </h6>
+                    </a>
+                </div>
+
+                <div class="col-lg-offset-1 col-lg-5 thumbnail col-lg-offset-2" style="height: 150px; width: 250px">
+                    <a href="~/User/ChangePassword">
+                        <img src="~/content/img/user_lock.png" style="height: 75%">
+                        <h6 align="center">Admin Password Change</h6>
+                    </a>
+                </div>
+
+                <div class="col-lg-offset-1 col-lg-5 thumbnail " style="height: 150px; width: 250px">
+                    <a href="~/Home/Dashboard">
+                        <img src="~/content/img/Back.png" style="height: 75%">
+                        <h6 align="center">Back </h6>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>

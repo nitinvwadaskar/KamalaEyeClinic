@@ -1,0 +1,164 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Data;
+using System.Linq;
+using System.Web;
+
+namespace Kamala_Eye_Clinic.Models
+{
+    public class Treatment
+    {
+
+        public int treatmentid { get; set; }
+        public int patientid { get; set; }
+        public int hid { get; set; }
+        public string advice { get; set; }
+        public string followup_dt { get; set; }
+        public bool checkfollowup { get; set; }
+        public string xray_dt { get; set; }
+        public bool xray { get; set; }
+        public string bloodtest_dt { get; set; }
+        public bool bloodtest { get; set; }
+        
+
+        public TreatmentInvestigation TreatInvestigation { get; set; }
+        public List<TreatmentInvestigation> TreatInvestigationList { get; set; }
+       
+        public int srno { get; set; }
+        public TreatmentMedicine TreatMedicine { get; set; }
+        public List<TreatmentMedicine> TreatMedicineList { get; set; }
+
+        public int srno1 { get; set; }
+        public CheckupMaster TreatCheckup { get; set; }
+        public List<CheckupMaster> TreatCheckupList { get; set; }
+
+        public int srno2 { get; set; }
+        public AdviceMaster TreatAdvice { get; set; }
+        public List<AdviceMaster> TreatAdviceList { get; set; }
+
+        public int srno3 { get; set; }
+        public PresentingComplentsMaster TreatComplents { get; set; }
+        public List<PresentingComplentsMaster> TreatComplentsList { get; set; }
+
+        public int srno4 { get; set; }
+        public PresentingDiagnosisMaster TreatDiagnosis { get; set; }
+        public List<PresentingDiagnosisMaster> TreatDiagnosisList { get; set; }
+
+
+        public TreatmenyVision TreatVision { get; set; }
+        public string CMD { get; set; }
+
+        public string[] PerformAction()
+        {
+            try
+            {
+                string xml = Common.ToXML(this);
+                DBConnection con = new DBConnection();
+                DataSet ds = con.ExecuteProcedure("SP_Treatment", xml);
+                return Common.CallbackMsg(ds);
+            }
+            catch (Exception e)
+            {
+                return new string[] { "Failed", e.Message };
+            }
+        }
+        public Treatment GetSingleTreatment()
+        {
+            Treatment t = new Treatment();
+            try
+            {
+                string xml = Common.ToXML(this);
+                DBConnection con = new DBConnection();
+                DataSet ds = con.ExecuteProcedure("SP_Treatment", xml);
+                t=t.Fill(ds);
+                return t;
+            }
+            catch (Exception)
+            {
+                return null;
+            }
+        }
+        private Treatment Fill(DataSet ds)
+        {
+            Treatment treatobj = new Treatment();
+            if (ds != null)
+            {
+                if (ds.Tables[0].Rows.Count > 0)
+                {
+                    treatobj.patientid = Convert.ToInt32(ds.Tables[0].Rows[0]["patientid"].ToString());
+                    treatobj.hid = Convert.ToInt32(ds.Tables[0].Rows[0]["hid"].ToString());
+                    treatobj.treatmentid= Convert.ToInt32(ds.Tables[0].Rows[0]["treatmentid"].ToString());
+                    treatobj.advice = ds.Tables[0].Rows[0]["advice"].ToString();
+                    treatobj.followup_dt = ds.Tables[0].Rows[0]["advice"].ToString();
+                }
+                               
+                if (ds.Tables[1].Rows.Count > 0)
+                {
+                    List<TreatmentMedicine> TM = new List<TreatmentMedicine>();
+                    for (int i = 0; i < ds.Tables[1].Rows.Count; i++)
+                    {
+                        TreatmentMedicine t = new TreatmentMedicine();
+                        t.m = ds.Tables[1].Rows[i]["m"].ToString();
+                        t.a = ds.Tables[1].Rows[i]["a"].ToString();
+                        t.e = ds.Tables[1].Rows[i]["e"].ToString();
+                        t.n = ds.Tables[1].Rows[i]["n"].ToString();
+                        t.mischecked = ds.Tables[1].Rows[i]["m"].ToString() == "" ? false : true;
+                        t.aischecked = ds.Tables[1].Rows[i]["a"].ToString() == "" ? false : true;
+                        t.eischecked = ds.Tables[1].Rows[i]["e"].ToString() == "" ? false : true;
+                        t.nischecked = ds.Tables[1].Rows[i]["n"].ToString() == "" ? false : true;
+                        t.medicineid = Convert.ToInt32(ds.Tables[1].Rows[i]["medicineid"].ToString());
+                        t.particular = ds.Tables[1].Rows[i]["particular"].ToString();
+                        t.qty = Convert.ToInt32(ds.Tables[1].Rows[i]["quantity"].ToString() == "" ? "0" : ds.Tables[1].Rows[i]["quantity"].ToString());
+                        TM.Add(t);
+
+                    }
+                    treatobj.TreatMedicineList = TM;
+                    HttpContext.Current.Session["TreatmentMedicine"] = TM;
+
+                }
+                if (ds.Tables[2].Rows.Count > 0)
+                {
+                    int i = 0;
+                    TreatmenyVision tv = new TreatmenyVision();
+                    tv.right_vn = Convert.ToInt32(ds.Tables[2].Rows[i]["right_vn"].ToString() == "" ? "0" : ds.Tables[2].Rows[i]["right_vn"].ToString());
+                    tv.right_dist_sph = Convert.ToInt32(ds.Tables[2].Rows[i]["right_dist_sph"].ToString() == "" ? "0" : ds.Tables[2].Rows[i]["right_dist_sph"].ToString());
+                    tv.right_dist_cyl = Convert.ToInt32(ds.Tables[2].Rows[i]["right_dist_cyl"].ToString() == "" ? "0" : ds.Tables[2].Rows[i]["right_dist_cyl"].ToString());
+                    tv.right_dist_axis = Convert.ToInt32(ds.Tables[2].Rows[i]["right_dist_axis"].ToString() == "" ? "0" : ds.Tables[2].Rows[i]["right_dist_axis"].ToString());
+                    tv.right_near_sph = Convert.ToInt32(ds.Tables[2].Rows[i]["right_near_sph"].ToString() == "" ? "0" : ds.Tables[2].Rows[i]["right_near_sph"].ToString());
+                    tv.right_near_cyl = Convert.ToInt32(ds.Tables[2].Rows[i]["right_near_cyl"].ToString() == "" ? "0" : ds.Tables[2].Rows[i]["right_near_cyl"].ToString());
+                    tv.right_near_axis = Convert.ToInt32(ds.Tables[2].Rows[i]["right_near_axis"].ToString() == "" ? "0" : ds.Tables[2].Rows[i]["right_near_axis"].ToString());
+                    tv.left_vn = Convert.ToInt32(ds.Tables[2].Rows[i]["left_vn"].ToString() == "" ? "0" : ds.Tables[2].Rows[i]["left_vn"].ToString());
+                    tv.left_dist_sph = Convert.ToInt32(ds.Tables[2].Rows[i]["left_dist_sph"].ToString() == "" ? "0" : ds.Tables[2].Rows[i]["left_dist_sph"].ToString());
+                    tv.left_dist_cyl = Convert.ToInt32(ds.Tables[2].Rows[i]["left_dist_cyl"].ToString() == "" ? "0" : ds.Tables[2].Rows[i]["left_dist_cyl"].ToString());
+                    tv.left_dist_axis = Convert.ToInt32(ds.Tables[2].Rows[i]["left_dist_axis"].ToString() == "" ? "0" : ds.Tables[2].Rows[i]["left_dist_axis"].ToString());
+                    tv.left_near_sph = Convert.ToInt32(ds.Tables[2].Rows[i]["left_near_sph"].ToString() == "" ? "0" : ds.Tables[2].Rows[i]["left_near_sph"].ToString());
+                    tv.left_near_cyl = Convert.ToInt32(ds.Tables[2].Rows[i]["left_near_cyl"].ToString() == "" ? "0" : ds.Tables[2].Rows[i]["left_near_cyl"].ToString());
+                    tv.left_near_axis = Convert.ToInt32(ds.Tables[2].Rows[i]["left_near_axis"].ToString() == "" ? "0" : ds.Tables[2].Rows[i]["left_near_axis"].ToString());
+                    treatobj.TreatVision = tv;
+                }
+                if (ds.Tables[3].Rows.Count > 0)
+                {
+                    TreatmentInvestigation t = new TreatmentInvestigation();
+                    List<TreatmentInvestigation> ti = new List<TreatmentInvestigation>();
+                    ti = t.GetList();
+
+                    for (int i = 0; i < ds.Tables[3].Rows.Count; i++)
+                    {
+                        ti.Where(w => w.invName == ds.Tables[3].Rows[i]["diseasename"].ToString()).ToList().ForEach(s => s.isChecked = true);
+
+                    }
+                    treatobj.TreatInvestigationList = ti;
+                }
+                else
+                {
+                    TreatmentInvestigation t = new TreatmentInvestigation();
+                    List<TreatmentInvestigation> ti = new List<TreatmentInvestigation>();
+                    ti = t.GetList();
+                    treatobj.TreatInvestigationList = ti;
+                }
+            }
+            return treatobj;
+
+        }
+    }
+}

@@ -1,0 +1,209 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Web;
+using System.Web.Mvc;
+using Kamala_Eye_Clinic.Models;
+using System.Data;
+
+namespace Kamala_Eye_Clinic.Controllers
+{
+    [Sessionclass]
+    public class TreatmentController : Controller
+    {
+        // GET: Treatment
+       
+        public ViewResult PresentingComplentsMaster()
+        {
+            PresentingComplentsMaster obj = new Models.PresentingComplentsMaster();
+            return View(obj);
+        }
+
+        [HttpPost]
+        public ActionResult PresentingComplentsMaster(PresentingComplentsMaster obj, string SubmitBtn)
+        {
+            obj.CMD = SubmitBtn == "Save" ? "Save" : SubmitBtn == "Update" ? "Update" : "Delete";
+            switch (obj.CMD)
+            {
+                case "Save":
+                    obj.hid = Convert.ToInt32(Session["hospital"].ToString());
+                    string[] str = obj.PerformAction();
+                    ViewBag.msg = str[1];
+                    return RedirectToAction("PresentingComplentsDetails");
+                case "Update":
+                    string[] str1 = obj.PerformAction();
+                    ViewBag.msg = str1[2];
+                    return RedirectToAction("PresentingComplentsDetails");
+                case "Delete":
+                    string[] str2 = obj.PerformAction();
+                    ViewBag.msg = str2[3];
+                    return RedirectToAction("PresentingComplentsDetails");
+                default:
+                    return View(obj);
+            }
+        }
+
+        public ViewResult PresentingComplentsMasterUpdate(int hid, int complentid)
+        {
+            PresentingComplentsMaster obj = new PresentingComplentsMaster();
+
+            if (complentid > 0)
+            {
+                obj.CMD = "Update";
+                obj.complentid = complentid;
+                obj.hid = hid;
+                obj = obj.GetSingleComplent(complentid);
+            }
+            return View("PresentingComplentsMaster", obj);
+        }
+
+        [HttpPost]
+        public ActionResult PresentingComplentsMasterUpdate(PresentingComplentsMaster obj, string SubmitBtn)
+        {
+            PresentingComplentsMaster(obj, SubmitBtn);
+            if (SubmitBtn == "Delete") return Redirect("~/Treatment/PresentingComplentsMaster");
+            return View("PresentingComplentsMaster", obj);
+        }
+
+        public ViewResult PresentingComplentsDetails(PresentingComplentsMaster obj, string cmd)
+        {
+            DBConnection cn = new DBConnection();
+            obj.CMD = "View";
+            obj.hid = Convert.ToInt32(Session["hospital"].ToString());
+            string xml = Common.ToXML(obj);
+            DataSet dataset = cn.ExecuteProcedure("SP_Complent", xml);
+            return View(dataset);
+        }
+
+
+        /***********************           Treatment History And Duration            *****************/
+
+
+        /***********************                     Occupation                      *****************/
+        public ViewResult OccupationMaster()
+        {
+            OccupationMaster obj = new Models.OccupationMaster();
+            return View(obj);
+        }
+
+        [HttpPost]
+        public ActionResult OccupationMaster(OccupationMaster obj, string SubmitBtn)
+        {
+            obj.CMD = SubmitBtn == "Save" ? "Save" : SubmitBtn == "Update" ? "Update" : "Delete";
+            switch (obj.CMD)
+            {
+                case "Save":
+                    obj.hid = Convert.ToInt32(Session["hospital"].ToString());
+                    string[] str = obj.PerformAction();
+                    ViewBag.msg = str[1];
+                    return RedirectToAction("OccupationDetails");
+                case "Update":
+                    string[] str1 = obj.PerformAction();
+                    ViewBag.msg = str1[2];
+                    return RedirectToAction("OccupationDetails");
+                case "Delete":
+                    string[] str2 = obj.PerformAction();
+                    ViewBag.msg = str2[3];
+                    return RedirectToAction("OccupationDetails");
+                default:
+                    return View(obj);
+            }
+        }
+
+        public ViewResult OccupationMasterUpdate(int hid, int occupationid)
+        {
+            OccupationMaster obj = new OccupationMaster();
+
+            if (occupationid > 0)
+            {
+                obj.CMD = "Update";
+                obj.occupationid = occupationid;
+                obj.hid = hid;
+                obj = obj.GetSingleOccupation(occupationid);
+            }
+            return View("OccupationMaster", obj);
+        }
+
+        [HttpPost]
+        public ActionResult OccupationMasterUpdate(OccupationMaster obj, string SubmitBtn)
+        {
+            OccupationMaster(obj, SubmitBtn);
+            if (SubmitBtn == "Delete") return Redirect("~/Treatment/OccupationMaster");
+            return View("OccupationMaster", obj);
+        }
+
+        public ViewResult OccupationDetails(OccupationMaster obj, string cmd)
+        {
+            DBConnection cn = new DBConnection();
+            obj.CMD = "View";
+            obj.hid = Convert.ToInt32(Session["hospital"].ToString());
+            string xml = Common.ToXML(obj);
+            DataSet dataset = cn.ExecuteProcedure("SP_Occupation", xml);
+            return View(dataset);
+        }
+
+        /*****************************                 Presenting Diagnosis           *************************/
+
+        public ViewResult PresentingDiagnosisMaster()
+        {
+            PresentingDiagnosisMaster obj = new Models.PresentingDiagnosisMaster();
+            return View(obj);
+        }
+
+        [HttpPost]
+        public ActionResult PresentingDiagnosisMaster(PresentingDiagnosisMaster obj, string SubmitBtn)
+        {
+            obj.CMD = SubmitBtn == "Save" ? "Save" : SubmitBtn == "Update" ? "Update" : "Delete";
+            switch (obj.CMD)
+            {
+                case "Save":
+                    obj.hid = Convert.ToInt32(Session["hospital"].ToString());
+                    string[] str = obj.PerformAction();
+                    ViewBag.msg = str[1];
+                    return RedirectToAction("PresentingDiagnosisDetails");
+                case "Update":
+                    string[] str1 = obj.PerformAction();
+                    ViewBag.msg = str1[2];
+                    return RedirectToAction("PresentingDiagnosisDetails");
+                case "Delete":
+                    string[] str2 = obj.PerformAction();
+                    ViewBag.msg = str2[3];
+                    return RedirectToAction("PresentingDiagnosisDetails");
+                default:
+                    return View(obj);
+            }
+        }
+
+        public ViewResult PresentingDiagnosisMasterUpdate(int hid, int diagnosisid)
+        {
+            PresentingDiagnosisMaster obj = new PresentingDiagnosisMaster();
+
+            if (diagnosisid > 0)
+            {
+                obj.CMD = "Update";
+                obj.diagnosisid = diagnosisid;
+                obj.hid = hid;
+                obj = obj.GetSingleDiagnosis(diagnosisid);
+            }
+            return View("PresentingDiagnosisMaster", obj);
+        }
+
+        [HttpPost]
+        public ActionResult PresentingDiagnosisMasterUpdate(PresentingDiagnosisMaster obj, string SubmitBtn)
+        {
+            PresentingDiagnosisMaster(obj, SubmitBtn);
+            if (SubmitBtn == "Delete") return Redirect("~/Treatment/PresentingDiagnosisMaster");
+            return View("PresentingDiagnosisMaster", obj);
+        }
+
+        public ViewResult PresentingDiagnosisDetails(PresentingDiagnosisMaster obj, string cmd)
+        {
+            DBConnection cn = new DBConnection();
+            obj.CMD = "View";
+            obj.hid = Convert.ToInt32(Session["hospital"].ToString());
+            string xml = Common.ToXML(obj);
+            DataSet dataset = cn.ExecuteProcedure("SP_Diagnosis", xml);
+            return View(dataset);
+        }
+    }
+}

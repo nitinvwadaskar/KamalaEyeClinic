@@ -1,0 +1,692 @@
+﻿@model Kamala_Eye_Clinic.Models.SisterMaster
+@{
+    ViewBag.Title = "Sister_Registration";
+    Layout = "~/Views/_Layout.cshtml";
+}
+
+<div class="row">
+    <div class="col-lg-12">
+        <div class="page-header">
+            <h4>Sister Registration</h4>
+        </div>
+        <div class="form-group-sm">
+            <div class="row form-group">
+                <div class="col-lg-6 input-sm">
+                    <label class="control-label"><font color="red">* fields are mandatory </font></label>
+                </div>
+            </div>
+            @using (Html.BeginForm())
+            {
+                @Html.AntiForgeryToken()
+
+                <div class="panel-group" id="newregistration">
+                    <div class="panel panel-info">
+                        <div class="panel-heading">
+                            <h5>New Sister Registration</h5>
+                        </div>
+                        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                        <div class="panel-body ">
+                            <div id="tabs">
+                                <ul class="nav nav-tabs input-group-lg">
+                                    <li id="p_d" class="active"><a data-toggle="tab" href="#Personal_Details">Personal Details</a></li>
+                                    <li id="a_d"><a data-toggle="tab" href="#Address_Details">Address Details</a></li>
+                                    <li id="c_d"><a data-toggle="tab" href="#Contact_Details">Contact Details</a></li>
+                                    <li id="i_d"><a data-toggle="tab" href="#Identity_Detils">Identity & Address Proof Details</a></li>
+                                </ul>
+                                <br />
+                                <div class="tab-content input-sm">
+                                    <!-- Tab 1-->
+                                    <div class="tab-pane active" id="Personal_Details">
+                                        <!-- Row 1-->
+                                        <div class="row form-group">
+                                            <!-- col1 -->
+                                            <div class="col-lg-4">
+                                                <div class="col-lg-5">
+                                                    <label class="control-label">Title*:</label>
+                                                </div>
+                                                <div class="col-lg-4">
+                                                    @Html.DropDownListFor(model => model.title, new SelectList(new[] { "Mr.", "Ms.", "Mrs." }), new { @class = "form-control" })
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <!-- Row 2-->
+                                        <div class="row form-group">
+                                            <!-- col1 -->
+                                            <div class="col-lg-4">
+                                                <div class="col-lg-5">
+                                                    <label class="control-label">First Name*:</label>
+                                                </div>
+                                                <div class="col-lg-7">
+                                                    @Html.EditorFor(model => model.fname, new { htmlAttributes = new { @class = "form-control" } })
+                                                    @Html.ValidationMessageFor(model => model.fname, "", new { @class = "text-danger" })
+                                                </div>
+                                            </div>
+                                            <!-- col2 -->
+                                            <div class="col-lg-4">
+                                                <div class="col-lg-5">
+                                                    <label class="control-label">Middle Name*:</label>
+                                                </div>
+                                                <div class="col-lg-7">
+                                                    @Html.EditorFor(model => model.mname, new { htmlAttributes = new { @class = "form-control" } })
+                                                    @Html.ValidationMessageFor(model => model.mname, "", new { @class = "text-danger" })
+                                                </div>
+                                            </div>
+                                            <!-- col3 -->
+                                            <div class="col-lg-4">
+                                                <div class="col-lg-4">
+                                                    <label class="control-label">Last Name*:</label>
+                                                </div>
+                                                <div class="col-lg-7">
+                                                    @Html.EditorFor(model => model.lname, new { htmlAttributes = new { @class = "form-control" } })
+                                                    @Html.ValidationMessageFor(model => model.lname, "", new { @class = "text-danger" })
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <!-- Row 3 -->
+                                        <div class="row form-group">
+                                            <!-- col1 -->
+                                            <div class="col-lg-4">
+                                                <div class="col-lg-5">
+                                                    <label class="control-label">Birth Date:</label>
+                                                </div>
+                                                <div class="col-lg-7">
+                                                    @Html.EditorFor(model => model.dob, new { htmlAttributes = new { @class = "form-control", @type = "date" } })
+                                                    @Html.ValidationMessageFor(model => model.dob, "", new { @class = "text-danger" })
+                                                </div>
+                                            </div>
+                                            <!-- col2 -->
+                                            <div class="col-lg-4">
+                                                <div class="col-lg-5">
+                                                    <label class="control-label">Birth Place:</label>
+                                                </div>
+                                                <div class="col-lg-7">
+                                                    @Html.DropDownListFor(model => model.birthplace, new SelectList(new[] { "Select", "Pune", "Mumbai" }), new { @class = "form-control" })
+                                                </div>
+                                            </div>
+                                            <!-- col3-->
+                                            <div class="col-lg-4">
+                                                <div class="col-lg-4">
+                                                    <label class="control-label">Age:</label>
+                                                </div>
+                                                <div class="col-lg-7">
+                                                    @Html.EditorFor(model => model.age, new { htmlAttributes = new { @class = "form-control" } })
+                                                    @Html.ValidationMessageFor(model => model.age, "", new { @class = "text-danger" })
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <!-- Row 4-->
+                                        <div class="row form-group">
+                                            <!-- col1 -->
+                                            <div class="col-lg-4">
+                                                <div class="col-lg-5">
+                                                    <label class="control-label">Gender*:</label>
+                                                </div>
+                                                <div class="col-lg-7">
+                                                    <div class="radio-inline">
+                                                        <label>@Html.RadioButton("Gender", "Male", true)  Male</label>
+                                                    </div>
+                                                    <div class="radio-inline">
+                                                        <label>@Html.RadioButton("Gender", "Female")  Female</label>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <!-- col2 -->
+                                            <div class="col-lg-4">
+                                                <div class="col-lg-5">
+                                                    <label class="control-label">Marital Status*:</label>
+                                                </div>
+
+                                                <div class="col-lg-7">
+                                                    @Html.DropDownListFor(model => model.maritalstatus, new SelectList(new[] { "Married ", "Unmarried" }), new { @class = "form-control" })
+                                                </div>
+                                            </div>
+                                            <!-- col3 -->
+                                            <div class="col-lg-4">
+                                                <div class="col-lg-4">
+                                                    <label class="control-label">Blood Group:</label>
+                                                </div>
+                                                <div class="col-lg-7">
+                                                    @Html.DropDownListFor(model => model.bloodgroup, new SelectList(new[] { "A+ ", "B+", "AB+", "O+", "A-", "B-", "AB-", "O-" }), new { @class = "form-control" })
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <!-- Row 5-->
+                                        <div class="row form-group">
+                                            <!-- col 1 -->
+                                            <div class="col-lg-4">
+                                                <div class="col-lg-5">
+                                                    <label class="control-label">Height:</label>
+                                                </div>
+                                                <div class="col-lg-7">
+                                                    @Html.EditorFor(model => model.dheight, new { htmlAttributes = new { @class = "form-control" } })
+                                                    @Html.ValidationMessageFor(model => model.dheight, "", new { @class = "text-danger" })
+                                                </div>
+                                            </div>
+                                            <!-- col 2 -->
+                                            <div class="col-lg-4">
+                                                <div class="col-lg-5">
+                                                    <label class="control-label">Weight:</label>
+                                                </div>
+                                                <div class="col-lg-7">
+                                                    @Html.EditorFor(model => model.dweight, new { htmlAttributes = new { @class = "form-control" } })
+                                                    @Html.ValidationMessageFor(model => model.dweight, "", new { @class = "text-danger" })
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-4">
+                                                <div class="col-lg-5">
+                                                    <label class="control-label">Qualification:</label>
+                                                </div>
+                                                <div class="col-lg-7">
+                                                    @Html.EditorFor(model => model.qualification, new { htmlAttributes = new { @class = "form-control" } })
+                                                    @Html.ValidationMessageFor(model => model.qualification, "", new { @class = "text-danger" })
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <!--Row 6-->
+                                        <div class="row form-group">
+                                            <!-- col 1 -->
+                                            <div class="col-lg-12" align="center">
+                                                <label id="next_tab2" class="btn btn-primary btn-sm"> Save & Continue &nbsp; <i class="fa fa-arrow-circle-right"></i></label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!--Tab 1 close-->
+                                    <!-- Tab No 2-->
+                                    <div class="tab-pane" id="Address_Details">
+                                        <!--Row 1-->
+                                        <div class="col-lg-12 label-success input-lg">
+                                            <!-- col1 -->
+                                            <div class="col-lg-6" align="center">
+                                                <h5 class="label">Temporary Address</h5>
+                                            </div>
+                                            <!-- col2 -->
+                                            <div class="col-lg-6" align="center">
+                                                <h5 class="label">Permanent Address</h5>
+                                            </div>
+                                        </div>
+                                        <div class="row form-group"></div>
+                                        <div class="row">
+                                            <div class="col-lg-12">
+                                                <div class="form-group col-lg-12">
+                                                    <div class="col-lg-6">
+                                                        <div class="col-lg-12 thumbnail">
+                                                            <div class="row form-group">
+                                                                <div class="col-lg-12">
+                                                                </div>
+                                                            </div>
+                                                            <div class="row form-group">
+                                                            </div>
+                                                            <div class="row form-group">
+                                                            </div>
+                                                            <div class="row form-group">
+                                                                <div class="col-lg-12">
+                                                                    <div class="col-lg-5">
+                                                                        <label class="control-label">Address:</label>
+                                                                    </div>
+                                                                    <div class="col-lg-6">
+                                                                        <input type="text" class="form-control" id="tAddress">
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="row form-group">
+                                                                <div class="col-lg-12">
+                                                                    <div class="col-lg-5">
+                                                                        <label class="control-label">City*:</label>
+                                                                    </div>
+                                                                    <div class="col-lg-6">
+                                                                        <input type="text" class="form-control" id="tCity">
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="row form-group ">
+                                                                <div class="col-lg-12">
+                                                                    <div class="col-lg-5">
+                                                                        <label class="control-label">Country*:</label>
+                                                                    </div>
+                                                                    <div class="col-lg-6">
+                                                                        <select class="form-control" id="tCountry">
+                                                                            <option value="select">Select</option>
+                                                                            <option value="Male">India</option>
+                                                                            <option value="Female">UK</option>
+                                                                        </select>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="row form-group ">
+                                                                <div class="col-lg-12">
+                                                                    <div class="col-lg-5">
+                                                                        <label class="control-label">State*:</label>
+                                                                    </div>
+                                                                    <div class="col-lg-6">
+                                                                        <select class="form-control" id="tState">
+                                                                            <option value="select">Select</option>
+                                                                            <option value="Male">Maharashtra</option>
+                                                                            <option value="Female">J&K</option>
+                                                                        </select>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="row form-group ">
+                                                                <div class="col-lg-12">
+                                                                    <div class="col-lg-5">
+                                                                        <label class="control-label">District*:</label>
+                                                                    </div>
+                                                                    <div class="col-lg-6">
+                                                                        <select class="form-control" id="tDistrict">
+                                                                            <option value="select">Select</option>
+                                                                            <option value="Male">Pune</option>
+                                                                            <option value="Female">Nashik</option>
+                                                                        </select>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="row form-group ">
+                                                                <div class="col-lg-12">
+                                                                    <div class="col-lg-5">
+                                                                        <label class="control-label">Pin Code:</label>
+                                                                    </div>
+                                                                    <div class="col-lg-6">
+                                                                        <input type="text" class="form-control" id="tPin">
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-lg-6">
+                                                        <div class="col-lg-12 thumbnail">
+                                                            <div class="row form-group">
+                                                                <div class="col-lg-12">
+                                                                    <div class="checkbox">
+                                                                        <label>
+                                                                            <input id="sameAddress" type="checkbox" value="Same as Temporary Address">Same as Temporary Address
+                                                                        </label>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="row form-group"></div>
+                                                            <div class="row">
+                                                                <div class="col-lg-12">
+                                                                    <!-- col2 -->
+                                                                    <div class="form-group col-lg-12">
+                                                                        <div class="col-lg-5">
+                                                                            <label class="control-label">Address:</label>
+                                                                        </div>
+                                                                        <div class="col-lg-6">
+                                                                            <input type="text" class="form-control" id="pAddress">
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <!--Row 3-->
+                                                            <div class="row">
+                                                                <div class="col-lg-12">
+                                                                    <!-- col2 -->
+                                                                    <div class="form-group col-lg-12">
+                                                                        <div class="col-lg-5">
+                                                                            <label class="control-label">City*:</label>
+                                                                        </div>
+                                                                        <div class="col-lg-6">
+                                                                            <input type="text" class="form-control" id="PCity">
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <!--Row 3-->
+                                                            <div class="row">
+                                                                <div class="col-lg-12">
+                                                                    <div class="form-group col-lg-12">
+                                                                        <div class="col-lg-5">
+                                                                            <label class="control-label">Country*:</label>
+                                                                        </div>
+                                                                        <div class="col-lg-6">
+                                                                            <select class="form-control" id="tCountry">
+                                                                                <option value="select">Select</option>
+                                                                                <option value="Male">India</option>
+                                                                                <option value="Female">UK</option>
+                                                                            </select>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <!--Row 4-->
+                                                            <div class="row">
+                                                                <div class="col-lg-12">
+                                                                    <div class="form-group col-lg-12">
+                                                                        <div class="col-lg-5">
+                                                                            <label class="control-label">State*:</label>
+                                                                        </div>
+                                                                        <div class="col-lg-6">
+                                                                            <select class="form-control" id="pState">
+                                                                                <option value="select">Select</option>
+                                                                                <option value="Male">Maharashtra</option>
+                                                                                <option value="Female">J&K</option>
+                                                                            </select>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <!--Row 5-->
+                                                            <div class="row">
+                                                                <div class="col-lg-12">
+                                                                    <div class="form-group col-lg-12">
+                                                                        <div class="col-lg-5">
+                                                                            <label class="control-label">District*:</label>
+                                                                        </div>
+                                                                        <div class="col-lg-6">
+                                                                            <select class="form-control" id="pDistrict">
+                                                                                <option value="select">Select</option>
+                                                                                <option value="Male">Pune</option>
+                                                                                <option value="Female">Nashik</option>
+                                                                            </select>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <!--Row 6-->
+                                                            <div class="row">
+                                                                <div class="col-lg-12">
+                                                                    <div class="form-group col-lg-12">
+                                                                        <div class="col-lg-5">
+                                                                            <label class="control-label">Pin Code:</label>
+                                                                        </div>
+                                                                        <div class="col-lg-6">
+                                                                            <input type="text" class="form-control" id="pPin">
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row form-group">
+                                            <!-- col 1 -->
+                                            <div class="col-lg-12" align="center">
+                                                <label id="previous_tab1" class="btn btn-primary btn-sm"><i class="fa fa-arrow-circle-left"></i>&nbsp; Back  </label>
+                                                <label id="next_tab3" class="btn btn-primary btn-sm"> Continue &nbsp; <i class="fa fa-arrow-circle-right"></i></label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!--Tab 2 close-->
+                                    <!-- Tab 3-->
+                                    <div class="tab-pane" id="Contact_Details">
+                                        <!--Row 1-->
+                                        <div class="row form-group">
+                                            <!-- col1 -->
+                                            <div class="col-lg-6">
+                                                <div class="col-lg-5">
+                                                    <label class="control-label">Mobile No*:</label>
+                                                </div>
+                                                <div class="col-lg-6">
+                                                    <input type="text" class="form-control" id="MobNo">
+                                                </div>
+                                            </div>
+                                            <!-- col2 -->
+                                            <div class="col-lg-6">
+                                                <div class="col-lg-5">
+                                                    <label class="control-label">Alternate Mobile No:</label>
+                                                </div>
+                                                <div class="col-lg-6">
+                                                    <input type="text" class="form-control" id="AltMobNo">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <!--Row 2-->
+                                        <div class="row form-group">
+                                            <!-- col1 -->
+                                            <div class="col-lg-6">
+                                                <div class="col-lg-5">
+                                                    <label class="control-label">Telephone No:</label>
+                                                </div>
+                                                <div class="col-lg-6">
+                                                    <input type="text" class="form-control" id="TelNo">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <!--Row 3-->
+                                        <div class="row form-group">
+                                            <!-- col1 -->
+                                            <div class="col-lg-6">
+                                                <div class="col-lg-5">
+                                                    <label class="control-label">Email Id:</label>
+                                                </div>
+                                                <div class="col-lg-6">
+                                                    <input type="text" class="form-control" id="EmailId" placeholder="xyz@abc.com">
+                                                </div>
+                                            </div>
+                                            <!-- col2 -->
+                                            <div class="col-lg-6">
+                                                <div class="col-lg-5">
+                                                    <label class="control-label">Alternate Email Id:</label>
+                                                </div>
+                                                <div class="col-lg-6">
+                                                    <input type="text" class="form-control" id="AltEmailId" placeholder="xyz@abc.com">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row form-group">
+                                            <!-- col 1 -->
+                                            <div class="col-lg-12" align="center">
+                                                <label id="previous_tab2" class="btn btn-primary btn-sm"><i class="fa fa-arrow-circle-left"></i>&nbsp; Back  </label>
+                                                <label id="next_tab4" class="btn btn-primary btn-sm"> Continue &nbsp; <i class="fa fa-arrow-circle-right"></i></label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!--tab 3 Close-->
+                                    <!-- Tab 4-->
+                                    <div class="tab-pane" id="Identity_Detils">
+                                        <!--Row 1-->
+                                        <div class="row form-group">
+                                            <!-- col1 -->
+                                            <div class="col-lg-6">
+                                                <div class="col-lg-5">
+                                                    <label class="control-label">Aadhar Card:</label>
+                                                </div>
+                                                <div class="col-lg-7 ">
+                                                    <div class="radio-inline">
+                                                        <label><input type="radio" id="Male" name="aadhar">Yes</label>
+                                                    </div>
+                                                    <div class="radio-inline">
+                                                        <label><input type="radio" id="Female" name="aadhar">No</label>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <!-- col2 -->
+                                            <div class="col-lg-6">
+                                                <div class="col-lg-5">
+                                                    <label class="control-label">Aadhar No:</label>
+                                                </div>
+                                                <div class="col-lg-6">
+                                                    <input type="text" class="form-control" id="AadharNo">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <!--Row 1 close-->
+                                        <!--Row 2-->
+                                        <div class="row form-group">
+                                            <!-- col1 -->
+                                            <div class="col-lg-6">
+                                                <div class="col-lg-5">
+                                                    <label class="control-label">Passport:</label>
+                                                </div>
+                                                <div class="col-lg-7 ">
+                                                    <div class="radio-inline">
+                                                        <label><input type="radio" id="Passport_Yes" name="passport">Yes</label>
+                                                    </div>
+                                                    <div class="radio-inline">
+                                                        <label><input type="radio" id="Passport_No" name="passport">No</label>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <!-- col2 -->
+                                            <div class="col-lg-6">
+                                                <div class="col-lg-5">
+                                                    <label class="control-label">Passport No:</label>
+                                                </div>
+                                                <div class="col-lg-6">
+                                                    <input type="text" class="form-control" id="PassportNo">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <!--Row 2 close-->
+                                        <!--Row 3-->
+                                        <div class="row form-group">
+                                            <!-- col1 -->
+                                            <div class="col-lg-6">
+                                                <div class="col-lg-5">
+                                                    <label class="control-label">PAN Card:</label>
+                                                </div>
+                                                <div class="col-lg-7 ">
+                                                    <div class="radio-inline">
+                                                        <label><input type="radio" id="Pan_Yes" name="pancard">Yes</label>
+                                                    </div>
+                                                    <div class="radio-inline">
+                                                        <label><input type="radio" id="Pan_No" name="pancard">No</label>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <!-- col2 -->
+                                            <div class="col-lg-6">
+                                                <div class="col-lg-5">
+                                                    <label class="control-label">PAN No:</label>
+                                                </div>
+                                                <div class="col-lg-6">
+                                                    <input type="text" class="form-control" id="PANNo">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <!--Row 3 close-->
+                                        <!--Row 4-->
+                                        <div class="row form-group">
+                                            <!-- col1 -->
+                                            <div class="col-lg-6">
+                                                <div class="col-lg-5">
+                                                    <label class="control-label">Voter Id:</label>
+                                                </div>
+                                                <div class="col-lg-7 ">
+                                                    <div class="radio-inline">
+                                                        <label><input type="radio" id="Voter_Id_Yes" name="voterid">Yes</label>
+                                                    </div>
+                                                    <div class="radio-inline">
+                                                        <label><input type="radio" id="Voter_Id_No" name="voterid">No</label>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <!-- col2 -->
+                                            <div class="col-lg-6">
+                                                <div class="col-lg-5">
+                                                    <label class="control-label">Voter Id No:</label>
+                                                </div>
+                                                <div class="col-lg-6">
+                                                    <input type="text" class="form-control" id="VoterIdNo">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <!--Row 4 close-->
+                                        <!--Row 4-->
+                                        <div class="row form-group">
+                                            <!-- col1 -->
+                                            <div class="col-lg-6">
+                                                <div class="col-lg-5">
+                                                    <label class="control-label">Employee Id:</label>
+                                                </div>
+                                                <div class="col-lg-7 ">
+                                                    <div class="radio-inline">
+                                                        <label><input type="radio" id="empid_yes" name="employee">Yes</label>
+                                                    </div>
+                                                    <div class="radio-inline">
+                                                        <label><input type="radio" id="empid_no" name="employee">No</label>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <!-- col2 -->
+                                            <div class="col-lg-6">
+                                                <div class="col-lg-5">
+                                                    <label class="control-label">Employee Id No:</label>
+                                                </div>
+                                                <div class="col-lg-6">
+                                                    <input type="text" class="form-control" id="EmpIdNo">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <!--Row 4 close-->
+                                        <div class="row">
+                                            <div class="col-lg-12" align="center">
+                                                <label id="previous_tab3" class="btn btn-primary btn-md"><i class="fa fa-arrow-circle-left"></i>&nbsp; Back  </label>
+                                                <button class="btn btn-info btn-md" value="Print"><i class="fa fa-print">&nbsp Print</i></button>
+                                                <button id="Submit" type="submit" class="btn btn-success btn-md"><i class="fa fa-save"></i> &nbsp; Save</button>
+                                                <button class="btn btn-danger btn-md" value="cancel"><i class="fa fa-ban">&nbsp Cancel</i></button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            }
+        </div>
+    </div>
+</div>
+<script>
+    $(document).ready(function () {
+
+        $("#next_tab2").click(function () {
+            $("#Personal_Details").removeClass("active");
+            $("#p_d").removeClass("active");
+            $("#Address_Details").addClass("active");
+            $("#a_d").addClass("active");
+        });
+
+        $("#next_tab3").click(function () {
+            $("#Address_Details").removeClass("active");
+            $("#a_d").removeClass("active");
+            $("#Contact_Details").addClass("active");
+            $("#c_d").addClass("active");
+        });
+
+        $("#next_tab4").click(function () {
+            $("#Contact_Details").removeClass("active");
+            $("#c_d").removeClass("active");
+            $("#Identity_Detils").addClass("active");
+            $("#i_d").addClass("active");
+        });
+
+        $("#next_tab5").click(function () {
+            $("#Identity_Detils").removeClass("active");
+            $("#i_d").removeClass("active");
+            $("#Other_Details").addClass("active");
+            $("#o_d").addClass("active");
+        });
+
+        $("#previous_tab1").click(function () {
+            $("#Address_Details").removeClass("active");
+            $("#a_d").removeClass("active");
+            $("#Personal_Details").addClass("active");
+            $("#p_d").addClass("active");
+        });
+
+        $("#previous_tab2").click(function () {
+            $("#Contact_Details").removeClass("active");
+            $("#c_d").removeClass("active");
+            $("#Address_Details").addClass("active");
+            $("#a_d").addClass("active");
+        });
+
+        $("#previous_tab3").click(function () {
+            $("#Identity_Detils").removeClass("active");
+            $("#i_d").removeClass("active");
+            $("#Contact_Details").addClass("active");
+            $("#c_d").addClass("active");
+        });
+
+        $("#previous_tab4").click(function () {
+            $("#Other_Details").removeClass("active");
+            $("#o_d").removeClass("active");
+            $("#Identity_Detils").addClass("active");
+            $("#i_d").addClass("active");
+        });
+    });
+</script>

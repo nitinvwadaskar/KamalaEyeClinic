@@ -1,0 +1,23 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Web;
+using System.Web.Mvc;
+
+namespace Kamala_Eye_Clinic.Controllers
+{
+    public class SharedController : Controller
+    {
+        public ActionResult Print(string printcontent)
+        {
+            FormCollection obj = new FormCollection();                                
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult Print(FormCollection obj)
+        {                        
+            return View();
+        }
+    }
+}

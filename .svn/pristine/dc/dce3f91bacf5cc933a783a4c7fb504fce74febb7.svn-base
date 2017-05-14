@@ -1,0 +1,78 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Web;
+using System.Web.Mvc;
+using Kamala_Eye_Clinic.Models;
+using System.Data;
+
+namespace Kamala_Eye_Clinic.Controllers
+{
+    [Sessionclass]
+    public class OTController : Controller
+    {
+        public ActionResult OTRegistration()
+        {
+            OTRegistration obj = new OTRegistration();
+            return View(obj);
+        }
+
+        public ViewResult OTRegistrationUpdate(int regid)
+        {
+            OTRegistration obj = new OTRegistration();
+
+            if (regid > 0)
+            {
+                obj.CMD = "Update";
+                obj = obj.GetSingleOT(regid, Convert.ToInt32(Session["hospital"].ToString()));
+
+            }
+            return View("OTRegistration", obj);
+        }
+        [HttpPost]
+        public ActionResult OTRegistrationUpdate(OTRegistration obj, string SubmitBtn)
+        {
+            OTRegistration(obj, SubmitBtn);
+            if (SubmitBtn == "Delete") return Redirect("~/Patient/PatientOTDetails");
+            return View("OTRegistration", obj);
+        }
+
+        [HttpPost]
+        public ActionResult OTRegistration(OTRegistration obj, string SubmitBtn)
+        {
+            obj.CMD = SubmitBtn == "Save" ? "Save" : SubmitBtn == "Update" ? "Update" : "Delete";
+            obj.hid = Convert.ToInt32(Session["hospital"].ToString());
+            switch (obj.CMD)
+            {
+                case "Save":
+                    obj.hid = Convert.ToInt32(Session["hospital"].ToString());
+                    string[] str = obj.PerformAction();
+                    ViewBag.msg = str[1];
+                    return View("OTRegistration", obj);
+                case "Update":
+                    string[] str1 = obj.PerformAction();
+                    ViewBag.msg = str1[2];
+                    return View("OTRegistration", obj);
+                case "Delete":
+                    string[] str2 = obj.PerformAction();
+                    ViewBag.msg = str2[3];
+                    return View("OTRegistration", obj);
+                default:
+                    return View(obj);
+            }
+
+        }
+
+        public ActionResult OTDetails()
+        {
+            OTRegistration obj = new OTRegistration();
+            DBConnection cn = new DBConnection();
+            obj.CMD = "View";
+            obj.hid = Convert.ToInt32(Session["hospital"].ToString());
+            obj.patientid = Convert.ToInt32(Session["patientid"].ToString());
+            string xml = Common.ToXML(obj);
+            DataSet dataset = cn.ExecuteProcedure("sp_otregistration", xml);
+            return View(dataset);
+        }
+    }
+}

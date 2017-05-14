@@ -1,0 +1,154 @@
+﻿
+using System;
+using System.Data;
+using System.IO;
+using System.Text;
+using System.Web;
+using iTextSharp.text;
+using iTextSharp.text.pdf;
+using iTextSharp.text.html.simpleparser;
+using System.Web.UI;
+
+namespace Kamala_Eye_Clinic.Models
+{
+    public class PrintGenerator
+    {
+        public static void GenerateBillPDF(int billid, int patientid, int hid, DateTime billdate)
+        {
+            //Dummy data for Invoice (Bill).
+            string HospitalName = "Kamala Eye Clinic";
+            int billNo = billid;
+            PatientBill obj = new PatientBill();
+            DBConnection cn = new DBConnection();
+            obj.CMD = "View1";
+            obj.hid = hid;
+            obj.billid = billid;
+            obj.patientid = patientid;
+            string xml = Common.ToXML(obj);
+            DataSet dataset = cn.ExecuteProcedure("Sp_PatientFinalBill", xml);
+
+            PatientMaster pm = new PatientMaster();
+            pm.CMD = "View1";
+            pm.hid = hid;
+            pm.patientid = patientid;
+            string xml1 = Common.ToXML(pm);
+            DataSet ds = cn.ExecuteProcedure("SP_PatientRegistration", xml);
+            string patientname = ds.Tables[0].Rows[0]["title"] + " " + ds.Tables[0].Rows[0]["fname"] + " " + ds.Tables[0].Rows[0]["mname"] + " " + ds.Tables[0].Rows[0]["lname"];
+            using (StringWriter sw = new StringWriter())
+            {
+                using (HtmlTextWriter hw = new HtmlTextWriter(sw))
+                {
+                    StringBuilder sb = new StringBuilder();
+
+                    //Generate Invoice (Bill) Header.
+                    sb.Append("<html><head></head><body><div style='font-family:verdana'>");
+
+                    sb.Append("<table width='600px'>");
+
+                    sb.Append("<tr style='font-size:30px'><td>");
+                    sb.Append(HospitalName);
+                    sb.Append("</td><td>Invoice</td></tr>");
+
+                    sb.Append("<tr style='font-size:14px'><td>Bill Date #:");
+                    sb.Append(billdate);
+                    sb.Append("</td><td>Invoice #:");
+                    sb.Append(billNo);
+                    sb.Append("</td></tr></table><br/>");
+
+                    sb.Append("<table border='1' width='650px' style='font-size:13px; border-collapse: collapse;'>");
+                    sb.Append("<tr><td colspan = '4' style = 'background-color:#ddd; font-weight:bold'>PATIENT & HOSPITAL DETAILS</td></tr>");
+                    sb.Append("<tr><td>Patient Name:</td><td>");
+                    sb.Append("");
+                    sb.Append("</td><td>Hospital No:</td><td>");
+                    sb.Append(hid);
+                    sb.Append("</td></tr>");
+
+                    sb.Append("<tr><td> Patient Age:</td><td> ");
+                    sb.Append(ds.Tables[0].Rows[0]["age"]);
+                    sb.Append("</td><td>Bed No:</td><td>");
+                    sb.Append("Bed");
+                    sb.Append("</td></tr>");
+
+                    sb.Append("<tr><td> Address:</td><td>");
+                    sb.Append("Address");
+                    sb.Append("</td><td>Admission Date:</td><td>");
+                    sb.Append(billdate);
+                    sb.Append("</td></tr>");
+
+                    sb.Append("<tr><td> Consultant :</td><td>");
+                    sb.Append("consultant");
+                    sb.Append("</td><td>Discharge Date:</td><td>");
+                    sb.Append(billdate);
+                    sb.Append("</td></tr>");
+
+                    sb.Append("</table><br/>");
+
+                    //Generate Invoice (Bill) Items Grid.
+                    sb.Append("<table border='1' width='650px' style='font-size:13px; border-collapse: collapse;'>");
+                    sb.Append("<tr style='background-color:#ddd; font-weight:bold'><td>SR#</td><td>PARTICULARS#</td><td>QUANTITY#</td><td>RATE#</td><td>AMOUNT#</td></tr>");
+                    decimal totalamt = 0;
+                    for (int i = 0; i <= dataset.Tables[0].Rows.Count - 1; i++)
+                    {
+                        sb.Append("<tr>");
+                        sb.Append("<td>");
+                        sb.Append(dataset.Tables[0].Rows[i]["srno"]);
+                        sb.Append("</td>");
+
+                        sb.Append("<td>");
+                        sb.Append(dataset.Tables[0].Rows[i]["particularname"]);
+                        sb.Append("</td>");
+
+                        sb.Append("<td>");
+                        sb.Append(dataset.Tables[0].Rows[i]["qty"]);
+                        sb.Append("</td>");
+
+                        sb.Append("<td>");
+                        sb.Append(Convert.ToDecimal(dataset.Tables[0].Rows[i]["charges"]));
+                        sb.Append("</td>");
+
+                        sb.Append("<td>");
+                        sb.Append(Convert.ToDecimal(dataset.Tables[0].Rows[i]["subtotal"]));
+                        sb.Append("</td>");
+                        sb.Append("</tr>");
+                        totalamt = totalamt + Convert.ToDecimal(dataset.Tables[0].Rows[i]["subtotal"]);
+                    }
+                    sb.Append("<tr>");
+                    sb.Append("<td colspan = 3>");
+
+                    sb.Append("<table style = 'font-size:13px'>");
+                    sb.Append("<tr><td>COMMENTS/INSTRUCTIONS</td><tr>");
+                    sb.Append("<tr><td>1</td></tr>");
+                    sb.Append("<tr><td>2</td></tr>");
+                    sb.Append("<tr><td>3</td></tr>");
+                    sb.Append("<tr><td>4</td></tr>");
+                    sb.Append("<tr><td>5</td></tr>");
+                    sb.Append("</table></td>");
+
+                    sb.Append("<td style = 'background-color:#ddd; font-weight:bold'> Sub Total:</td>");
+                    sb.Append("<td style = 'background-color:#ddd; font-weight:bold'>");
+                    sb.Append(totalamt);
+                    sb.Append("</td>");
+                    sb.Append("</tr>");
+                    sb.Append("</table><br/><span style='font-size:11px'>## This is computer generated print there no need of signaure.</span>");
+                    sb.Append("</div></body></html>");
+
+
+
+                    //Export HTML String as PDF.
+                    StringReader sr = new StringReader(sb.ToString());
+                    Document pdfDoc = new Document(PageSize.A4, 10f, 10f, 10f, 0f);
+                    HTMLWorker htmlparser = new HTMLWorker(pdfDoc);
+                    PdfWriter writer = PdfWriter.GetInstance(pdfDoc, HttpContext.Current.Response.OutputStream);
+                    pdfDoc.Open();
+                    htmlparser.Parse(sr);
+                    pdfDoc.Close();
+                    HttpContext.Current.Response.ContentType = "application/pdf";
+                    HttpContext.Current.Response.AddHeader("content-disposition", "attachment;filename=Invoice_" + billNo + ".pdf");
+                    HttpContext.Current.Response.Cache.SetCacheability(HttpCacheability.NoCache);
+                    HttpContext.Current.Response.Write(pdfDoc);
+                    HttpContext.Current.Response.End();
+                }
+            }
+        }
+    }
+}

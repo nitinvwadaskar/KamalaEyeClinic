@@ -1,0 +1,77 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Data;
+using System.Linq;
+using System.Web;
+
+namespace Kamala_Eye_Clinic.Models
+{
+    public class OTRegistration
+    {
+        public int hid { get; set; }
+        public int patientid { get; set; }
+        public int regid { get; set; }
+        
+        public string otdate { get; set; }
+        public string durationfrom { get; set; }
+        public string durationto { get; set; }
+        public string typeofanaesthesia { get; set; }
+        public string provisionaldiagnosis { get; set; }
+        public string surgerytitle { get; set; }
+        public string operatingsurgeon { get; set; }
+        public string anaesthetist { get; set; }
+        public string assistingdoctor { get; set; }
+        public string assistingnurse { get; set; }
+        public string remarks { get; set; }
+        public string material_HPE { get; set; }
+        public string createby { get; set; }
+        public string updateby { get; set; }
+        public string CMD { get; set; }
+
+
+        public string[] PerformAction()
+        {
+            try
+            {
+                this.createby = this.updateby = HttpContext.Current.Session["UserName"].ToString();
+                string xml = Common.ToXML(this);
+                DBConnection con = new DBConnection();
+                DataSet ds = con.ExecuteProcedure("sp_otregistration", xml);
+                return Common.CallbackMsg(ds);
+            }
+            catch (Exception e)
+            {
+                return new string[] { "Failed", e.Message };
+            }
+        }
+        public OTRegistration GetSingleOT(int regid, int hid)
+        {
+            this.CMD = "View1";
+            this.hid = hid;
+            this.patientid = patientid;
+            string xml = Common.ToXML(this);
+            DBConnection con = new DBConnection();
+            DataSet ds = con.ExecuteProcedure("sp_otregistration", xml);
+            if (ds != null)
+            {
+                for (int i = 0; i < ds.Tables[0].Rows.Count; i++)
+                {
+                    this.otdate = ds.Tables[0].Rows[i]["otdate"].ToString();
+                    this.durationfrom = ds.Tables[0].Rows[i]["durationfrom"].ToString();
+                    this.durationto= ds.Tables[0].Rows[i]["durationto"].ToString();
+                    this.typeofanaesthesia = ds.Tables[0].Rows[i]["typeofanaesthesia"].ToString();
+                    this.provisionaldiagnosis = ds.Tables[0].Rows[i]["provisionaldiagnosis"].ToString();
+                    this.surgerytitle = ds.Tables[0].Rows[i]["surgerytitle"].ToString();
+                    this.operatingsurgeon= ds.Tables[0].Rows[i]["operatingsurgeon"].ToString();
+                    this.anaesthetist = ds.Tables[0].Rows[i]["anaesthetist"].ToString();
+                    this.assistingdoctor = ds.Tables[0].Rows[i]["assistingdoctor"].ToString();
+                    this.assistingnurse = ds.Tables[0].Rows[i]["assistingnurse"].ToString();                    
+                    this.remarks = ds.Tables[0].Rows[i]["remarks"].ToString();
+                    this.material_HPE = ds.Tables[0].Rows[i]["material_HPE"].ToString();                    
+                }
+            }
+            return this;
+        }
+
+    }
+}

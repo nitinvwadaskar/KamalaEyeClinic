@@ -1,0 +1,192 @@
+﻿@model Kamala_Eye_Clinic.Models.OTRegistration
+
+@{
+    ViewBag.Title = "O.T. Registration";
+    Layout = "~/Views/_Layout.cshtml";
+
+}
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+       @if (ViewBag.msgarr != null)
+       {
+        <div class="alert alert-@ViewBag.msgarr[0] alert-dismissible" role="alert">
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            <strong>@ViewBag.msgarr[1]</strong>
+        </div>
+       }
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+        <div class="row form-group">
+            <div class="col-md-8">
+                <div class="col-md-12 form-group">
+                    <div class="col-md-6">
+                        <div class="col-md-5">
+                            <label class="control-label">O.T. Date:</label>
+                        </div>
+                        <div class="col-md-7">
+
+                            <div class="input-group">
+                                @Html.EditorFor(model => model.otdate, new { htmlAttributes = new { @class = "form-control date",@placeholder="MM/DD/YYYY"} })
+                                <div class="input-group-addon">
+                                    <i class="fa fa-calendar">
+                                    </i>
+                                </div>
+                            </div>
+                            @Html.ValidationMessageFor(model => model.otdate, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-12 form-group">
+                    <div class="col-md-6">
+                        <div class="col-md-5">
+                            <label class="control-label">From:</label>
+                        </div>
+                        <div class="col-md-7">
+                            @Html.EditorFor(model => model.durationfrom, new { htmlAttributes = new { @class = "form-control", @type = "time", value = "12:00:00" } })
+                            @Html.ValidationMessageFor(model => model.durationfrom, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="col-md-5">
+                            <label class="control-label">To:</label>
+                        </div>
+                        <div class="col-md-7">
+                            @Html.EditorFor(model => model.durationto, new { htmlAttributes = new { @class = "form-control", @type = "time", value = "22:53:00" } })
+                            @Html.ValidationMessageFor(model => model.durationto, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-12 form-group">
+                    <div class="col-md-6">
+                        <div class="col-md-5">
+                            <label class="control-label">Type of Anaesthesia:</label>
+                        </div>
+                        <div class="col-md-7">
+                            @Html.DropDownListFor(model => model.typeofanaesthesia, new SelectList(new[] { "GA", "SA", "LA", "EA" }), new { @class = "form-control" })
+                            @Html.ValidationMessageFor(model => model.typeofanaesthesia, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="col-md-5">
+                            <label class="control-label">Provisional Diagnosis:</label>
+                        </div>
+                        <div class="col-md-7">
+                           @Html.DropDownListFor(model => model.provisionaldiagnosis ,Model.doctor, new { @class = "form-control" })
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-12 form-group">
+                    <div class="col-md-6">
+                        <div class="col-md-5">
+                            <label class="control-label">Operating Surgeon:</label>
+                        </div>
+                        <div class="col-md-7">
+                           @Html.DropDownListFor(model => model.operatingsurgeon, Model.doctor, new { @class = "form-control" })
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="col-md-5">
+                            <label class="control-label">Anaesthetist:</label>
+                        </div>
+                        <div class="col-md-7">
+                            @Html.DropDownListFor(model => model.anaesthetist, Model.doctor, new { @class = "form-control" })
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-12 form-group">
+                    <div class="col-md-6">
+                        <div class="col-md-5">
+                            <label class="control-label">Assisting Doctor:</label>
+                        </div>
+                        <div class="col-md-7">
+                            @Html.DropDownListFor(model => model.assistingdoctor, Model.doctor, new { @class = "form-control" })
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="col-md-5">
+                            <label class="control-label">Assisting Nurse:</label>
+                        </div>
+                        <div class="col-md-7">
+                           @Html.DropDownListFor(model => model.assistingnurse, Model.nurse, new { @class = "form-control" })
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-12 form-group">
+                    <div class="col-md-6">
+                        <div class="col-md-5">
+                            <label class="control-label">Remarks:</label>
+                        </div>
+                        <div class="col-md-7">
+                            @Html.EditorFor(model => model.remarks, new { htmlAttributes = new { @class = "form-control" } })
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="col-md-5">
+                            <label class="control-label">Material H.P.E:</label>
+                        </div>
+                        <div class="col-md-7">
+                            @Html.DropDownListFor(model => model.material_HPE, new SelectList(new[] { "Yes", "No" }), new { @class = "form-control" })
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="col-md-12 form-group">
+                    <label class="control-label" align="center"> Title of Surgery</label>
+                </div>
+                <div class="col-md-12 form-group">
+                    <div class="col-md-5">
+                        <label class="control-label">Ref.</label>
+                    </div>
+                    <div class="col-md-7">
+                        @Html.EditorFor(model => model.oreference, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.oreference, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+                <div class="col-md-12 form-group">
+                    <div class="col-md-5">
+                        <label class="control-label">Power.</label>
+                    </div>
+                    <div class="col-md-7">
+                        @Html.EditorFor(model => model.opower, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.opower, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+                <div class="col-md-12 form-group">
+                    <div class="col-md-5">
+                        <label class="control-label">S/N</label>
+                    </div>
+                    <div class="col-md-7">
+                        @Html.EditorFor(model => model.sn, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.sn, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-12 form-group">
+                <div class="col-lg-12" align="center">
+                    @Html.HiddenFor(model => model.CMD)
+                    @if (Model.CMD == null)
+                    {
+                        <input type="submit" class="btn btn-default btn-info " value="Save" name="SubmitBtn" />
+                    }
+                    else
+                    {
+                        <input type="submit" class="btn btn-default btn-primary " value="Update" name="SubmitBtn" />
+                        @* <input type="submit" class="btn btn-default btn-danger" value="Delete" name="SubmitBtn" />*@
+                    }
+                    <input type="reset" class="btn btn-warning " value="Reset" />
+                </div>
+            </div>
+        </div>
+    </div>
+}
+
+<div>
+    @Html.ActionLink("  Back to List", "OTDetails","OT",new {@class= "fa fa-arrow-circle-o-left btn btn-info btn-sm" })
+</div>

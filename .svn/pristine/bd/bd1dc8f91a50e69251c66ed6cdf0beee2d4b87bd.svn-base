@@ -1,0 +1,79 @@
+﻿@model System.Data.DataSet
+@{
+    ViewBag.Title = "SisterDetails";
+    Layout = "~/Views/_Layout.cshtml";
+}
+
+<div class="row">
+    <div class="page-header">
+        <h4>Sister Details</h4>
+    </div>
+    <form class="form-horizontal" action="/Sister/SisterDetails" method="post">
+        <div class="col-lg-12">
+            <div class="col-lg-4">
+                <a class="btn btn-primary" href="~/Sister/Registration"><i class="fa fa-plus"></i> &nbsp; Add New Sister</a>
+            </div>           
+        </div>
+       
+        <div class="col-lg-12 form-group">
+            <hr />
+            <div class="col-lg-3">
+                <div class="col-lg-10">
+                    <input class="form-control" name="sid" type="text" placeholder="Sister Id" />
+                </div>
+            </div>
+            <div class="col-lg-1" align="center">
+                <label class="control-label">OR</label>
+            </div>
+            <div class="col-lg-3" align="center">
+                <div class="col-lg-10">
+                    <input class="form-control" name="fname" type="text" placeholder="First Name" />
+                </div>
+            </div>
+            <div class="col-lg-3" align="center">
+                <div class="col-lg-10">
+                    <input class="form-control" name="lname" type="text" placeholder="Last Name" />
+                </div>
+            </div>
+            <div class="col-lg-1">
+                <button class="btn btn-info" type="submit" name="submitBtn" value="Search">Search</button>
+            </div>
+            <div class="col-lg-1">
+                <button class="btn btn-info" type="submit" id="viewall" name="submitBtn" value="ViewAll">View All</button>
+            </div>
+        </div>
+        <div class="col-lg-12">
+            <div class="table-responsive">
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>Sister Id</th>
+                            <th>Sister Name</th>
+                            <th>Registration Date</th>
+                            <th>Contact No </th>
+                            <th>Age</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @for (int i = 0; i <= Model.Tables[0].Rows.Count - 1; i++)
+                        {
+                            <tr>
+                                <td>@(i + 1)</td>
+                                <td>@Model.Tables[0].Rows[i]["sisterid"]</td>
+                                <td>@Model.Tables[0].Rows[i]["fname"]&nbsp;&nbsp; @Model.Tables[0].Rows[i]["mname"] &nbsp;&nbsp; @Model.Tables[0].Rows[i]["lname"]</td>
+                                <td>@Model.Tables[0].Rows[i]["reg_dt"]</td>
+                                <td>@Model.Tables[0].Rows[i]["contact"]</td>
+                                <td>@Model.Tables[0].Rows[i]["age"]</td>
+                                <td>@Html.ActionLink("Edit", "Update", new { sisterid = Model.Tables[0].Rows[i][1] })</td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </form>
+</div>
+<script src="~/Scripts/jquery.validate.min.js"></script>
+<script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>

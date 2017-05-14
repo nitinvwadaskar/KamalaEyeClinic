@@ -1,0 +1,108 @@
+﻿@{
+    ViewBag.Title = "Dashboard";
+    Layout = "~/Views/_Layout.cshtml";   
+}
+
+<div class="row">
+    <div class="col-lg-12">
+        <div class="col-lg-2 thumbnail box" style="height: 100px; width: 150px">
+            <a href="#">
+                <img src="~/Content/img/ragistration1.jpg" style="height: 75%">
+                <h6 align="center">Patient Registration </h6>
+            </a>
+        </div>
+        <div class="col-lg-2 thumbnail box" style="height: 100px; width: 150px">
+            <a href="#">
+                <img src="~/Content/img/search.jpg" style="height: 75%">
+                <h6 align="center">Search Patient Details</h6>
+            </a>
+        </div>
+        <div class="col-lg-2 thumbnail box" style="height: 100px; width: 150px">
+            <a href="#">
+                <img src="~/Content/img/nurse-1.jpg" style="height: 75%">
+                <h6 align="center">Nursing</h6>
+            </a>
+        </div>
+        <div class="col-lg-2 thumbnail box" style="height: 100px; width: 150px">
+            <a href="#">
+                <img src="~/Content/img/insurance.jpg" style="height: 75%">
+                <h6 align="center">Insurance</h6>
+            </a>
+        </div>
+        <div class="col-lg-2 thumbnail box" style="height: 100px; width: 150px">
+            <a href="#">
+                <img src="~/Content/img/doctor consulting.jpg" style="height: 75%">
+                <h6 align="center">Doctor Consulting </h6>
+            </a>
+        </div>
+    </div>
+
+    <div class="col-lg-12">
+        <div class="col-lg-2 thumbnail box" style="height: 100px; width: 150px">
+            <a href="#">
+                <img src="~/content/img/sp_doctor.jpg" style="height: 75%">
+                <h6 align="center">Specialist</h6>
+            </a>
+        </div>
+        <div class="col-lg-2 thumbnail box" style="height: 100px; width: 150px">
+            <a href="#">
+                <img src="~/content/img/Lab_investigation.jpg" style="height: 75%">
+                <h6 align="center">Investigation</h6>
+            </a>
+        </div>
+        <div class="col-lg-2 thumbnail box" style="height: 100px; width: 150px">
+            <a href="#">
+                <img src="~/content/img/health_insurance.jpg" style="height: 75%">
+                <h6 align="center">Reports</h6>
+            </a>
+        </div>
+        <div class="col-lg-2 thumbnail box" style="height: 100px; width: 150px">
+            <a href="#">
+                <img src="~/content/img/admin.jpg" style="height: 75%">
+                <h6 align="center">Admin Management </h6>
+            </a>
+        </div>
+
+        <div class="col-lg-2 thumbnail box" style="height: 100px; width: 150px">
+            <a href="#">
+                <img src="~/content/img/HR-management.jpg" style="height: 75%">
+                <h6 align="center">Resource Management </h6>
+            </a>
+        </div>
+    </div>
+
+    <div class="col-lg-12">
+        <div class="col-lg-2 thumbnail box" style="height: 100px; width: 150px">
+            <a href="#">
+                <img src="~/content/img/pharmacy.jpg" style="height: 75%">
+                <h6 align="center">Store Management </h6>
+            </a>
+        </div>
+        <div class="col-lg-2 thumbnail box" style="height: 100px; width: 150px">
+            <a href="#">
+                <img src="~/content/img/finance mgt.jpg" style="height: 75%">
+                <h6 align="center">Financial Management</h6>
+            </a>
+        </div>
+        <div class="col-lg-2 thumbnail box" style="height: 100px; width: 150px">
+            <a href="#">
+                <img src="~/content/img/hrms.jpg" style="height:75%">
+                <h6 align="center">HRMS</h6>
+            </a>
+        </div>
+        <div class="col-lg-2 thumbnail box" style="height: 100px; width: 150px">
+            <a href="#">
+                <img src="~/content/img/news.jpg" style="height: 75%">
+                <h6 align="center">News </h6>
+            </a>
+        </div>
+
+        <div class=" col-lg-2 thumbnail box" style="height: 100px; width: 150px">
+            <a href="#">
+                <img src="~/content/img/event.jpg" style="height: 75%">
+                <h6 align="center">Events </h6>
+            </a>
+        </div>
+    </div>
+
+</div>

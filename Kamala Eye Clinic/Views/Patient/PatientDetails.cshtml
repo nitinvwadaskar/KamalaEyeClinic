@@ -1,0 +1,82 @@
+﻿@model System.Data.DataSet
+@{
+    ViewBag.Title = "Patient Details";
+    Layout = "~/Views/_StartupLayout.cshtml";
+}
+
+<div class="row">
+
+    <form class="form-horizontal" action="/Patient/PatientDetails" method="post">
+        <div class="col-lg-12 form-group">
+            <div class="col-lg-6 pull-left">
+            <h4>Patient List</h4>
+                </div>
+            <div class="col-lg-6 pull-right">
+                @Html.ActionLink("  Back To Selection", "PatientSelection", "Patient", new { @class = "fa fa-arrow-circle-o-left btn btn-warning btn-sm" })
+            </div>            
+        </div>
+        <div class="col-lg-12 form-group">
+            <div class="col-lg-3">
+                <div class="col-lg-10">
+                    <input class="form-control" name="pid" type="text" placeholder="Patient Id" />
+                </div>
+            </div>
+            <div class="col-lg-1" align="center">
+                <label class="control-label">OR</label>
+            </div>
+            <div class="col-lg-3" align="center">
+                <div class="col-lg-10">
+                    <input class="form-control" name="fname" type="text" placeholder="First Name" />
+                </div>
+            </div>
+            <div class="col-lg-3" align="center">
+                <div class="col-lg-10">
+                    <input class="form-control" name="lname" type="text" placeholder="Last Name" />
+                </div>
+            </div>
+            <div class="col-lg-1">
+                <button class="btn btn-info" type="submit" name="submitBtn" value="Search">Search</button>
+            </div>
+            <div class="col-lg-1">
+                <button class="btn btn-info" type="submit" id="viewall" name="submitBtn" value="ViewAll">View All</button>
+            </div>
+        </div>
+        <div class="col-lg-12">
+            <div class="table-responsive">
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>Patient Id</th>
+                            <th>Patient Name</th>
+                            <th>Registration Date</th>
+                            <th>Contact No </th>
+                            <th>Age</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @try
+                        {
+                            for (int i = 0; i <= Model.Tables[0].Rows.Count - 1; i++)
+                            {
+                            <tr>
+                                <td>@(i + 1)</td>
+                                <td>@Model.Tables[0].Rows[i][1]</td>
+                                <td>@Model.Tables[0].Rows[i][3]&nbsp;&nbsp; @Model.Tables[0].Rows[i][4] &nbsp;&nbsp; @Model.Tables[0].Rows[i][5]</td>
+                                <td>@Model.Tables[0].Rows[i][2]</td>
+                                <td>@Model.Tables[0].Rows[i][6]</td>
+                                <td>@Model.Tables[0].Rows[i][9]</td>
+                                <td>@Html.ActionLink("Edit", "Update", new { patientid = Model.Tables[0].Rows[i][1] }) | @Html.ActionLink("Select", "Select", new { patientid = Model.Tables[0].Rows[i][1] }) | @Html.ActionLink("Set Appointment", "SetAppointment", new { pid = Model.Tables[0].Rows[i][1] })</td>
+                            </tr>
+                            }
+                        }
+                        catch (Exception){ }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </form>
+</div>
+<script src="~/Scripts/jquery.validate.min.js"></script>
+<script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>

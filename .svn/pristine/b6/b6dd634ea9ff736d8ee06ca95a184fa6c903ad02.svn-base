@@ -1,0 +1,46 @@
+﻿@{
+    ViewBag.Title = "PatientSelection";
+    Layout = "~/Views/_StartupLayout.cshtml";
+}
+<div class="row">
+    <div class="col-lg-12">
+        <div class="col-lg-offset-3 col-lg-6 thumbnail">
+
+            <div class="col-lg-12">
+                <h3 align="center">Selection</h3>
+                <br />
+            </div>
+
+            <div class="col-lg-12">
+                <a href="~/Patient/Registration" id="Registration" class="col-lg-4 thumbnail" style="height: 200px; width: 250px; margin-left: 1%;">
+                    <img src="~/Content/images/Registration.jpeg" style="height: 75%; width: 85%" />
+                    <br />
+                    <label class="control-label">Registration</label>
+                </a>
+
+
+                <a href="~/Patient/PatientDetails" id="PatientDetails" class="col-lg-4 thumbnail" style="height: 200px; width: 250px; margin-left: 1%;">
+                    <img src="~/Content/images/List.png" style="height: 75%; width: 85%" />
+                    <br />
+                    <label class="control-label">View Patients</label>
+                </a>
+            </div>
+
+            <div class="col-lg-12">
+                <a href="~/Patient/Appointment" id="Appointment" class="col-lg-4 thumbnail" style="height: 200px; width: 250px; margin-left: 1%;">
+                    <img src="~/Content/images/calendar.jpg" style="height: 75%; width: 85%" />
+                    <br />
+                    <label class="control-label">Appointment</label>
+                </a>
+
+
+                <a href="~/Patient/AppointmentDetails" id="AppointmentDetails" class="col-lg-4 thumbnail" style="height: 200px; width: 250px; margin-left: 1%;">
+                    <img src="~/Content/images/view appointments.png" style="height: 75%; width: 85%" />
+                    <br />
+                    <label class="control-label">View Appointments</label>
+                </a>
+            </div>
+
+        </div>
+    </div>
+</div>       

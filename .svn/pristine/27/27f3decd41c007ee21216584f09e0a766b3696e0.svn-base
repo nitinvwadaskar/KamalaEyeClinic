@@ -1,0 +1,26 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Web;
+
+namespace Kamala_Eye_Clinic.Models
+{
+    public class TreatmentTnVn
+    {
+        public string tn_re_clg { get; set; }
+        public string tn_le_clg { get; set; }
+        public string vn_re_clg { get; set; }
+        public string vn_le_clg { get; set; }
+        public string tn_re_clg_t { get; set; }
+        public string tn_le_clg_t { get; set; }
+        public string vn_re_clg_v { get; set; }
+        public string vn_le_clg_v { get; set; }
+        public string tn_re_cph { get; set; }
+        public string tn_le_cph { get; set; }
+        public string vn_re_cph { get; set; }
+        public string vn_le_cph { get; set; }
+        public string vn_re_ug { get; set; }
+        public string vn_le_ug { get; set; }
+        public string vn_ug_add { get; set; }
+    }
+}

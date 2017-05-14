@@ -1,0 +1,123 @@
+﻿using Kamala_Eye_Clinic.Models;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Web;
+using System.Web.Mvc;
+using System.Web.Security;
+namespace Kamala_Eye_Clinic.Controllers
+{
+    [Sessionclass]
+    public class HomeController : Controller
+    {      
+        /********************Logins***********************************/
+
+        public ActionResult Login()
+        {
+            return View();
+        }
+
+        public ActionResult Signup()
+        {
+            return View();
+        }
+
+        public ActionResult Register()
+        {     
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult Register(PatientMaster obj)
+        {
+            PatientMaster reg = new PatientMaster();               
+            return View("Dashboard");
+        }
+       
+        public ActionResult Dashboard()
+        {
+            return View();
+        }
+        /******************* Patient Management *************************/
+        public ActionResult Treatment_Sheet()
+        {
+            return View();
+        }
+        public ActionResult Consent_Form()
+        {
+            return View();
+        }
+        public ActionResult Discharge_Information()
+        {
+            return View();
+        }
+
+
+        /* *****************Medicine Management ******************/
+        public ActionResult Medicine_Category_Master()
+        {
+            return View();
+        }
+
+        public ActionResult Drug_Master()
+        {
+            return View();
+        }
+
+
+        /*****************Administrator**********************/
+        public ActionResult Doctor_Registration()
+        {
+            return View();
+        }
+        [HttpPost]
+        public ActionResult Doctor_Registration(DoctorMaster obj)
+        {
+            DoctorMaster reg = new DoctorMaster();
+            return View("Dashboard");
+        }
+
+        public ActionResult Sister_Registration()
+        {
+            return View();
+        }
+        public ActionResult Admin_Control_Panel()
+        {
+            return View();
+        }
+
+        public ActionResult New_User()
+        {
+            return View();
+        }
+        public ActionResult Admin_Password_Change()
+        {
+            return View();
+        }
+
+        public ActionResult User_Password_Change()
+        {
+            return View();
+        }
+        public ActionResult Patient_Appointment()
+        {
+            return View();
+        }
+
+
+        /********************** Billing ******************************/
+        public ActionResult OPD_Billing()
+        {
+            return View();
+        }
+        public ActionResult Billing()
+        {
+            return View();
+        }
+        public ActionResult Bill_Particulars_Master()
+        {
+            return View();
+        }
+
+    }
+}

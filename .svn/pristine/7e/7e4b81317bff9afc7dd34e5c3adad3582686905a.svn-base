@@ -1,0 +1,55 @@
+﻿@model System.Data.DataSet
+@{
+    ViewBag.Title = "ConsentDetails";
+    Layout = "~/Views/_Layout.cshtml";
+}
+<div class="row">
+    <div class="form-horizontal">
+        <div class="col-lg-12">
+            <div class="col-lg-4">
+                <a class="btn btn-primary" href="~/Patient/ConsentForm"><i class="fa fa-plus"></i> &nbsp; Add New Consent</a>
+            </div>
+        </div>
+        <div class="col-lg-12">
+            <hr />
+            <div class="table-responsive">
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>Patient Id</th>
+                            <th>Consent Id</th>
+                            <th>Visitor Name</th>
+                            <th>Witness Name</th>
+                            <th>Place</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @try
+                        {
+                            for (int i = 0; i <= Model.Tables[0].Rows.Count - 1; i++)
+                            {
+                                <tr>
+                                    <td>@(i + 1)</td>
+                                    <td>@Model.Tables[0].Rows[i]["patientid"]</td>
+                                    <td>@Model.Tables[0].Rows[i]["consentid"]</td>
+                                    <td>@Model.Tables[0].Rows[i]["visitorname"]</td>
+                                    <td>@Model.Tables[0].Rows[i]["witnessname"]</td>
+                                    <td>@Model.Tables[0].Rows[i]["place"]</td>
+                                    <td>@Html.ActionLink("Edit", "ConsentFormUpdate", new { hid = Model.Tables[0].Rows[i]["hid"], consentid = Model.Tables[0].Rows[i]["consentid"] })</td>
+                                </tr>
+                            }
+                        }
+                        catch (Exception) { }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <div>
+
+    </div>
+</div>
+

@@ -1,0 +1,42 @@
+﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using System.Linq;
+using System.Web;
+
+namespace Kamala_Eye_Clinic.Models
+{
+    public class TreatmentMaster
+    {
+        public int hospitalid { get; set; }
+        public int treatmentid { get; set; }
+        public int patientid { get; set; }
+
+        [Display(Name = "Advice:")]
+        public string advice { get; set; }
+
+        [Required(ErrorMessage ="Follow-Up Date is Required")]
+        [Display(Name ="Follow-Up Date:")]
+        public DateTime followup_dt { get; set; }
+
+
+        private string Save()
+        {
+            return "";
+        }
+        private string Update()
+        {
+            return "";
+        }
+
+        private string Delete()
+        {
+            return "";
+        }
+
+        public List<TreatmentMaster> ShowAllTreatmentDetails()
+        {
+            return null;
+        }
+    }
+}

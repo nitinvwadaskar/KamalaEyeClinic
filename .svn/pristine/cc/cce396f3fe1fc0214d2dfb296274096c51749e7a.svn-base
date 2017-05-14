@@ -1,0 +1,793 @@
+﻿@using Kamala_Eye_Clinic.Models
+@model Kamala_Eye_Clinic.Models.Treatment
+@{
+    ViewBag.Title = "Treatment";
+    Layout = "~/Views/_Layout.cshtml";
+    if (ViewBag.tabindex == null)
+    {
+        ViewBag.tabindex = 0;
+    }
+    List<Kamala_Eye_Clinic.Models.CheckupMaster> checkuplist = new Kamala_Eye_Clinic.Models.CheckupMaster().GetAllCheckup();
+    List<Kamala_Eye_Clinic.Models.DrugMaster> druglist = new Kamala_Eye_Clinic.Models.DrugMaster().GetAllDrug();
+    List<Kamala_Eye_Clinic.Models.AdviceMaster> advicelist = new Kamala_Eye_Clinic.Models.AdviceMaster().GetAllAdvice();
+    List<Kamala_Eye_Clinic.Models.OccupationMaster> occupationlist = new Kamala_Eye_Clinic.Models.OccupationMaster().GetAllOccupation();
+    List<Kamala_Eye_Clinic.Models.PresentingComplentsMaster> complentlist = new Kamala_Eye_Clinic.Models.PresentingComplentsMaster().GetAllPresentingComplent();
+    List<Kamala_Eye_Clinic.Models.PresentingDiagnosisMaster> diagnosislist = new Kamala_Eye_Clinic.Models.PresentingDiagnosisMaster().GetAllDiagnosis();
+    List<Kamala_Eye_Clinic.Models.FundusMaster> funduslist = new Kamala_Eye_Clinic.Models.FundusMaster().GetAllFundus();
+    List<Kamala_Eye_Clinic.Models.HistoryMaster> historylist = new Kamala_Eye_Clinic.Models.HistoryMaster().GetAllHistory();
+    List<Kamala_Eye_Clinic.Models.DoctorMaster> doctorlist = new Kamala_Eye_Clinic.Models.DoctorMaster().GetAllDoctor();
+
+    List<Kamala_Eye_Clinic.Models.TreatmentCheckups> TreatCheckupList = (List<Kamala_Eye_Clinic.Models.TreatmentCheckups>)Session["TreatmentCheckups"];
+    List<Kamala_Eye_Clinic.Models.TreatmentComplents> TreatComplentList = (List<Kamala_Eye_Clinic.Models.TreatmentComplents>)Session["TreatmentComplents"];
+    List<Kamala_Eye_Clinic.Models.TreatmentDiagnosis> TreatDiagnosisList = (List<Kamala_Eye_Clinic.Models.TreatmentDiagnosis>)Session["TreatmentDiagnosis"];
+    List<Kamala_Eye_Clinic.Models.TreatmentFundus> TreatFundusList = (List<Kamala_Eye_Clinic.Models.TreatmentFundus>)Session["TreatmentFundus"];
+    List<Kamala_Eye_Clinic.Models.TreatmentMedicine> TreatMedicineList = (List<Kamala_Eye_Clinic.Models.TreatmentMedicine>)Session["TreatmentMedicine"];
+    List<Kamala_Eye_Clinic.Models.TreatmentHistory> TreatHistoryList = (List<Kamala_Eye_Clinic.Models.TreatmentHistory>)Session["TreatmentHistory"];
+    List<Kamala_Eye_Clinic.Models.TreatmentAdvice> TreatAdviceList = (List<Kamala_Eye_Clinic.Models.TreatmentAdvice>)Session["TreatmentAdvice"];
+}
+
+<form method="post" action="/Patient/Treatment">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="col-md-6">
+                @Html.ActionLink("New Tratment", "Treatment", "Patient", new { treatmentid = 0, btn = "View" }, new { @class = "btn btn-primary pull-left" })
+            </div>
+            <div class="col-md-6">
+                @Html.ActionLink("Continue With Same Treatment", "Treatment", "Patient", new { treatmentid = Model.treatmentid, btn = "Continue" }, new { @class = "btn btn-primary pull-right" })
+            </div>
+        </div>
+    </div>
+    <hr />
+    <input type="hidden" name="tabindex" id="tabindex" value="@ViewBag.tabindex" />
+    <div id="tabs">
+        <ul class="nav nav-tabs nav-justified"  role="tablist">
+            <li role="presentation" id="pre" class="active"><a data-toggle="tab" href="#Presenting_and_Previous_Details" aria-controls="Presenting_and_Previous_Details" role="tab" onclick="fillTabIndex(0);">Previous Details</a></li>
+            <li role="presentation" id="prev"><a data-toggle="tab" href="#TN_VN_and_SL_Fundus_Details" aria-controls="TN_VN_and_SL_Fundus_Details" role="tab"  onclick="fillTabIndex(1);">TnVn,S/L,Fundus Details</a></li>
+            <li role="presentation" id="medi"><a data-toggle="tab" href="#Medicine_Details" aria-controls="Medicine_Details" role="tab" onclick="fillTabIndex(2);">Medicine Details</a></li>
+            <li role="presentation" id="inv"><a data-toggle="tab" href="#Advice_Reoprt_Details" aria-controls="Advice_Reoprt_Details" role="tab" onclick="fillTabIndex(3);">Advice,Report Details</a></li>
+            <li role="presentation" id="tnvn"><a data-toggle="tab" href="#Eye_Vision" aria-controls="Eye_Vision" role="tab" onclick="fillTabIndex(4);">Eye Vision</a></li>
+        </ul>
+        <br />
+
+        <div class="tab-content">
+            <div role="tabpanel" class="tab-pane active" id="Presenting_and_Previous_Details">
+                <div class="row">
+                    <div class="col-md-12">
+                        <label class="label label-info col-md-12" style="height:25px;font-size:14px">Investigations</label>
+                    </div>
+                </div>
+                <div class="row form-group">
+                    <div class="col-md-12">
+                        @for (int i = 0; i < Model.TreatInvestigationList.Count; i++)
+                        {
+                            <label class="checkbox-inline">
+                                @Html.HiddenFor(model => model.TreatInvestigationList[i].invId)
+                                @Html.HiddenFor(model => model.TreatInvestigationList[i].invName)
+                                @Html.CheckBoxFor(model => model.TreatInvestigationList[i].isChecked) @Model.TreatInvestigationList[i].invName
+                            </label>
+                        }
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <label class="label label-info col-md-12" style="height:25px;font-size:14px">Presenting Details</label>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="col-md-12">
+                            <div class="col-md-4">
+                                <label>Presenting Complains:</label>
+                            </div>
+                            <div class="col-md-4">
+                                <select class="form-control" id="complents" name="complents">
+                                    @for (int i = 0; i < complentlist.Count; i++)
+                                    {
+                                        <option value="@complentlist[i].complentid:@complentlist[i].complentname">@complentlist[i].complentname</option>
+                                    }
+                                </select>
+                                @if (ViewBag.complentmsg != null)
+                                { <h4 style="color:orangered">@ViewBag.complentmsg</h4> }
+                            </div>
+                            <div class="col-md-2">
+                                <Button class="btn btn-primary" name="submitBtn" id="addcomplent" onclick="addrow()" value="addcomplent">Add</Button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="col-md-12">
+                            <div class="col-md-4">
+                                <label>Presenting Diagnosis:</label>
+                            </div>
+                            <div class="col-md-4">
+                                <select class="form-control" id="diagnosis" name="diagnosis">
+                                    @for (int i = 0; i < diagnosislist.Count; i++)
+                                    {
+                                        <option value="@diagnosislist[i].diagnosisid:@diagnosislist[i].diagnosisname">@diagnosislist[i].diagnosisname</option>
+                                    }
+                                </select>
+                                @if (ViewBag.diagnosismsg != null)
+                                { <h4 style="color:orangered">@ViewBag.diagnosismsg</h4> }
+                            </div>
+                            <div class="col-md-2">
+                                <Button type="submit" class="btn btn-primary" name="submitBtn" value="adddiagnosis">Add</Button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12 form-group">
+                        <div class="col-md-6">
+                            <hr />
+                            <table class="table table-stripped" id="complents">
+                                <thead>
+                                    <tr>
+                                        <th>#</th>
+                                        <th>Complents</th>
+                                        <th>Action</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @if (TreatComplentList != null)
+                                    {
+                                        for (int i = 0; i < TreatComplentList.Count; i++)
+                                        {
+                                            <tr>
+                                                <td>@(i + 1)</td>
+                                                <td>@TreatComplentList[i].complentname</td>
+                                                <td>
+                                                    <form action="/Patient/Treatment" method="post">
+                                                        <input type="hidden" name="complentsrno" value="@i" />
+                                                        <Button type="submit" class="btn btn-default" value="DeleteComplent" name="SubmitBtn">Delete</Button>
+                                                    </form>
+                                                </td>
+                                            </tr>
+                                        }
+                                    }
+                                </tbody>
+                            </table>
+                        </div>
+                        <div class="col-md-6">
+                            <hr />
+                            <table class="table table-stripped" id="diagnosis">
+                                <thead>
+                                    <tr>
+                                        <th>#</th>
+                                        <th>Diagnosis</th>
+                                        <th>Action</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @if (TreatDiagnosisList != null)
+                                    {
+                                        for (int i = 0; i < TreatDiagnosisList.Count; i++)
+                                        {
+                                            <tr>
+                                                <td>@(i + 1)</td>
+                                                <td>@TreatDiagnosisList[i].diagnosisname</td>
+                                                <td>
+                                                    <input type="hidden" name="diagsrno" value="@i" />
+                                                    <Button type="submit" class="btn btn-default" value="DeleteDiagnosis" name="SubmitBtn">Delete</Button>
+                                                </td>
+                                            </tr>
+                                        }
+                                    }
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <label class="label label-info col-md-12" style="height:25px;font-size:14px">Previous Disease and Duration</label>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="col-md-4">
+                            <div class="col-md-4">
+                                <label class="control-label">Disease:</label>
+                            </div>
+                            <div class="col-md-8">
+                                <select class="form-control" id="history" name="history">
+                                    @for (int i = 0; i < historylist.Count; i++)
+                                    {
+                                        <option value="@historylist[i].historyid:@historylist[i].historyname">@historylist[i].historyname</option>
+                                    }
+                                </select>
+
+                                @if (ViewBag.historymsg != null)
+                                { <h4 style="color:orangered">@ViewBag.historymsg</h4> }
+
+                            </div>
+                        </div>
+                        <div class="col-md-8">
+                            <div class="col-md-1">
+                                <label class="control-label">From:</label>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="input-group">
+                                    @Html.TextBoxFor(model => model.from_dt, new { @class = "form-control date", placeholder = "MM/DD/YYYY" })
+                                    <div class="input-group-addon">
+                                        <i class="fa fa-calendar">
+                                        </i>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-1">
+                                <label class="control-label">To:</label>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="input-group">
+                                    @Html.TextBoxFor(model => model.to_dt, new { @class = "form-control date", placeholder = "MM/DD/YYYY" })
+                                    <div class="input-group-addon">
+                                        <i class="fa fa-calendar">
+                                        </i>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-2">
+                                <Button type="submit" class="btn btn-primary" name="submitBtn" value="addhistory">Add</Button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row form-group">
+                    <hr />
+                    <div class="col-md-12">
+                        <table class="table table-stripped" id="history">
+                            <thead>
+                                <tr>
+                                    <th>#</th>
+                                    <th>Disease</th>
+                                    <th>From Date</th>
+                                    <th>To Date</th>
+                                    <th>Action</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @if (TreatHistoryList != null)
+                                {
+                                    for (int i = 0; i < TreatHistoryList.Count; i++)
+                                    {
+                                        <tr>
+                                            <td>@(i + 1)</td>
+                                            <td>@TreatHistoryList[i].historyname</td>
+                                            <td>@TreatHistoryList[i].from_dt</td>
+                                            <td>@TreatHistoryList[i].to_dt</td>
+                                            <td>
+                                                <form method="post" action="/Patient/Treatment">
+                                                    <input type="hidden" name="historysrno" value="@i" />
+                                                    <Button type="submit" class="btn btn-default" value="DeleteHistory" name="SubmitBtn">Delete</Button>
+                                                </form>
+                                            </td>
+                                        </tr>
+                                    }
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+            </div>
+
+            <div role="tabpanel" class="tab-pane" id="TN_VN_and_SL_Fundus_Details">
+                <div class="row">
+                    <div class="col-md-12">
+                        <label class="label label-info col-md-12" style="height:25px;font-size:14px">Tn & Vn</label>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="table-responsive">
+                            <table class="table" border="0">
+                                <thead>
+                                    <tr>
+                                        <th> </th>
+                                        <th><u>cgl</u></th>
+                                        <th>cgl</th>
+                                        <th>cph</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>Vn-RE</td>
+                                        <td>@Html.TextBoxFor(model => model.TreatTnVn.vn_re_clg, new { @class = "form-control" })</td>
+                                        <td>@Html.TextBoxFor(model => model.TreatTnVn.vn_re_clg_v, new { @class = "form-control" })</td>
+                                        <td>@Html.TextBoxFor(model => model.TreatTnVn.vn_re_cph, new { @class = "form-control" })</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Vn-LE</td>
+                                        <td>@Html.TextBoxFor(model => model.TreatTnVn.vn_le_clg, new { @class = "form-control" })</td>
+                                        <td>@Html.TextBoxFor(model => model.TreatTnVn.vn_le_clg_v, new { @class = "form-control" })</td>
+                                        <td>@Html.TextBoxFor(model => model.TreatTnVn.vn_le_cph, new { @class = "form-control" })</td>
+                                    </tr>
+
+                                    <tr>
+                                        <td>Tn-RE</td>
+                                        <td>@Html.TextBoxFor(model => model.TreatTnVn.tn_re_clg, new { @class = "form-control" })</td>
+                                        <td>@Html.TextBoxFor(model => model.TreatTnVn.tn_re_clg_t, new { @class = "form-control" })</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Tn-LE</td>
+                                        <td>@Html.TextBoxFor(model => model.TreatTnVn.tn_le_clg, new { @class = "form-control" })</td>
+                                        <td>@Html.TextBoxFor(model => model.TreatTnVn.tn_le_clg_t, new { @class = "form-control" })</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <label class="label label-info col-md-12" style="height:25px;font-size:14px">S/L And Fundus</label>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="col-md-2">
+                            <label>S/L:</label>
+                        </div>
+                        <div class="col-md-4">
+                            <select class="form-control" id="checkups" name="checkups">
+                                @for (int i = 0; i < checkuplist.Count; i++)
+                                {
+                                    <option value="@checkuplist[i].checkupid:@checkuplist[i].checkupname">@checkuplist[i].checkupname</option>
+                                }
+                            </select>
+                            @if (ViewBag.checkupmsg != null)
+                            { <h4 style="color:orangered">@ViewBag.checkupmsg</h4> }
+                        </div>
+                        <div class="col-md-2">
+                            <Button type="submit" class="btn btn-primary" name="submitBtn" value="addcheckups">Add</Button>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="col-md-4">
+                            <label>Fundus:</label>
+                        </div>
+                        <div class="col-md-4">
+                            <select class="form-control" id="fundus" name="fundus">
+                                @for (int i = 0; i < funduslist.Count; i++)
+                                {
+                                    <option value="@funduslist[i].fundusid:@funduslist[i].fundusname">@funduslist[i].fundusname</option>
+                                }
+                            </select>
+                            @if (ViewBag.fundusmsg != null)
+                            { <h4 style="color:orangered">@ViewBag.fundusmsg</h4> }
+                        </div>
+                        <div class="col-md-2">
+                            <Button type="submit" class="btn btn-primary" name="submitBtn" value="addfundus">Add</Button>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12 form-group">
+                        <hr />
+                        <div class="col-md-6">
+                            <table class="table table-stripped" id="checkups">
+                                <thead>
+                                    <tr>
+                                        <th>#</th>
+                                        <th>S/L</th>
+                                        <th>Action</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @if (TreatCheckupList != null)
+                                    {
+                                        for (int i = 0; i < TreatCheckupList.Count; i++)
+                                        {
+                                            <tr>
+                                                <td>@(i + 1)</td>
+                                                <td>@TreatCheckupList[i].checkupname</td>
+                                                <td>
+                                                    <input type="hidden" name="checkupsrno" value="@i" />
+                                                    <Button type="submit" class="btn btn-default" value="DeleteCheckup" name="SubmitBtn">Delete</Button>
+                                                </td>
+                                            </tr>
+                                        }
+                                    }
+                                </tbody>
+                            </table>
+                        </div>
+                        <div class="col-md-6">
+                            <table class="table table-stripped" id="fundus">
+                                <thead>
+                                    <tr>
+                                        <th>#</th>
+                                        <th>Fundus</th>
+                                        <th>Action</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @if (TreatFundusList != null)
+                                    {
+                                        for (int i = 0; i < TreatFundusList.Count; i++)
+                                        {
+                                            <tr>
+                                                <td>@(i + 1)</td>
+                                                <td>@TreatFundusList[i].fundusname</td>
+                                                <td>
+                                                    <input type="hidden" name="srno" value="@i" />
+                                                    <Button type="submit" class="btn btn-default" value="DeleteFundus" name="SubmitBtn">Delete</Button>
+                                                </td>
+                                            </tr>
+                                        }
+                                    }
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div role="tabpanel" class="tab-pane" id="Medicine_Details">
+                <div class="row">
+                    <div class="col-md-12 form-group">
+                        @Html.HiddenFor(model => model.TreatMedicine.medicineid, new SelectList(druglist, "drugid", "drugname"))
+                        <div class="col-md-4">
+                            <select class="form-control" id="particular" name="particular">
+                                @for (int i = 0; i < druglist.Count; i++)
+                                {
+                                    <option value="@druglist[i].drugid:@druglist[i].drugname">@druglist[i].drugname</option>
+                                }
+                            </select>
+                            @if (ViewBag.msg != null)
+                            { <h4 style="color:orangered">@ViewBag.msg</h4> }
+                        </div>
+                        <div class="col-md-2">
+                            @Html.TextBoxFor(model => model.TreatMedicine.qty, new { type = "number", @class = "form-control", placeholder = "qty" })
+                        </div>
+                        <div class="col-md-3">
+                            <label class="checkbox-inline">
+                                @Html.CheckBoxFor(model => (model.TreatMedicine.mischecked)) M
+                            </label>
+                            <label class="checkbox-inline">
+                                @Html.CheckBoxFor(model => model.TreatMedicine.aischecked) A
+                            </label>
+                            <label class="checkbox-inline">
+                                @Html.CheckBoxFor(model => model.TreatMedicine.eischecked) E
+                            </label>
+                            <label class="checkbox-inline">
+                                @Html.CheckBoxFor(model => model.TreatMedicine.nischecked) N
+                            </label>
+                        </div>
+                        <div class="col-md-3">
+                            <Button type="submit" class="btn btn-primary" name="submitBtn" value="addmedicine">Add</Button>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="table-responsive">
+                            <table class="table table-stripped" id="particulars">
+                                <thead>
+                                    <tr>
+                                        <th>#</th>
+                                        <th>Particulars</th>
+                                        <th>Qty.</th>
+                                        <th>Timing</th>
+                                        <th>Action</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @if (TreatMedicineList != null)
+                                    {
+                                        for (int i = 0; i < TreatMedicineList.Count; i++)
+                                        {
+                                            <tr>
+                                                <td>@(i + 1)</td>
+                                                <td>@TreatMedicineList[i].particular</td>
+                                                <td>@TreatMedicineList[i].qty</td>
+                                                <td>
+                                                    <lable>@TreatMedicineList[i].m</lable>
+                                                    <lable>@TreatMedicineList[i].a</lable>
+                                                    <lable>@TreatMedicineList[i].e</lable>
+                                                    <lable>@TreatMedicineList[i].n</lable>
+                                                </td>
+                                                <td>
+                                                    <form method="post" action="/Patient/Treatment">
+                                                        <input type="hidden" name="medicinesrno" value="@i" />
+                                                        <Button type="submit" class="btn btn-default" value="Delete" name="SubmitBtn">Delete</Button>
+                                                    </form>
+                                                </td>
+                                            </tr>
+                                        }
+                                    }
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div role="tabpanel" id="Advice_Reoprt_Details" class="tab-pane">
+                <div class="row">
+                    <div class="col-md-6">
+                        <label class="label label-info col-md-12" style="height:25px;font-size:14px">Advice</label>
+                    </div>
+                    <div class="col-md-6">
+                        <label class="label label-info col-md-12" style="height:25px;font-size:14px">Reports</label>
+                    </div>
+                </div>
+                <div class="row form-group">
+                    <br />
+                    <div class="col-md-6">
+                        <div class="col-md-12">
+                            <div class="col-md-2">
+                                <label>Advice:</label>
+                            </div>
+                            <div class="col-md-6">
+                                <select class="form-control" id="advice" name="advice">
+                                    @for (int i = 0; i < advicelist.Count; i++)
+                                    {
+                                        <option value="@advicelist[i].adviceid:@advicelist[i].advicename">@advicelist[i].advicename</option>
+                                    }
+                                </select>
+                                @if (ViewBag.advicemsg != null)
+                                { <h4 style="color:orangered">@ViewBag.advicemsg</h4> }
+                            </div>
+                            <div class="col-md-2">
+                                <Button type="submit" class="btn btn-primary" name="submitBtn" value="addadvice">Add</Button>
+                            </div>
+                        </div>
+                        <div class="col-md-12">
+                            <hr />
+                            <table class="table table-stripped" id="checkups">
+                                <thead>
+                                    <tr>
+                                        <th>#</th>
+                                        <th>Advice</th>
+                                        <th>Action</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @if (TreatAdviceList != null)
+                                    {
+                                        for (int i = 0; i < TreatAdviceList.Count; i++)
+                                        {
+                                            <tr>
+                                                <td>@(i + 1)</td>
+                                                <td>@TreatAdviceList[i].advicename</td>
+                                                <td>
+                                                    <form method="post" action="/Patient/Treatment">
+                                                        <input type="hidden" name="checkupsrno" value="@i" />
+                                                        <Button type="submit" class="btn btn-default" value="DeleteAdvice" name="SubmitBtn">Delete</Button>
+                                                    </form>
+                                                </td>
+                                            </tr>
+                                        }
+                                    }
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <div class="col-md-6 form-group">
+                        <div class="col-md-12 form-group">
+                            <div class="col-md-3">
+                                <label>X-Ray:</label>
+                            </div>
+                            <div class="col-md-2">
+                                @Html.RadioButtonFor(model => model.xray, "Y", new { @class = "radio-inline", @checked = true, @name = "xray", @id = "xrayY" })Yes
+                            </div>
+                            <div class="col-md-2">
+                                @Html.RadioButtonFor(model => model.xray, "N", new { @class = "radio-inline", @name = "xray", @id = "xrayN" })No
+                            </div>
+                            <div class="col-md-5">
+                                <div class="input-group" id="xraydiv">
+                                    @Html.TextBoxFor(model => model.xray_dt, new { @class = "form-control date", placeholder = "MM/DD/YYYY", @id = "xray" })
+                                    <div class="input-group-addon">
+                                        <i class="fa fa-calendar">
+                                        </i>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-12 form-group">
+                            <div class="col-md-3">
+                                <label>Blood Test:</label>
+                            </div>
+                            <div class="col-md-2">
+                                @Html.RadioButtonFor(model => model.bloodtest, "Y", new { @class = "radio-inline", @checked = true, @name = "btest", @id = "btestY" })Yes
+                            </div>
+                            <div class="col-md-2">
+                                @Html.RadioButtonFor(model => model.bloodtest, "N", new { @class = "radio-inline", @name = "btest", @id = "btestN" })No
+                            </div>
+                            <div class="col-md-5" id="btestdiv">
+                                <div class="input-group">
+                                    @Html.TextBoxFor(model => model.bloodtest_dt, new { @class = "form-control date", placeholder = "MM/DD/YYYY", @id = "btest" })
+                                    <div class="input-group-addon">
+                                        <i class="fa fa-calendar">
+                                        </i>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-12">
+                            <label class="label label-info col-md-12" style="height:25px;font-size:14px">Other Details</label>
+                        </div>
+                        <div class="col-md-12 form-group">
+                            <div class="col-md-6">
+                                <label class="control-label">Patient Occupation:</label>
+                            </div>
+                            <div class="col-md-6">
+                                @Html.TextBoxFor(model => model.occupation, new { @class = "form-control" })
+                            </div>
+                        </div>
+                        <div class="col-md-12 form-group">
+                            <div class="col-md-6">
+                                <label class="control-label">Consultant Doctor:</label>
+                            </div>
+                            <div class="col-md-6">
+                                <select class="form-control" id="doctor" name="doctor">
+                                    @for (int i = 0; i < doctorlist.Count; i++)
+                                    {
+                                        <option value="@doctorlist[i].doctorid:@doctorlist[i].fname:@doctorlist[i].lname">@doctorlist[i].fname @doctorlist[i].lname</option>
+                                    }
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-md-12 form-group">
+                            <br />
+                            <div class="col-md-3">
+                                <label>Follow-Up Date:</label>
+                            </div>
+                            <div class="col-md-2">
+                                @Html.RadioButtonFor(model => model.checkfollowup, "Y", new { @class = "radio-inline", @checked = true, @name = "followup", @id = "followupY" })Yes
+                            </div>
+                            <div class="col-md-2">
+                                @Html.RadioButtonFor(model => model.checkfollowup, "N", new { @class = "radio-inline", @name = "followup", @id = "followupN" })No
+                            </div>
+                            <div class="col-md-5" id="followupdiv">
+                                <div class="input-group">
+                                    @Html.TextBoxFor(model => model.followup_dt, new { @class = "form-control date", placeholder = "MM/DD/YYYY", @id = "followup" })
+                                    <div class="input-group-addon">
+                                        <i class="fa fa-calendar">
+                                        </i>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div role="tabpanel" id="Eye_Vision" class="tab-pane">
+                <div class="row">
+                    <div class="col-md-12">
+                        <label class="label label-info col-md-12" style="height:25px;font-size:14px">Eye Vision</label>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="table-responsive">
+                            <table class="table table-stripped">
+                                <thead>
+                                    <tr>
+                                        <th>Eye</th>
+                                        <th colspan="1">Right</th>
+                                        <th></th>
+                                        <th></th>
+                                        <th></th>
+                                        <th></th>
+                                        <th>Eye</th>
+                                        <th colspan="1">Left</th>
+                                    </tr>
+                                    <tr>
+                                        <th colspan="2">
+                                            <div class="input-group">
+                                                <span class="input-group-addon">Vn</span>@Html.TextBoxFor(model => model.TreatVision.right_vn, new { @class = "form-control" })<span class="input-group-addon">/6</span>
+                                            </div>
+                                        </th>
+                                        <th></th>
+                                        <th></th>
+                                        <th></th>
+                                        <th></th>
+                                        <th colspan="2">
+                                            <div class="input-group">
+                                                <span class="input-group-addon">Vn</span>@Html.TextBoxFor(model => model.TreatVision.left_vn, new { @class = "form-control" })<span class="input-group-addon">/6</span>
+                                            </div>
+                                        </th>
+                                    </tr>
+                                    <tr>
+                                        <th></th>
+                                        <th>Sph.</th>
+                                        <th>Cyl.</th>
+                                        <th>Axis.</th>
+                                        <th></th>
+                                        <th>Sph.</th>
+                                        <th>Cyl.</th>
+                                        <th>Axis.</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>Dist.</td>
+                                        <td>@Html.TextBoxFor(model => model.TreatVision.right_dist_sph, new { @class = "form-control", placeholder = "sph" })</td>
+                                        <td>@Html.TextBoxFor(model => model.TreatVision.right_dist_cyl, new { @class = "form-control", placeholder = "cyl" })</td>
+                                        <td>@Html.TextBoxFor(model => model.TreatVision.right_dist_axis, new { @class = "form-control", placeholder = "axis" })</td>
+                                        <td>Dist.</td>
+                                        <td>@Html.TextBoxFor(model => model.TreatVision.left_dist_sph, new { @class = "form-control", placeholder = "sph" })</td>
+                                        <td>@Html.TextBoxFor(model => model.TreatVision.left_dist_cyl, new { @class = "form-control", placeholder = "cyl" })</td>
+                                        <td>@Html.TextBoxFor(model => model.TreatVision.left_dist_axis, new { @class = "form-control", placeholder = "axis" })</td>
+
+                                    </tr>
+                                    <tr>
+                                        <td>Near</td>
+                                        <td>@Html.TextBoxFor(model => model.TreatVision.right_near_sph, new { @class = "form-control", placeholder = "sph" })</td>
+                                        <td>@Html.TextBoxFor(model => model.TreatVision.right_near_cyl, new { @class = "form-control", placeholder = "cyl" })</td>
+                                        <td>@Html.TextBoxFor(model => model.TreatVision.right_near_axis, new { @class = "form-control", placeholder = "axis" })</td>
+                                        <td>Near</td>
+                                        <td>@Html.TextBoxFor(model => model.TreatVision.left_near_sph, new { @class = "form-control", placeholder = "sph" })</td>
+                                        <td>@Html.TextBoxFor(model => model.TreatVision.left_near_cyl, new { @class = "form-control", placeholder = "cyl" })</td>
+                                        <td>@Html.TextBoxFor(model => model.TreatVision.left_near_axis, new { @class = "form-control", placeholder = "axis" })</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+    <div class="row form-group">
+        <div class="col-md-12 col-sm-12" align="center">
+            <hr />
+            @Html.HiddenFor(model => model.treatmentid)
+            @if (Model.treatmentid == 0)
+            {
+                <Button type="submit" class="btn btn-info" name="submitBtn" value="Save">Save</Button>
+            }
+            else
+            {
+                <Button type="submit" class="btn btn-primary" name="submitBtn" value="Update">Update</Button>
+                        @* <input type="submit" class="btn btn-default btn-danger" value="Delete" name="SubmitBtn" />*@
+            }
+            <Button type="submit" class="btn btn-danger" name="submitBtn" value="Reset">Reset</Button>
+        </div>
+    </div>
+
+</form>
+
+<script>
+    function fillTabIndex(tabind)
+    {
+        document.all.tabindex.value = tabind;
+
+    }
+    $(document).ready(function () {
+
+        
+        $('#tabs li:eq(@ViewBag.tabindex) a').tab('show');
+
+        $("#followupY").click(function () {
+            $("#followupdiv").show();
+        });
+        $("#followupN").click(function () {
+            $("#followupdiv").hide();
+            $("#followup").removeAttr("required");
+        });
+
+
+        $("#btestY").click(function () {
+            $("#btestdiv").show();
+        });
+        $("#btestN").click(function () {
+            $("#btestdiv").hide();
+            $("#btest").removeAttr("required");
+        });
+
+
+        $("#xrayY").click(function () {
+            $("#xraydiv").show();
+        });
+        $("#xrayN").click(function () {
+            $("#xraydiv").hide();
+            $("#xray").removeAttr("required");
+        });
+
+    });
+</script>

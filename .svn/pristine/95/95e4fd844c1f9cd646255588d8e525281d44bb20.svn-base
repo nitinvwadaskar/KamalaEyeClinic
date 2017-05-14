@@ -1,0 +1,57 @@
+﻿@model Kamala_Eye_Clinic.Models.RoleMaster
+
+@{
+    ViewBag.Title = "UserRole";
+    Layout = "~/Views/_Layout.cshtml";
+}
+<div class="row">
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+
+        <div class="form-horizontal">
+            <h4>
+                User Role : <span style="font-size:14px">
+                    @if (ViewBag != null)
+                {
+                        <label>@ViewBag.msg </label>
+                    }
+                </span>
+            </h4>
+
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.rolename, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.rolename, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.rolename, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="col-md-12">
+                <div class="col-md-12 col-sm-12" align="center">
+                    @Html.HiddenFor(model => model.CMD)
+                    @if (Model.CMD == null)
+                    {
+                        <input type="submit" class="btn btn-default btn-info" value="Save" name="SubmitBtn" />
+                    }
+                    else
+                    {
+
+                        <input type="submit" class="btn btn-default btn-primary" value="Update" name="SubmitBtn" />
+                        <input type="submit" class="btn btn-default btn-danger" value="Delete" name="SubmitBtn" />
+                    }
+                    <input type="reset" class="btn btn-warning" value="Reset" />
+                </div>
+            </div>
+        </div>
+    }
+
+    <div>
+        <a href="#">Back</a>
+    </div>
+
+</div>
+@*<script src="~/Scripts/jquery-1.10.2.min.js"></script>*@
+<script src="~/Scripts/jquery.validate.min.js"></script>
+<script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>

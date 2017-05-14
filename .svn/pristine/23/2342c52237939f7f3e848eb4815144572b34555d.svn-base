@@ -1,0 +1,55 @@
+﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using System.Linq;
+using System.Web;
+
+namespace Kamala_Eye_Clinic.Models
+{
+    public class TreatVision
+    {
+        public int treatmentid { get; set; }
+        public int visionid { get; set; }
+
+
+        [Required(ErrorMessage = "Eye is Required")]
+        [Display(Name = "Eye:")]
+        public int eye { get; set; }
+
+        [Required(ErrorMessage = "Vn is Required")]
+        [Display(Name = "Vn:")]
+        public int vn { get; set; }
+
+        [Required(ErrorMessage = "Area is Required")]
+        [Display(Name = "Area:")]
+        public int area { get; set; }
+        
+        [Display(Name = "Sph:")]
+        public int sph { get; set; }
+
+        [Display(Name = "Cyl:")]
+        public int cyl { get; set; }
+
+        [Display(Name = "Axis:")]
+        public int axis { get; set; }
+
+        private string Save()
+        {
+            return "";
+        }
+        private string Update()
+        {
+            return "";
+        }
+
+        private string Delete()
+        {
+            return "";
+        }
+
+        public List<TreatVision> ShowAllTreatVision()
+        {
+            return null;
+        }
+    }
+}

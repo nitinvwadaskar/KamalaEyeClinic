@@ -1,0 +1,216 @@
+﻿@model Kamala_Eye_Clinic.Models.OTRegistration
+
+@{
+    ViewBag.Title = "O.T. Registration";
+    Layout = "~/Views/_Layout.cshtml";
+
+    List<Kamala_Eye_Clinic.Models.DoctorMaster> doctorlist = new Kamala_Eye_Clinic.Models.DoctorMaster().GetAllDoctor();
+    List<Kamala_Eye_Clinic.Models.SisterMaster> nurselist = new Kamala_Eye_Clinic.Models.SisterMaster().GetAllSister();
+    List<Kamala_Eye_Clinic.Models.PresentingDiagnosisMaster> diagnosislist = new Kamala_Eye_Clinic.Models.PresentingDiagnosisMaster().GetAllDiagnosis();
+}
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+        <h4>O.T. Registration</h4>
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+        <div class="row form-group">
+            <div class="col-md-8">
+                <div class="col-md-12 form-group">
+                    <div class="col-md-6">
+                        <div class="col-md-5">
+                            <label class="control-label">O.T. Date:</label>
+                        </div>
+                        <div class="col-md-7">
+
+                            <div class="input-group">
+                                @Html.EditorFor(model => model.otdate, new { htmlAttributes = new { @class = "form-control date",@placeholder="MM/DD/YYYY"} })
+                                <div class="input-group-addon">
+                                    <i class="fa fa-calendar">
+                                    </i>
+                                </div>
+                            </div>
+                            @Html.ValidationMessageFor(model => model.otdate, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-12 form-group">
+                    <div class="col-md-6">
+                        <div class="col-md-5">
+                            <label class="control-label">From:</label>
+                        </div>
+                        <div class="col-md-7">
+                            @Html.EditorFor(model => model.durationfrom, new { htmlAttributes = new { @class = "form-control", @type = "time", value = "12:00:00" } })
+                            @Html.ValidationMessageFor(model => model.durationfrom, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="col-md-5">
+                            <label class="control-label">To:</label>
+                        </div>
+                        <div class="col-md-7">
+                            @Html.EditorFor(model => model.durationto, new { htmlAttributes = new { @class = "form-control", @type = "time", value = "22:53:00" } })
+                            @Html.ValidationMessageFor(model => model.durationto, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-12 form-group">
+                    <div class="col-md-6">
+                        <div class="col-md-5">
+                            <label class="control-label">Type of Anaesthesia:</label>
+                        </div>
+                        <div class="col-md-7">
+                            @Html.DropDownListFor(model => model.typeofanaesthesia, new SelectList(new[] { "GA", "SA", "LA", "EA" }), new { @class = "form-control" })
+                            @Html.ValidationMessageFor(model => model.typeofanaesthesia, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="col-md-5">
+                            <label class="control-label">Provisional Diagnosis:</label>
+                        </div>
+                        <div class="col-md-7">
+                            <select class="form-control" id="diagnosis" name="diagnosis">
+                                @for (int i = 0; i < diagnosislist.Count; i++)
+                                {
+                                    <option value="@diagnosislist[i].diagnosisid:@diagnosislist[i].diagnosisname">@diagnosislist[i].diagnosisname</option>
+                                }
+                            </select>
+
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-12 form-group">
+                    <div class="col-md-6">
+                        <div class="col-md-5">
+                            <label class="control-label">Operating Surgeon:</label>
+                        </div>
+                        <div class="col-md-7">
+                            <select class="form-control" id="operatingsurgeon" name="operatingsurgeon">
+                                @for (int i = 0; i < doctorlist.Count; i++)
+                                {
+                                    <option value="@doctorlist[i].fname @doctorlist[i].lname">@doctorlist[i].fname @doctorlist[i].lname</option>
+                                }
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="col-md-5">
+                            <label class="control-label">Anaesthetist:</label>
+                        </div>
+                        <div class="col-md-7">
+                            <select class="form-control" id="anaesthetist" name="anaesthetist">
+                                @for (int i = 0; i < doctorlist.Count; i++)
+                                {
+                                    <option value="@doctorlist[i].fname @doctorlist[i].lname">@doctorlist[i].fname @doctorlist[i].lname</option>
+                                }
+                            </select>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-12 form-group">
+                    <div class="col-md-6">
+                        <div class="col-md-5">
+                            <label class="control-label">Assisting Doctor:</label>
+                        </div>
+                        <div class="col-md-7">
+                            <select class="form-control" id="assistingdoctor" name="assistingdoctor">
+                                @for (int i = 0; i < doctorlist.Count; i++)
+                                {
+                                    <option value="@doctorlist[i].fname @doctorlist[i].lname">@doctorlist[i].fname @doctorlist[i].lname</option>
+                                }
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="col-md-5">
+                            <label class="control-label">Assisting Nurse:</label>
+                        </div>
+                        <div class="col-md-7">
+                            <select class="form-control" id="assistingnurse" name="assistingnurse">
+                                @for (int i = 0; i < nurselist.Count; i++)
+                                {
+                                    <option value="@nurselist[i].fname @nurselist[i].lname">@nurselist[i].fname @nurselist[i].lname</option>
+                                }
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-12 form-group">
+                    <div class="col-md-6">
+                        <div class="col-md-5">
+                            <label class="control-label">Remarks:</label>
+                        </div>
+                        <div class="col-md-7">
+                            @Html.EditorFor(model => model.remarks, new { htmlAttributes = new { @class = "form-control" } })
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="col-md-5">
+                            <label class="control-label">Material H.P.E:</label>
+                        </div>
+                        <div class="col-md-7">
+                            @Html.DropDownListFor(model => model.material_HPE, new SelectList(new[] { "Yes", "No" }), new { @class = "form-control" })
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="col-md-12 form-group">
+                    <label class="control-label" align="center"> Title of Surgery</label>
+                </div>
+                <div class="col-md-12 form-group">
+                    <div class="col-md-5">
+                        <label class="control-label">Ref.</label>
+                    </div>
+                    <div class="col-md-7">
+                        @Html.EditorFor(model => model.referance, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.referance, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+                <div class="col-md-12 form-group">
+                    <div class="col-md-5">
+                        <label class="control-label">Power.</label>
+                    </div>
+                    <div class="col-md-7">
+                        @Html.EditorFor(model => model.opower, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.opower, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+                <div class="col-md-12 form-group">
+                    <div class="col-md-5">
+                        <label class="control-label">S/N</label>
+                    </div>
+                    <div class="col-md-7">
+                        @Html.EditorFor(model => model.sn, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.sn, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-12 form-group">
+                <div class="col-lg-12" align="center">
+                    @Html.HiddenFor(model => model.CMD)
+                    @if (Model.CMD == null)
+                    {
+                        <input type="submit" class="btn btn-default btn-info " value="Save" name="SubmitBtn" />
+                    }
+                    else
+                    {
+                        <input type="submit" class="btn btn-default btn-primary " value="Update" name="SubmitBtn" />
+                        @* <input type="submit" class="btn btn-default btn-danger" value="Delete" name="SubmitBtn" />*@
+                    }
+                    <input type="reset" class="btn btn-warning " value="Reset" />
+                </div>
+            </div>
+        </div>
+    </div>
+}
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>

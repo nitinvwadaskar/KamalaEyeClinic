@@ -1,0 +1,23 @@
+﻿<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Print</title>
+</head>
+<body>
+    <div>
+        @Html.Raw(ViewBag.str)
+    </div>
+    <div>
+        <button onclick="myFunction()" id="print">Print</button>
+    </div>
+
+    <script>
+        function myFunction() {
+            document.getElementById("print").style.visibility = 'hidden';
+            window.print();
+        }
+    </script>
+</body>
+</html>

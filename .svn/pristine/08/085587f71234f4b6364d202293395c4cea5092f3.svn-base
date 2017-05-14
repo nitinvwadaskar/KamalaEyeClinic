@@ -1,0 +1,194 @@
+﻿<!DOCTYPE HTML>
+<html>
+<head>
+    <title>@ViewBag.Title</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } </script>
+    <link href="~/Content/css/bootstrap.min.css" rel='stylesheet' type='text/css' />
+    <!-- Custom Theme files -->
+    <link href="~/Content/css/style.css" rel='stylesheet' type='text/css' />
+    <link href="~/Content/css/font-awesome.css" rel="stylesheet">
+    <script src="~/Content/js/jquery.min.js"> </script>
+    <script src="~/Content/js/bootstrap.min.js"> </script>
+
+    <!-- Mainly scripts -->
+    <script src="~/Content/js/jquery.metisMenu.js"></script>
+    <script src="~/Content/js/jquery.slimscroll.min.js"></script>
+    <!-- Custom and plugin javascript -->
+    <link href="~/Content/css/custom.css" rel="stylesheet">
+    <script src="~/Content/js/custom.js"></script>
+    <script src="~/Content/js/screenfull.js"></script>
+    <script>
+        $(function () {
+            $('#supported').text('Supported/allowed: ' + !!screenfull.enabled);
+
+            if (!screenfull.enabled) {
+                return false;
+            }
+
+            $('#toggle').click(function () {
+                screenfull.toggle($('#container')[0]);
+            });
+        });
+    </script>
+  @*  <script type="text/javascript" src="https://code.jquery.com/jquery-1.11.3.min.js"></script>*@
+
+    <!-- Include Date Range Picker -->
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.1/js/bootstrap-datepicker.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.1/css/bootstrap-datepicker3.css" />
+   
+    <script>
+    $(document).ready(function () {
+        var date_input = $('.date');
+       // var container = $('.bootstrap-iso form').length > 0 ? $('.bootstrap-iso form').parent() : "body";
+        date_input.datepicker({
+            format: 'dd/mm/yyyy',
+           // container: container ,
+            todayHighlight: true,
+            autoclose: true,
+        })
+    })
+    </script>
+    <style>
+        body {
+            font-family: 'Times New Roman';
+            font-size: 100%;
+            background: #F3F3F4;
+            overflow-x: hidden;
+        }
+
+        .btn {
+            border-radius: 2px;
+            outline: none;
+        }
+
+        /*.form-control {
+            display: block;
+            width: 100%;
+            height: 34px;
+            padding: 6px 12px;
+            font-size: 12px;
+            line-height: 1.42857143;
+            color: #555;
+            background-color: #fff;
+            background-image: none;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            -webkit-box-shadow: inset 0 1px 1px rgba(0,0,0,.075);
+            box-shadow: inset 0 1px 1px rgba(0,0,0,.075);
+            -webkit-transition: border-color ease-in-out .15s,-webkit-box-shadow ease-in-out .15s;
+            -o-transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s;
+            transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s;
+        }*/
+        
+    </style>
+</head>
+
+<body>
+    <div id="wrapper">
+        <nav class="navbar-default navbar-static-top" role="navigation">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <h1><a class="navbar-brand" href="~/Home/Dashboard">Hospital</a></h1>
+            </div>
+            <div class="border-bottom">
+                <div class="col-lg-6 full-left">
+                    <section class="full-top">
+                        <button id="toggle"><i class="fa fa-arrows-alt"></i></button>
+                    </section>
+                    <form class="navbar-left-right">
+                        <input type="text" value="Search..." onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Search...';}">
+                        <input type="submit" value="" class="fa fa-search">
+                    </form>
+                </div>
+                <div class="col-lg-6 pull-right">
+                    <lable class="control-label">@Session["UserName"].ToString()</lable>
+                </div>
+                <div class="clearfix"></div>
+            </div>
+        </nav>
+    </div>
+    <div class="clearfix">
+    </div>
+
+    <div class="navbar-default sidebar" role="navigation">
+        <div class="sidebar-nav navbar-collapse">
+            <ul class="nav" id="side-menu">
+
+                <li>
+                    <a href="~/Home/Dashboard" class="hvr-bounce-to-right" style="padding: 0px 0px;"><i class="fa fa-dashboard nav_icon "></i><span class="nav-label">Dashboards</span> </a>
+                </li>
+
+                <li>
+                    <a href="#" class="hvr-bounce-to-right"><i class="fa fa-wheelchair nav_icon"></i><span class="nav-label">Patient Management</span><span class="fa arrow"></span></a>
+                    <ul class="nav nav-second-level">
+                        <li><a href="~/Patient/Treatment" class="hvr-bounce-to-right"><i class="fa fa-file-text-o  nav_icon"></i>New Treatment</a></li>
+                        <li><a href="~/Patient/TreatmentHistory" class="hvr-bounce-to-right"><i class="fa fa-file-text-o  nav_icon"></i>Treatment Sheet</a></li>
+                        <li><a href="~/Patient/ConsentDetails" class="hvr-bounce-to-right"><i class="fa fa-file-text-o nav_icon"></i>Consent Form</a></li>
+                        <li><a href="~/Patient/DischargeDetails" class="hvr-bounce-to-right"><i class="fa fa-file-text-o  nav_icon"></i>Discharge Information</a></li>
+                    </ul>
+                </li>
+
+                <li>
+                    <a href="#" class="hvr-bounce-to-right"><i class="fa fa-medkit nav_icon"></i><span class="nav-label">Medicine Management</span><span class="fa arrow"></span></a>
+                    <ul class="nav nav-second-level">
+                        <li><a href="~/Medicines/DrugCategoryDetails" class="hvr-bounce-to-right"><i class="fa fa-file-text-o nav_icon"></i>Category Master</a></li>
+                        <li><a href="~/Medicines/DrugDetails" class="hvr-bounce-to-right"><i class="fa fa-file-text-o nav_icon"></i>Drug Master</a></li>
+                    </ul>
+                </li>
+
+                <li>
+                    <a href="#" class="hvr-bounce-to-right"><i class="fa fa-user nav_icon"></i><span class="nav-label">Administrative</span><span class="fa arrow"></span></a>
+                    <ul class="nav nav-second-level">
+                        <li><a href="~/Doctor/DoctorDetails" class="hvr-bounce-to-right"><i class="fa fa-user-md nav_icon"></i>Doctor Registration</a></li>
+                        <li><a href="~/Sister/SisterDetails" class="hvr-bounce-to-right"><i class="fa fa-stethoscope nav_icon"></i>Sister Registration</a></li>
+                        <li><a href="~/Home/Admin_Control_Panel" class="hvr-bounce-to-right"><i class="fa fa-stethoscope nav_icon"></i>Admin Control Panel</a></li>                    
+                    </ul>
+                </li>
+                <li>
+                    <a href="#" class="hvr-bounce-to-right"><i class="fa fa-rupee nav_icon"></i><span class="nav-label">Billing</span><span class="fa arrow"></span></a>
+                    <ul class="nav nav-second-level">
+                        <li><a href="~/Patient/BillDetails" class="hvr-bounce-to-right"><i class="fa fa-file-text-o nav_icon"></i>Billing</a></li>
+                        @*<li><a href="~/Billing/OPD_Billing" class="hvr-bounce-to-right"><i class="fa fa-file-text-o nav_icon"></i>OPD Billing</a></li>*@
+                        <li><a href="~/Billing/BillParticularDetails" class="hvr-bounce-to-right"><i class="fa fa-file-text-o nav_icon"></i>Bill Particular Master</a></li>
+                    </ul>
+                </li>
+                <li>
+                    <a href="~/Patient/PatientSelection" class="hvr-bounce-to-right"><i class="fa fa-sign-out nav_icon"></i><span class="nav-label">Go Patient List </span></a>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <div id="page-wrapper" class="gray-bg dashbard-1">
+        <div class="content-main">
+            @*
+                 <div class="banner">
+                    <h2>
+                        <a href="~/home/Dashboard">Home</a>
+                        <i class="fa fa-angle-right"></i>
+                        <span>@ViewBag.Title</span>
+                    </h2>
+                </div>
+            *@
+            <div class="grid-system">
+                <div class="horz-grid">
+                    @RenderBody()
+                </div>
+            </div>
+
+            <div class="copy">
+                <p>&copy; 2014 RUBRAIN. All Rights Reserved | Design by <a href="http://rubrains.com" target="_blank">RUBRAIN</a> </p>
+            </div>
+        </div>
+    </div>
+    <div class="clearfix"></div>
+    <script src="~/Content/js/jquery.nicescroll.js"></script>
+    <script src="~/Content/js/scripts.js"></script>
+</body>
+</html>

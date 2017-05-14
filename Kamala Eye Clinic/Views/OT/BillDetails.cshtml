@@ -1,0 +1,96 @@
+﻿@model System.Data.DataSet
+@{
+    ViewBag.Title = "Bill Details";
+    Layout = "~/Views/_Layout.cshtml";
+}
+<div class="row">
+
+    <div class="form-horizontal">
+        <div class="col-lg-12">
+            <div class="col-lg-6 pull-left">
+                <button type="button" class="fa fa-plus btn btn-info btn-sm" name="submitBtn" data-toggle="modal" data-target="#selectot">&nbsp; New OT Bill</button>
+            </div>
+        </div>
+        <div id="selectot" class="modal fade" role="dialog">
+            <div class="modal-dialog ">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h4 class="modal-title">Select OT For Checkout</h4>
+                    </div>
+                    <div class="modal-body">
+                        <div class="table-responsive">
+                            <table class="table table-striped">
+                                <thead>
+                                    <tr>
+                                        <th>#</th>
+                                        <th>Patient Id</th>
+                                        <th>OT Id</th>
+                                        <th>OT Date</th>
+                                        <th>Action</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @try
+                                    {
+                                        for (int i = 0; i <= Model.Tables[1].Rows.Count - 1; i++)
+                                        {
+                                            <tr>
+                                                <td>@(i + 1)</td>
+                                                <td>@Model.Tables[1].Rows[i]["patientid"]</td>
+                                                <td>@Model.Tables[1].Rows[i]["regid"]</td>
+                                                <td>@Model.Tables[1].Rows[i]["otdate"]</td>
+                                                <td>@Html.ActionLink("Select", "Bill", new { regid = Model.Tables[1].Rows[i]["regid"] })</td>
+                                            </tr>
+                                        }
+                                    }
+                                    catch (Exception) { }
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="col-lg-12">
+            <hr />
+            <div class="table-responsive">
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>Patient Id</th>
+                            <th>OT Id</th>
+                            <th>OT Date</th>
+                            <th>OT Bill Id</th>                                                        
+                            <th>OT Bill Date</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @try
+                        {
+                            for (int i = 0; i <= Model.Tables[0].Rows.Count - 1; i++)
+                            {
+                                <tr>
+                                    <td>@(i + 1)</td>
+                                    <td>@Model.Tables[0].Rows[i]["patientid"]</td>
+                                    <td>@Model.Tables[0].Rows[i]["otid"]</td>
+                                    <td>@Model.Tables[0].Rows[i]["billid"]</td>                                   
+                                    <td>@Model.Tables[0].Rows[i]["billdate"]</td>
+                                    <td>@Model.Tables[0].Rows[i]["otdate"]</td>
+                                    <td>@Html.ActionLink("View", "ViewBills","OT", new { Billid = Model.Tables[0].Rows[i]["billid"] })</td>
+                                </tr>
+                            }
+                        }
+                        catch (Exception) { }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>

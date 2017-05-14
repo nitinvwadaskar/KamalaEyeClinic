@@ -1,0 +1,246 @@
+﻿<?xml version="1.0" encoding="utf-8"?><Database Name="KamalaDB" Class="DataDataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
+  <Table Name="dbo.tbl_appointment" Member="tbl_appointments">
+    <Type Name="tbl_appointment">
+      <Column Name="hid" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="appointmentid" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="appointment_dt" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="patientname" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+      <Column Name="contact" Type="System.String" DbType="VarChar(10)" CanBeNull="true" />
+      <Column Name="paddress" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+      <Column Name="createby" Type="System.String" DbType="VarChar(10)" CanBeNull="true" />
+      <Column Name="create_dt" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="updateby" Type="System.String" DbType="VarChar(10)" CanBeNull="true" />
+      <Column Name="update_dt" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.tbl_consent" Member="tbl_consents">
+    <Type Name="tbl_consent">
+      <Column Name="hid" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="consentid" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="patientid" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="visitorname" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+      <Column Name="witnessname" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+      <Column Name="place" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+      <Column Name="createby" Type="System.String" DbType="VarChar(10)" CanBeNull="true" />
+      <Column Name="create_dt" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="updateby" Type="System.String" DbType="VarChar(10)" CanBeNull="true" />
+      <Column Name="update_dt" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.tbl_discharge" Member="tbl_discharges">
+    <Type Name="tbl_discharge">
+      <Column Name="hid" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="dischargeid" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="patientid" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="reasonofdischarge" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+      <Column Name="doctorincharge" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+      <Column Name="eye" Type="System.String" DbType="Char(2)" CanBeNull="true" />
+      <Column Name="operation" Type="System.String" DbType="VarChar(255)" CanBeNull="true" />
+      <Column Name="treatmentadvice" Type="System.String" DbType="VarChar(255)" CanBeNull="true" />
+      <Column Name="treatmentinword" Type="System.String" DbType="VarChar(255)" CanBeNull="true" />
+      <Column Name="createby" Type="System.String" DbType="VarChar(10)" CanBeNull="true" />
+      <Column Name="create_dt" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="updateby" Type="System.String" DbType="VarChar(10)" CanBeNull="true" />
+      <Column Name="update_dt" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.tbl_doctorMst" Member="tbl_doctorMsts">
+    <Type Name="tbl_doctorMst">
+      <Column Name="hid" Type="System.String" DbType="VarChar(10) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="doctorid" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="reg_dt" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="fname" Type="System.String" DbType="VarChar(10)" CanBeNull="true" />
+      <Column Name="mname" Type="System.String" DbType="VarChar(10)" CanBeNull="true" />
+      <Column Name="lname" Type="System.String" DbType="VarChar(10)" CanBeNull="true" />
+      <Column Name="contact" Type="System.String" DbType="VarChar(10) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="dob" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="birthplace" Type="System.String" DbType="VarChar(15)" CanBeNull="true" />
+      <Column Name="age" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="gender" Type="System.Char" DbType="Char(1)" CanBeNull="true" />
+      <Column Name="maritalstatus" Type="System.Char" DbType="Char(1)" CanBeNull="true" />
+      <Column Name="bloodgroup" Type="System.String" DbType="VarChar(3)" CanBeNull="true" />
+      <Column Name="dheight" Type="System.Decimal" DbType="Decimal(10,2)" CanBeNull="true" />
+      <Column Name="dweight" Type="System.Decimal" DbType="Decimal(10,2)" CanBeNull="true" />
+      <Column Name="createby" Type="System.String" DbType="VarChar(10)" CanBeNull="true" />
+      <Column Name="create_dt" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="updateby" Type="System.String" DbType="VarChar(10)" CanBeNull="true" />
+      <Column Name="update_dt" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.tbl_drugcategory" Member="tbl_drugcategories">
+    <Type Name="tbl_drugcategory">
+      <Column Name="hid" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="categoryid" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="categoryname" Type="System.String" DbType="VarChar(20) NOT NULL" CanBeNull="false" />
+      <Column Name="cdescription" Type="System.String" DbType="VarChar(255)" CanBeNull="true" />
+      <Column Name="createby" Type="System.String" DbType="VarChar(10)" CanBeNull="true" />
+      <Column Name="create_dt" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="updateby" Type="System.String" DbType="VarChar(10)" CanBeNull="true" />
+      <Column Name="update_dt" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.tbl_drugMst" Member="tbl_drugMsts">
+    <Type Name="tbl_drugMst">
+      <Column Name="hid" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="drugid" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="categoryid" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="drugname" Type="System.String" DbType="VarChar(20) NOT NULL" CanBeNull="false" />
+      <Column Name="ddescription" Type="System.String" DbType="VarChar(255)" CanBeNull="true" />
+      <Column Name="createby" Type="System.String" DbType="VarChar(10)" CanBeNull="true" />
+      <Column Name="create_dt" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="updateby" Type="System.String" DbType="VarChar(10)" CanBeNull="true" />
+      <Column Name="update_dt" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.tbl_Followup" Member="tbl_Followups">
+    <Type Name="tbl_Followup">
+      <Column Name="hid" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="followupid" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="patientid" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="createby" Type="System.String" DbType="VarChar(10)" CanBeNull="true" />
+      <Column Name="create_dt" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="updateby" Type="System.String" DbType="VarChar(10)" CanBeNull="true" />
+      <Column Name="update_dt" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.tbl_hospital" Member="tbl_hospitals">
+    <Type Name="tbl_hospital">
+      <Column Name="hid" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="hname" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="htype" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="htag" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="hlogo1" Type="System.String" DbType="VarChar(100)" CanBeNull="true" />
+      <Column Name="hlogo2" Type="System.String" DbType="VarChar(100)" CanBeNull="true" />
+      <Column Name="hlogo3" Type="System.String" DbType="VarChar(100)" CanBeNull="true" />
+      <Column Name="address1" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="address2" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="city" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+      <Column Name="hstate" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+      <Column Name="country" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+      <Column Name="contact1" Type="System.String" DbType="VarChar(15)" CanBeNull="true" />
+      <Column Name="contact2" Type="System.String" DbType="VarChar(15)" CanBeNull="true" />
+      <Association Name="tbl_hospital_tbl_patientMst" Member="tbl_patientMsts" ThisKey="hid" OtherKey="hid" Type="tbl_patientMst" />
+    </Type>
+  </Table>
+  <Table Name="dbo.tbl_investigation" Member="tbl_investigations">
+    <Type Name="tbl_investigation">
+      <Column Name="treatmentid" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="patientid" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="investigationid" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="cbc" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="hiv" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="urinecomp" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="r_b_sugar" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="hbsagdieseas" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="esr" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="mt" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="r_a_factor" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="fitness_certificate" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="a_scan" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.tbl_medicine" Member="tbl_medicines">
+    <Type Name="tbl_medicine">
+      <Column Name="treatmentid" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="patientid" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="medicineid" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="particular" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+      <Column Name="quantity" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="m" Type="System.Char" DbType="Char(1)" CanBeNull="true" />
+      <Column Name="a" Type="System.Char" DbType="Char(1)" CanBeNull="true" />
+      <Column Name="e" Type="System.Char" DbType="Char(1)" CanBeNull="true" />
+      <Column Name="n" Type="System.Char" DbType="Char(1)" CanBeNull="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.tbl_patientMst" Member="tbl_patientMsts">
+    <Type Name="tbl_patientMst">
+      <Column Name="hid" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="patientid" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="reg_dt" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="fname" Type="System.String" DbType="VarChar(10)" CanBeNull="true" />
+      <Column Name="mname" Type="System.String" DbType="VarChar(10)" CanBeNull="true" />
+      <Column Name="lname" Type="System.String" DbType="VarChar(10)" CanBeNull="true" />
+      <Column Name="contact" Type="System.String" DbType="VarChar(10) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="dob" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="birthplace" Type="System.String" DbType="VarChar(15)" CanBeNull="true" />
+      <Column Name="age" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="gender" Type="System.Char" DbType="Char(1)" CanBeNull="true" />
+      <Column Name="maritalstatus" Type="System.Char" DbType="Char(1)" CanBeNull="true" />
+      <Column Name="bloodgroup" Type="System.String" DbType="VarChar(3)" CanBeNull="true" />
+      <Column Name="pheight" Type="System.Decimal" DbType="Decimal(10,2)" CanBeNull="true" />
+      <Column Name="pweight" Type="System.Decimal" DbType="Decimal(10,2)" CanBeNull="true" />
+      <Column Name="createby" Type="System.String" DbType="VarChar(10)" CanBeNull="true" />
+      <Column Name="create_dt" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="updateby" Type="System.String" DbType="VarChar(10)" CanBeNull="true" />
+      <Column Name="update_dt" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Association Name="tbl_patientMst_tbl_treatment" Member="tbl_treatments" ThisKey="patientid" OtherKey="patientid" Type="tbl_treatment" />
+      <Association Name="tbl_hospital_tbl_patientMst" Member="tbl_hospital" ThisKey="hid" OtherKey="hid" Type="tbl_hospital" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.tbl_role" Member="tbl_roles">
+    <Type Name="tbl_role">
+      <Column Name="roleid" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="rolename" Type="System.String" DbType="VarChar(10)" CanBeNull="true" />
+      <Column Name="createby" Type="System.String" DbType="VarChar(10)" CanBeNull="true" />
+      <Column Name="create_dt" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="updateby" Type="System.String" DbType="VarChar(10)" CanBeNull="true" />
+      <Column Name="update_dt" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Association Name="tbl_role_tbl_user" Member="tbl_users" ThisKey="roleid" OtherKey="roleid" Type="tbl_user" />
+    </Type>
+  </Table>
+  <Table Name="dbo.tbl_treatdisease" Member="tbl_treatdiseases">
+    <Type Name="tbl_treatdisease">
+      <Column Name="treatmentid" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="patientid" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="srno" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="diseasename" Type="System.String" DbType="VarChar(100) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+    </Type>
+  </Table>
+  <Table Name="dbo.tbl_treatment" Member="tbl_treatments">
+    <Type Name="tbl_treatment">
+      <Column Name="hid" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="treatmentid" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="patientid" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="advice" Type="System.String" DbType="VarChar(300)" CanBeNull="true" />
+      <Column Name="followup_dt" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="createby" Type="System.String" DbType="VarChar(10)" CanBeNull="true" />
+      <Column Name="create_dt" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="updateby" Type="System.String" DbType="VarChar(10)" CanBeNull="true" />
+      <Column Name="update_dt" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Association Name="tbl_patientMst_tbl_treatment" Member="tbl_patientMst" ThisKey="patientid" OtherKey="patientid" Type="tbl_patientMst" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.tbl_user" Member="tbl_users">
+    <Type Name="tbl_user">
+      <Column Name="Hid" Type="System.String" DbType="VarChar(10) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="userid" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="username" Type="System.String" DbType="VarChar(10) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="pass" Type="System.String" DbType="VarChar(10) NOT NULL" CanBeNull="false" />
+      <Column Name="fname" Type="System.String" DbType="VarChar(10)" CanBeNull="true" />
+      <Column Name="mname" Type="System.String" DbType="VarChar(10)" CanBeNull="true" />
+      <Column Name="lname" Type="System.String" DbType="VarChar(10)" CanBeNull="true" />
+      <Column Name="contact" Type="System.String" DbType="VarChar(10) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="email" Type="System.String" DbType="VarChar(100)" CanBeNull="true" />
+      <Column Name="DOB" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="createby" Type="System.String" DbType="VarChar(10)" CanBeNull="true" />
+      <Column Name="create_dt" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="updateby" Type="System.String" DbType="VarChar(10)" CanBeNull="true" />
+      <Column Name="update_dt" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="roleid" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Association Name="tbl_role_tbl_user" Member="tbl_role" ThisKey="roleid" OtherKey="roleid" Type="tbl_role" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.tbl_visionMeasurement" Member="tbl_visionMeasurements">
+    <Type Name="tbl_visionMeasurement">
+      <Column Name="treatmentid" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="patientid" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="visionid" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="visioneye" Type="System.String" DbType="VarChar(5)" CanBeNull="true" />
+      <Column Name="vision" Type="System.String" DbType="VarChar(4)" CanBeNull="true" />
+      <Column Name="visionarea" Type="System.String" DbType="VarChar(5)" CanBeNull="true" />
+      <Column Name="sph" Type="System.String" DbType="VarChar(10)" CanBeNull="true" />
+      <Column Name="cyl" Type="System.String" DbType="VarChar(10)" CanBeNull="true" />
+      <Column Name="axis" Type="System.String" DbType="VarChar(10)" CanBeNull="true" />
+    </Type>
+  </Table>
+</Database>

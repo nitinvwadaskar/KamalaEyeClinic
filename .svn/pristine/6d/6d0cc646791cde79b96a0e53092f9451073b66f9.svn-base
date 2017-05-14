@@ -1,0 +1,49 @@
+﻿@model System.Data.DataSet
+@{
+    ViewBag.Title = "Checkup Details";
+    Layout = "~/Views/_Layout.cshtml";
+}
+
+<div class="row">
+    <div class="form-horizontal">
+        <div class="col-lg-12">
+            <div class="col-lg-4">
+                <a class="btn btn-primary" href="~/Treatment/CheckupMaster"><i class="fa fa-plus"></i> &nbsp; Add New Checkup</a>
+            </div>
+        </div>
+        <div class="col-lg-12">
+            <hr />
+            <div class="table-responsive">
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>Checkup Id</th>
+                            <th>Checkup Name</th>
+                            <th>Description</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @try
+                        {
+                            for (int i = 0; i <= Model.Tables[0].Rows.Count - 1; i++)
+                            {
+                            <tr>
+                                <td>@(i + 1)</td>
+                                <td>@Model.Tables[0].Rows[i]["checkupid"]</td>
+                                <td>@Model.Tables[0].Rows[i]["checkupname"]</td>
+                                <td>@Model.Tables[0].Rows[i]["checkupdescription"]</td>
+                                <td>@Html.ActionLink("Edit", "CheckupMasterUpdate", new { hid = Model.Tables[0].Rows[i][0], checkupid = Model.Tables[0].Rows[i][1] })</td>
+                            </tr>
+                            }
+                        }
+                        catch (Exception)
+                        {
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
